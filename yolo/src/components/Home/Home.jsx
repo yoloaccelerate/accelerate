@@ -231,8 +231,6 @@ console.log(this.state.allproviderDetails,"home2233")
                 console.log(itemz,"inside");
                 return (
                     <div>
-                        {itemz.City!=store_your_city_name_through_google_api ?
-                        (
                         <div>
                             <span style={{display: 'none'}}>
                                 {!fullname_array.includes(itemz.fullName)?
@@ -417,10 +415,7 @@ console.log(this.state.allproviderDetails,"home2233")
                              
 
                         </div>        
-                        )
-                        :
-                        ("")
-                        }
+                        
                         
                     </div>
                     )
