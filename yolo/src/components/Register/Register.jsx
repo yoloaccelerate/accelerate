@@ -11,12 +11,12 @@ import { Grid, Container,
 
 import {Link} from 'react-router-dom';
 import logo from "../../assets/img/Logo.png";
-import {getCountriesList} from '../../actions/getUtilsAction'
-import {registerUser} from '../../actions/registerUserAction'
+
+
 import { history, store } from '../../store';
 import log from '../../utils/logger.service';
 import { GpsFixed } from '@material-ui/icons';
-import {connect} from 'react-redux';
+
 
 
 var button_style={
@@ -30,10 +30,10 @@ var button_style={
 
 }
 
- class Register extends React.Component {
+export default class Register extends React.Component {
 
     constructor(props) {
-        super(props);
+        super();
         this.state = {
             name: '',
             email: '',
@@ -45,7 +45,7 @@ var button_style={
             formValid: false,
             country_code: '+91',
             open: false,
-            successMesage:'',
+            message: '',
             errors: {
                 name: '',
                 email: '',
@@ -94,7 +94,7 @@ var button_style={
                 this.setState({open: true});
                 this.setState({errorMessage:this.props.userData.userRegister.success});
                 setTimeout(()=>{
-                history.push('/')
+                history.push('/dashboard');
                 },3000);
             }
         },3000)
@@ -255,10 +255,10 @@ var button_style={
                                             variant="outlined"
                                             style={{marginBottom: 15,width: '20%',borderRadius: '1px'}}
                                         >
-                                            {   
-                                                (this.props.countries !==[]) ? this.props.countries.map((item, index)=>{
+                                            {
+                                                (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
                                                 return <MenuItem key={index} value={item.dial_code} autoWidth={true} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
-                                                }) : (<span>Loading</span>)
+                                                }) : <span>Loading</span>
                                             }
                                         </Select>
                                         <TextField 
@@ -327,11 +327,8 @@ var button_style={
                     </React.Fragment>
                     }
                 />
-
-
+                
             </div>
         )
     }
 }
-
-export default (Register)

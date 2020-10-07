@@ -9,7 +9,6 @@ import {
 } from '../types/utils';
 
 export function getCountriesList () {
-    console.log("register")
     return(dispatch) => {
         dispatch(loading(true));
         return fetch('/api/common/countries', {
@@ -20,7 +19,6 @@ export function getCountriesList () {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=> {
-                    console.log(res)
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

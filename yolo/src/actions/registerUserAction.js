@@ -10,7 +10,7 @@ import {
 
 export function registerUser (name, email, password, phone_number) {
     return(dispatch) => {
-        dispatch(loading(false));
+        dispatch(loading(true));
         return fetch('/api/auth/register', {
             method: 'POST',
             headers: {
@@ -22,7 +22,9 @@ export function registerUser (name, email, password, phone_number) {
                 password: password,
                 phone_number: phone_number
             })
-        }).then(res=>{
+        })
+        .then(res=>{
+            
             if(res.status === 201) {
                 return res.json().then(res=>{
                     dispatch(loading(false));
