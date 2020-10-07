@@ -1,10 +1,11 @@
-const joi = require('joi');
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
-const userProfileUpdateSchema= joi.object().keys({
-    name: joi.string().exist().required(),
-    email: joi.string().exist().email().required(),
-    phone_number: joi.string().exist().required()
-    //country: joi.string().exist().required(),
+const userProfileUpdateSchema= Joi.object().keys({
+    name: Joi.string().exist().required(),
+    email: Joi.string().exist().email().required(),
+    phone_number: Joi.string().exist().required(),
+    id: Joi.objectId(),
     //photo: joi.string().exist().required(),
 })
 
