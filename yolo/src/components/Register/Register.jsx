@@ -62,6 +62,13 @@ var button_style={
         log('User on Registration Page')
         console.log("before")
         this.props.getCountries();
+        // store.subscribe(()=>{
+            // console.log(store.getState());
+            // console.log(this.props.userData);
+            setTimeout(()=>{
+                this.setState({countries:this.props.userData.getCountries.countries})
+                // console.log(this.props.userData)
+            },3000);
      
         console.log(this.props,"mahaha")
       this.setState({countries:this.props.countries})
