@@ -11,12 +11,12 @@ import { Grid, Container,
 
 import {Link} from 'react-router-dom';
 import logo from "../../assets/img/Logo.png";
-import {getCountriesList} from '../../actions/getUtilsAction'
-import {registerUser} from '../../actions/registerUserAction'
+
+
 import { history, store } from '../../store';
 import log from '../../utils/logger.service';
 import { GpsFixed } from '@material-ui/icons';
-import {connect} from 'react-redux';
+
 
 
 var button_style={
@@ -30,10 +30,10 @@ var button_style={
 
 }
 
- class Register extends React.Component {
+export default class Register extends React.Component {
 
     constructor(props) {
-        super(props);
+        super();
         this.state = {
             name: '',
             email: '',
@@ -45,7 +45,7 @@ var button_style={
             formValid: false,
             country_code: '+91',
             open: false,
-            successMesage:'',
+            message: '',
             errors: {
                 name: '',
                 email: '',
@@ -58,24 +58,12 @@ var button_style={
     }
 
     componentDidMount() {
-        console.log(this.props.countries,"render")
-        log('User on Registration Page')
-        console.log("before")
         this.props.getCountries();
-     
-        console.log(this.props,"mahaha")
-      this.setState({countries:this.props.countries})
+            setTimeout(()=>{
+                this.setState({countries:this.props.userData.getCountries.countries})
+            },3000);
     }
-    // componentDidUpdate() {
-    //     log('User on Registration Page')
-    //     util.getCountriesList();
-    //     this.props.getCountries();
-    //     console.log(this.state.countries)
-    //     store.subscribe(()=>{
-    //         console.log(store.getState().getCountries.countries)
-    //         this.setState({countries: store.getState().getCountries.countries});
-    //     })
-    // }
+    
     handleAccessCode = (e)=> {
         this.setState({country_code: e.target.getAttribute('data-value')});
     }
@@ -94,26 +82,24 @@ var button_style={
     
     
     signUp = (e) => {
-        
         e.preventDefault();
-        
         this.props.userRegister(this.state.name, this.state.email, this.state.password, this.state.country_code+this.state.phone_number);
-        console.log(this.props.error)
-            if(this.props.error) {
+            setTimeout(()=>{
+            if(this.props.userData.userRegister.error != '') {
                 this.setState({open: true});
                 this.setState({
-                    errorMessage: this.props.error
+                    errorMessage: this.props.userData.userRegister.error
                 })
-            } else{ 
-                    this.setState({open:true,successMesage:"Registeration successfull"})
-                 history.push('/login');
-            //    console.log(this.props)
-            //    this.props.getCountries();
-            //    this.setState({countries:this.props.countries})
-             
+            } else{
+                this.setState({open: true});
+                this.setState({errorMessage:this.props.userData.userRegister.success});
+                setTimeout(()=>{
+                history.push('/dashboard');
+                },3000);
             }
-        
+        },3000)
     }
+
 
     change = (e) => {
         const { name, value } = e.target;
@@ -269,10 +255,10 @@ var button_style={
                                             variant="outlined"
                                             style={{marginBottom: 15,width: '20%',borderRadius: '1px'}}
                                         >
-                                            {   
-                                                (this.props.countries !==[]) ? this.props.countries.map((item, index)=>{
+                                            {
+                                                (this.state.countries && this.state.countries.length) ? this.state.countries.map((item, index)=>{
                                                 return <MenuItem key={index} value={item.dial_code} autoWidth={true} onClick={(e)=> this.handleAccessCode(e)}>{item.dial_code}</MenuItem>
-                                                }) : (<span>Loading</span>)
+                                                }) : <span>Loading</span>
                                             }
                                         </Select>
                                         <TextField 
@@ -324,7 +310,7 @@ var button_style={
 
 
 
-                <Snackbar
+               <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
                         horizontal: 'center',
@@ -332,7 +318,7 @@ var button_style={
                     open={this.state.open}
                     autoHideDuration={5000}
                     onClose={(e,r)=>this.handleClose(e,r)}
-                    message={this.props.error}
+                    message={this.state.errorMessage}
                     action={
                     <React.Fragment>
                         <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
@@ -341,41 +327,8 @@ var button_style={
                     </React.Fragment>
                     }
                 />
-
-
-{/* <Snackbar
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    }}
-                    open={this.state.open}
-                    autoHideDuration={5000}
-                    onClose={(e,r)=>this.handleClose(e,r)}
-                    message={this.state.successMesage}
-                    action={
-                    <React.Fragment>
-                        <Button color="primary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
-                            Hide
-                        </Button>
-                    </React.Fragment>
-                    }
-                /> */}
+                
             </div>
         )
     }
 }
-// const mapStateToProps=(state)=>{
-//     return {
-//         countries:state.getCountries.countries,
-//         error:state.userRegister.error,
-        
-//     }
-// }
-
-// const mapDispatchToProps=(dispatch)=>{
-//     return {
-//         getcountries:util.getCountriesList
-//     }
-// }
-// connect(mapStateToProps,{getCountriesList,registerUser})
-export default (Register)

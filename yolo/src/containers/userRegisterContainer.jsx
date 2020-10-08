@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as userRegisterReducer from '../actions/registerUserAction';
 import * as getCountriesReducer from '../actions/getUtilsAction';
+// import { getCountriesList } from '../actions/getUtilsAction';
 
 import Register from '../components/Register/Register';
 import { bindActionCreators } from 'redux';
@@ -11,8 +12,13 @@ class RegisterContainer extends React.Component {
         return <Register 
             userRegister={this.props.userRegister}
             getCountries={this.props.getCountriesList}
-            countries={this.props.countries}
+            userData={this.props.userData}
         />
+    }
+}
+const mapStateToProps = (state)=>{
+    return {
+        userData:state
     }
 }
 
@@ -23,13 +29,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 }
 
-
-const mapStateToProps=(state)=>{
-    return {
-        countries:state.getCountries.countries,
-        error:state.userRegister.error,
-        
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
+export default connect( mapStateToProps, mapDispatchToProps)(RegisterContainer);

@@ -15,7 +15,7 @@ export function getUserDetails() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': window.localStorage.getItem('token')
+                'x-api-key': localStorage.getItem('token')
             }
         }).then(res=> {
             if(res.status === 200){
@@ -26,9 +26,11 @@ export function getUserDetails() {
             } else if(res.status === 500) {
                 dispatch(loading(false));
                 dispatch(isError('Something went wrong from our end. Please try again later.'))
-            } else {
+            }
+             else {
+                console.log(res);
                 dispatch(loading(false));
-                dispatch(isSuccess(res));
+                dispatch(isError(res.statusText));
             }
         }).catch(err=> {
             dispatch(loading(false));

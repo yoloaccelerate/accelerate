@@ -11,12 +11,19 @@ class UserProfileContainer extends React.Component {
     render() {
         return(
             <UserProfile 
-                userUpdate = {this.props.userUpdate}
                 getUserDetails = {this.props.getUserDetails}
                 getCountries={this.props.getCountriesList}
+                userDetails={this.props.userDetails}
+                userUpdate = {this.props.userUpdate}
             />
         )
     }
+}
+
+const mapStateToProps = (state)=>{
+    return {
+    userDetails: state
+}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -27,4 +34,4 @@ const mapDispatchToProps = dispatch => {
     }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(UserProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfileContainer);

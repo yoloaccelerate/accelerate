@@ -8,19 +8,20 @@ import {
     USER_UPDATE_IS_SUCCESS 
 } from '../types/user';
 
-export function userUpdate(email, name, phone_number, country, photo) {
+export function userUpdate(email, name, phone_number, id, country, photo) {
     return(dispatch) => {
         dispatch(loading(true));
         return fetch('/api/user/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': window.localStorage.getItem('token')
+                'x-api-key': localStorage.getItem("token")
             },
             body: JSON.stringify({
                 email: email,
                 name: name,
                 phone_number: phone_number,
+                id: id
                 //country: country,
                 //photo: photo
             })

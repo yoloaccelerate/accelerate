@@ -51,15 +51,15 @@ export default class UserProfile extends React.Component {
         document.title = 'Yoloj - User Profile';
         this.props.getUserDetails();
         this.props.getCountries();
-        store.subscribe(() => {
+        setTimeout(()=>{
+            console.log(this.props.userDetails);
             this.setState({
-                userDetails: store.getState().getUserDetails.success
+                userDetails: this.props.userDetails.getUserDetails.success
             })
             this.setState({
-                countries: store.getState().getCountries.countries
+                countries: this.props.userDetails.getCountries.countries
             })
-        })
-    
+    },1000);
         if(localStorage.getItem('userProfile')==='false'){
             setTimeout(() => {
                 this.setState({
@@ -91,7 +91,6 @@ export default class UserProfile extends React.Component {
         switch (name) {
 
             case 'name':
-                console.log(value.replace(/\s/g,''))
                 // errors.name = value.length < 3 ? 'Name should be more than 3 characters long': null;
                 if (value.length < 3) {
                     errors.name = 'Name should be more than 3 characters long'
@@ -135,27 +134,29 @@ export default class UserProfile extends React.Component {
     //UI part is done need to work on put and 
     updateProfile=(e)=>{
         e.preventDefault();
-        console.log("update profile")
-        this.props.userUpdate( this.state.email, this.state.name,this.state.phone_number,this.state.country_code,this.state.photo );
-        store.subscribe(()=>{
-            if(store.getState().userUpdate.error) {
+        // console.log(this.state.userDetails[0]._id);
+        this.props.userUpdate( this.state.email, this.state.name,this.state.phone_number,this.state.userDetails[0]._id,this.state.country_code,this.state.photo );
+            // console.log(store.getState())
+            setTimeout(()=>{
+            if(this.props.userDetails.userUpdate.error) {
                 this.setState({open: true});
                 this.setState({
-                    errorMessage: store.getState().userUpdate.error
+                    errorMessage: this.props.userDetails.userUpdate.error
                 })
             } else{ 
-                console.log("update profile--->",this.state.userDetails)
-                
+                // console.log("update profile--->",this.state.userDetails)
+                console.log(this.props.userDetails);
                 this.setState({open: true});
                 this.setState({
-                    errorMessage: "Successfully Updated ! Bye Bye",
+                    errorMessage: this.props.userDetails.userUpdate.success,
                     disableName:true,
                     disableEmail:true,
                     disableNumber:true,
                     updateDetails: true
                 })
             }
-        })
+        },1000);
+        
     }
 
     handleUpdate =()=>{
@@ -299,7 +300,7 @@ export default class UserProfile extends React.Component {
                                                         </Row>
                                                     </Form.Group>
                                                     <br/>
-                                                    <Button variant="contained" type="submit" color="primary" disabled={this.state.updateDetails} onClick={()=>{console.log("user  -->",this.state.userDetails)}} >Update</Button>
+                                                    <Button variant="contained" type="submit" color="primary" disabled={this.state.updateDetails} >Update</Button>
                                                     </Form>
 
                                                     {/* <form noValidate autoCapitalize="off"> */}
