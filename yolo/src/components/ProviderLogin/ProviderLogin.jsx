@@ -94,8 +94,9 @@ export default class ProviderLogin extends React.Component {
                     errorMessage: store.getState().providerLogin.error
                 })
             } else {
-                console.log("provider profile",store.getState().providerLogin.success)
-                window.localStorage.setItem('token', store.getState().providerLogin.success.token);
+                
+                console.log("provider profile",store.getState().providerLogin)
+                sessionStorage.setItem('token', store.getState().providerLogin.success.token);
                 //setName(store.getState().providerLogin.success[0].name);
                 window.localStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);

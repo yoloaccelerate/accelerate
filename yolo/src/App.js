@@ -131,7 +131,7 @@ function App() {
             <Route exact path="/provider/register" component = {ProviderRegisterContainer} />
             <Route exact path="/admin/login" component={AdminLoginContainer} />
             <ProtectedRoute exact path="/dashboard" component={ Dashboard } />
-            <ProtectedRoute exact path="/provider/dashboard" component= {ProviderDashboardContainer} />
+            <Route exact path="/provider/dashboard" component= {ProviderDashboardContainer} />
             <ProtectedRoute exact path="/admin/dashboard" component= {AdminDashboardContainer} />
 
             <Route exact path="/contact" component={Contactus} />
