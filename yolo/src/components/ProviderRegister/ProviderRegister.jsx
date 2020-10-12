@@ -515,7 +515,7 @@ export default class ProviderRegister extends React.Component {
 
     handleSelectedexpertise = (e, value) => {
        
-        this.setState({ OrgExpertise: [...this.state.OrgExpertise,value] });
+        this.setState({ OrgExpertise: [...this.state.OrgExpertise,e.target.value] });
         this.handleServicesDetails()
     }
 
