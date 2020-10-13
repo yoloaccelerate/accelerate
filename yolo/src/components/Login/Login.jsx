@@ -75,7 +75,7 @@ export default class Login extends React.Component {
                 })
             }
             if(store.getState().userLogin.success.status === true) {
-                window.localStorage.setItem('token', store.getState().userLogin.success.token);
+                window.sessionStorage.setItem('token', store.getState().userLogin.success.token);
                 this.setState({
                     open: false
                 });

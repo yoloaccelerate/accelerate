@@ -96,6 +96,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         document.title = 'Welcome to Infosys - Yolo Network';
+        console.log("Component Mounted")
         this.props.getAllProvider();
        
         this.props.getAllService();
@@ -105,6 +106,10 @@ class Home extends React.Component {
        
         store.subscribe(() => {
             console.log(store.getState().getAllApprovedProvider,"lassl")
+            console.log(store.getState().getFinancialService,"jassl")
+            console.log(store.getState().getBusinessTypes,"hassl")
+            console.log(store.getState().getCountries,"oassl")
+            console.log(store.getState().getAllProvidersDetails,"passl")
             if (store.getState().getAllApprovedProvider.error) {
                 this.setState({
                     open: true
@@ -140,6 +145,7 @@ class Home extends React.Component {
             })
         }
         else if (filterValue.city != null && filterValue.city != null) {
+            console.log("See this",this.state.allProvidersDetails)
             this.state.allProvidersDetails.map((obj) => {
                 if (obj.country == filterValue.country && obj.City == filterValue.city) {
                     filterArr.push(obj)
@@ -221,7 +227,7 @@ class Home extends React.Component {
 
 
     logic_for_profiles_based_on_city(){
-console.log(this.state.allproviderDetails,"home2233")
+        console.log(this.state.allproviderDetails,"home2233")
         var fullname_array=[]
        console.log(this.state.allproviderDetails,"outside");
         return(
@@ -426,7 +432,8 @@ console.log(this.state.allproviderDetails,"home2233")
         <div class="carddd" style={{textAlign: 'center', backgroundColor: '#fff',height: '215px'}}>
             <br/><br/>
             <CheckCircleOutlinedIcon style={{color: '#006699'}}/><br/>
-            <Link variant="caption">See all profiles from<br/>{store_your_city_name_through_google_api}<br/>{this.props.rcn}</Link> 
+            <Link variant="caption">See all profiles from<br/>{store_your_city_name_through_google_api}<br/>City Profiles
+            </Link> 
             <br/>
         </div>
 
@@ -480,7 +487,10 @@ console.log(this.state.allproviderDetails,"home2233")
                     <Grid container spacing={2} xs={12} style={{ marginTop: 70 }} >
                     
                     <div class="profiles_based_on_city">           
-        <div style={{paddingLeft: '15px'}}>Profiles based on {store_your_city_name_through_google_api}</div><br/><br/>
+                        <div style={{paddingLeft: '15px'}}>
+                            Profiles based on {store_your_city_name_through_google_api}
+                        </div>
+                        <br/><br/>
                         {this.logic_for_profiles_based_on_city()}
                     </div>
                     
@@ -493,9 +503,7 @@ console.log(this.state.allproviderDetails,"home2233")
 
                             <div style={{textAlign:'left',paddingLeft: '15px'}}>All Profiles</div><br/><br/>
                             {
-                                (this.state.allproviderDetails != [] && this.state.allProvidersDetails.length) ? this.state.allProvidersDetails.map((itemz, index) => {
-                                       
-
+                                (this.state.allproviderDetails != [] && this.state.allProvidersDetails.length>0) ? this.state.allProvidersDetails.map((itemz, index) => {
                                     return (
 
                                         <div class="carddd" style={{ backgroundColor: "#FFF" }}>
@@ -582,7 +590,7 @@ console.log(this.state.allproviderDetails,"home2233")
 
                                                                         {itemz.partnerType != undefined && itemz.partnerType.map((expertise) => {
                                                                             return (
-                                                                                <span>{expertise.name},&nbsp;</span>
+                                                                                <span key={expertise.id}>{expertise.name},&nbsp;</span>
                                                                             )
                                                                         })
                                                                         }
