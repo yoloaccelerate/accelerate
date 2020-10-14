@@ -15,7 +15,7 @@ let defaultState = {
 }
 
 const getProviderByIdReducer = (state=defaultState, action) => {
-    console.log(action,900000)
+    
     if(action.type === GET_PROVIDER_BY_ID){
         return {
             ...state

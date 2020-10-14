@@ -95,21 +95,16 @@ export default class ProviderLogin extends React.Component {
                 })
             } else {
                 
-<<<<<<< HEAD
-                console.log("provider profile",store.getState().providerLogin.success.partnerId)
+                console.log("provider profile",store.getState().providerLogin.success)
                 sessionStorage.setItem('token', store.getState().providerLogin.success.partnerId);
-=======
-                console.log("provider profile",store.getState().providerLogin)
-                sessionStorage.setItem('token', store.getState().providerLogin.success.token);
->>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
                 //setName(store.getState().providerLogin.success[0].name);
                 window.localStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
                 window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
                 //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
                 window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
-
-               this.navigateToDashboard()}
+               setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},2000) 
+               }
         })
     }
 
@@ -119,7 +114,7 @@ export default class ProviderLogin extends React.Component {
                 <HeaderContainer />
           
                 
-                <div classNameName="section box_shadow">
+                <div className="section box_shadow">
 
 
                     <div className="login_background">
