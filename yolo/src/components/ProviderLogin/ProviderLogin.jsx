@@ -94,8 +94,9 @@ export default class ProviderLogin extends React.Component {
                     errorMessage: store.getState().providerLogin.error
                 })
             } else {
-                console.log("provider profile",store.getState().providerLogin.success)
-                window.localStorage.setItem('token', store.getState().providerLogin.success.token);
+                
+                console.log("provider profile",store.getState().providerLogin.success.partnerId)
+                sessionStorage.setItem('token', store.getState().providerLogin.success.partnerId);
                 //setName(store.getState().providerLogin.success[0].name);
                 window.localStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
@@ -113,14 +114,14 @@ export default class ProviderLogin extends React.Component {
                 <HeaderContainer />
           
                 
-                <div class="section box_shadow">
+                <div classNameName="section box_shadow">
 
 
-                    <div class="login_background">
+                    <div className="login_background">
                         
-                        <div class="sub_login_background" >
+                        <div className="sub_login_background" >
 
-                            <div class="sub_section_content_login_background">
+                            <div className="sub_section_content_login_background">
                                 
                                 <br/>
                                 <Typography variant="h5">Yoloj <img src ={logo} style={{width: '16px', height: '16px'}}/></Typography>
@@ -144,9 +145,9 @@ export default class ProviderLogin extends React.Component {
                     </div>
 
 
-                    <div class="sub_section">
+                    <div className="sub_section">
 
-                        <div class="login_section">
+                        <div className="login_section">
 
                         <img src ={logo}/>
                     
@@ -201,7 +202,7 @@ export default class ProviderLogin extends React.Component {
                                     
                         </div>
 
-                        <div class="forget_section">
+                        <div className="forget_section">
                             <label>Don't have an account ?</label>
                             <Link to={this.navigateToRegister}>&nbsp;Sign Up</Link>
                         </div>

@@ -87,6 +87,7 @@ exports.verifyUserRequest = token => {
         async function tokenResolver(token) {
             try {
                 var payload = await verifiedTokenPromise(token);
+                console.log(payload,4577)
                 return true;
             } catch (e) {
                 return false;
@@ -150,9 +151,11 @@ var blacklistedJWT = token =>
  * @returns {Object}
  */
 exports.getTokenDecoded = token => {
+    console.log(2992)
     if (!token) {
         return false
     } else {
+        console.log(2992)
         async function decodeJWT(token) {
             try {
                 var decodedUser = await verifiedTokenPromise(token)
@@ -162,6 +165,7 @@ exports.getTokenDecoded = token => {
             }
         }
         var decoded = decodeJWT(token)
+        console.log(decoded,4577)
         return decoded
     }
 }

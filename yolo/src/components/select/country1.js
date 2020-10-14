@@ -125,27 +125,34 @@ getNames=()=>{
       
     
       this.setState({ filterValue: { ...filterValue, country: e.target.innerHTML},selectedCountry:e.target.innerHTML  });
+      this.props.filterFunction({...this.state.filterValue,country:e.target.innerHTML}, this.state.filterValueField)
       setTimeout(() => {
         this.citySelect()
       }, 500);
     }
     else if (e.target.id.substring(0, 2) == "ci") {
       this.setState({ filterValue: { ...filterValue, city: e.target.innerHTML },selectedCity:e.target.innerHTML });
+      this.props.filterFunction({...this.state.filterValue,city:e.target.innerHTML}, this.state.filterValueField)
     }
     else {
         switch(this.state.filterValueField){
                 case"name":
                 this.setState({filterValue:{...filterValue,name:e.target.innerHTML} });
+                this.props.filterFunction({...this.state.filterValue,name:e.target.innerHTML}, this.state.filterValueField)
                 break;
                 case"services":
                 this.setState({filterValue:{...filterValue,service:e.target.innerHTML} });
+                this.props.filterFunction({...this.state.filterValue,service:e.target.innerHTML}, this.state.filterValueField)
+
                 break;
                 case"orgName":
                 this.setState({filterValue:{...filterValue,orgName:e.target.innerHTML} });
+                 this.props.filterFunction({...this.state.filterValue,orgName:e.target.innerHTML}, this.state.filterValueField)
                 break;
                 case"expertise":
                 this.setState({filterValue:{...filterValue,expertise:e.target.innerHTML} });
-                break;
+                this.props.filterFunction({...this.state.filterValue,expertise:e.target.innerHTML}, this.state.filterValueField)
+                 break;
 
         }
       this.setState({ selectedSearchByValue:e.target.innerHTML});

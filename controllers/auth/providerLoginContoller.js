@@ -25,9 +25,11 @@ exports.partnerLogin = (req, res) => {
                     user[0].fullName,
                     2
                 );
+                console.log(48,token)
                 res.status(200).json({
-                    token,
-                    status: true
+                   token,
+                    status: true,
+                    partnerId:user[0].partnerId
                 });
             }
         }

@@ -50,7 +50,7 @@ export default class ProviderDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            providerData:[],
+            providerData:{},
             updatedData:[],
             disableEmail: true,
             disableName : true,
@@ -123,26 +123,38 @@ export default class ProviderDashboard extends React.Component {
     }
 
     componentDidMount() {
+        this.props.getProviderById();
+       
+        setTimeout(()=>{
+            
+            localStorage.setItem("userProfile",true)
+            sessionStorage.setItem("ProviderProfile",true)
+                sessionStorage.setItem("ProviderName",this.props.data[0].fullName)
+           
+            this.setState({
+            providerData:this.props.data[0]
+        })
         
-        var partnerdata = window.localStorage.getItem('providerData')
-        console.log(partnerdata)
-         this.setState({
-           providerData:JSON.parse(partnerdata)
-       })
+    
+      
+    },8000) 
+     
    }
 
 
 
 
     render() {
-
-        return(
-            <div style={{width: '100%', marginTop: '100px'}}>
+        
+return (<div>
+  
+            {this.props.data.length!=0? (
+            <div className="offset-2 col-md-10" style={{ marginTop: '100px'}}>
 
             <HeaderContainer />
 
             <Form onSubmit={(e)=>{this.updateProfile(e)}}>
-                {this.state.providerData.fullName}
+                
 
                 <Form.Control type="name"
                 name='name'
@@ -175,9 +187,16 @@ export default class ProviderDashboard extends React.Component {
 
 
 
-        </div>       
+        </div>  ): (<div>
+            
+            <div>Loading
+                
+                </div>
+                
+                </div>) 
+            }   </div>)
            
-        )
+        
     }
     
     }

@@ -7,17 +7,19 @@ import {
     GET_PROVIDER_BY_ID_IS_SUCCESS,
     GET_PROVIDER_BY_ID_IS_FAILURE,
 } from '../types/provider';
-
+// http://localhost:3000/provider/dashboard
 export function getProviderById() {
     return (dispatch) => {
         dispatch(loading(true));
-        return fetch('/api/provider/'+ window.localStorage.getItem('partnerId'),{
+        console.log("providerId",sessionStorage.getItem('token'))
+        return fetch('/api/provider/pro/login',{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': window.localStorage.getItem('token')
+                'x-api-key':sessionStorage.getItem('token')
             }
         }).then(res=> {
+            console.log(res,200)
             if(res.status === 200){
                 return res.json().then(res=> {
                     dispatch(loading(false));

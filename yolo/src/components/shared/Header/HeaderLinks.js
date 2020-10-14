@@ -192,9 +192,11 @@ export default function HeaderLinks(props) {
   };
 
   const logout = () => {
-      window.localStorage.removeItem('token');
+     sessionStorage.removeItem('token');
       window.localStorage.removeItem('userProfile');
       window.localStorage.removeItem('providerProfile');
+      sessionStorage.removeItem("ProviderName")
+      sessionStorage.removeItem("ProviderProfile")
       window.location.reload(false);
   }
 
@@ -248,7 +250,7 @@ useEffect(() => {
     if (history.location.pathname !== '/login' || '/register') {
         setIsLoggedIn(true);
     }
-    if (localStorage.getItem("userProfile")==='true') {
+    if (localStorage.getItem("userProfile")==='true'||sessionStorage.getItem("ProviderProfile")) {
         setIsLoggedIn(true);
     }
     if (localStorage.getItem("providerProfile")==='true') {
@@ -262,18 +264,23 @@ useEffect(() => {
         setFinancialTypes(store.getState().getFinancialService.success);
         
     });
-    if (localStorage.getItem('userProfile') === 'true') {
+    if (localStorage.getItem('userProfile') === 'true'||sessionStorage.getItem("ProviderProfile")) {
         if(store.getState().getUserDetails.success.length>0){
             console.log("yes",name);
             setName(store.getState().getUserDetails.success[0].name);
-        }else{
+        }
+        else if(sessionStorage.getItem("ProviderName"))
+        {
+            setName(sessionStorage.getItem("ProviderName"))
+        }
+        else{
             localStorage.setItem('userProfile', true);
             
         }
     }
 
 
-}, []);
+}, [setName]);
 
 
 const classes = useStyles();
@@ -360,7 +367,7 @@ const navigatetoLogin = () => {
         target="_blank"
         className={classes.navLink}
         >
-            <Link to={'contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
+            <Link to={'./contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
                 Contact Us
             </Link>
             

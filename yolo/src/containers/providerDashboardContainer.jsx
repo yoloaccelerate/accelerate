@@ -9,8 +9,14 @@ class ProviderDashboardContainer extends React.Component {
         return (
             <ProviderDashboard
                 getProviderById={this.props.getProviderById}
+                data={this.props.data}
             />
         )
+    }
+}
+const map=(state)=>{
+    return{
+        data:state.getProviderById.success
     }
 }
 
@@ -21,4 +27,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(null, mapDispatchToProps)(ProviderDashboardContainer);
+export default connect(map, mapDispatchToProps)(ProviderDashboardContainer);

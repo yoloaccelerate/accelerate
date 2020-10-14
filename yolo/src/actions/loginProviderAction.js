@@ -25,7 +25,7 @@ export function providerLogin(email, password) {
             if(res.status === 200) {
                 return res.json().then(res=> {
                     console.log(res )
-                    dispatch(loading(true));
+                    dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
             } else if(res.status === 500) {
@@ -38,7 +38,7 @@ export function providerLogin(email, password) {
                 })
             }
         }).catch(err=> {
-            console.log(err)
+            //console.log(err)
             // dispatch(loading(false));
             // dispatch(isError(err));
         })

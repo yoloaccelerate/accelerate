@@ -114,9 +114,10 @@ export default class ProviderProfile extends React.Component {
     constructor(props){
         super();
         this.state = {
-            providerData:[],
+            providerData:{},
             cityData:[],
-            city:''
+            city:'',
+            provider:false
         }   
     }
     
@@ -126,56 +127,61 @@ export default class ProviderProfile extends React.Component {
        let  myParam = demo.split("=");
        let Id = myParam[1];
        var pcity = '';
+
         fetch('/api/provider/'+Id, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res=> {
+            
                 if(res.status === 200) {
                     return res.json().then(res=> {
-                        this.setState({
+                        console.log(res,"mayank")
+                      
+                      setTimeout(()=>{  this.setState({
                             providerData:res,
-                            city:res.City
-                        }) 
-                        this.CitySelect()
-                        pcity = this.state.providerData.City
-                        console.log("Pcityy==",pcity)
+                            provider:true
+                           
+                        }) },2000)
+                     
+                       
+                       
 
                     })
                 } 
             }).catch(err=> {
-               console.log(err);
+               console.log(err,6566);
             })
          
             }
 
 
 
-            CitySelect = () => {
-                fetch('/api/provider/city/'+this.state.city, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(res=> {
-                    console.log("response is=======", res)
-                    if(res.status === 200) {
-                        return res.json().then(res=> {
-                            this.setState({
-                                cityData:res
+    //         CitySelect = () => {
+    //             fetch('/api/provider/city/'+this.state.city, {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 }
+    //             }).then(res=> {
+    //                 console.log("response is=======", res)
+    //                 if(res.status === 200) {
+    //                     return res.json().then(res=> {
+    //                         this.setState({
+    //                             cityData:res
                                 
-                            })           
+    //                         })           
     
-                        })
-                    } 
-                }).catch(err=> {
-                   console.log(err);
-                })
+    //                     })
+    //                 } 
+    //             }).catch(err=> {
+    //                console.log(err);
+    //             })
     
-                //console.log("ityyyyyy data is ---", this.state.cityData)
+    //             //console.log("ityyyyyy data is ---", this.state.cityData)
              
-    }  
+    // }  
 
 
       
@@ -183,8 +189,8 @@ export default class ProviderProfile extends React.Component {
     
     render() {
     
-   
-            return(
+   return(<div> {this.state.provider?
+           (
          
             
 
@@ -673,7 +679,7 @@ export default class ProviderProfile extends React.Component {
                         <div class="similar_container" id="similar_profile_location">
 
                             <div class="sim_con">
-                                <Similar_Profiles_location rcn={relevant_city_name}/>
+                                {/* <Similar_Profiles_location rcn={relevant_city_name}/> */}
                             </div>
 
                         </div> 
@@ -692,7 +698,7 @@ export default class ProviderProfile extends React.Component {
                         }      
                         <div class="similar_container" id="similar_profile_expertise">
                             <div class="sim_con">
-                                <Similar_Profiles_expertise ren={relevant_expertise_name}/>
+                                {/* <Similar_Profiles_expertise ren={relevant_expertise_name}/> */}
                             </div>
                         </div> 
                         
@@ -710,7 +716,7 @@ export default class ProviderProfile extends React.Component {
                         }      
                         <div class="similar_container" id="similar_profile_service">
                             <div class="sim_con">
-                                <Similar_Profiles_service rsn={relevant_service_name}/>
+                                {/* <Similar_Profiles_service rsn={relevant_service_name}/> */}
                             </div>
                         </div> 
 
@@ -732,8 +738,15 @@ export default class ProviderProfile extends React.Component {
 
             </div>       
                
-            )
+                    
+               ):(<span>Loading</span>)
+                    }
+                    </div>
+   )
+
     }
+            
+
 }
 
 
