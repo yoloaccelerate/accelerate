@@ -24,8 +24,13 @@ exports.getProviderDetail = (req, res) => {
             if(error) {
                 res.status(400).json(error)
             } else {
+<<<<<<< HEAD
                 console.log(docs.partnerId,'11')
                 res.status(200).json(docs.partnerId);
+=======
+                console.log(docs,'11')
+                res.status(200).json(docs);
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
             }
         })
     })   

@@ -25,7 +25,11 @@ export function providerLogin(email, password) {
             if(res.status === 200) {
                 return res.json().then(res=> {
                     console.log(res )
+<<<<<<< HEAD
                     dispatch(loading(false));
+=======
+                    // dispatch(loading(false));
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
                     dispatch(isSuccess(res));
                 })
             } else if(res.status === 500) {

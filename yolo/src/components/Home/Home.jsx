@@ -99,6 +99,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         document.title = 'Welcome to Infosys - Yolo Network';
+        console.log("Component Mounted")
         this.props.getAllProvider();
 
         this.props.getAllService();
@@ -109,7 +110,15 @@ class Home extends React.Component {
 
 
         store.subscribe(() => {
+<<<<<<< HEAD
             console.log(store.getState().getAllApprovedProvider, "lassl")
+=======
+            console.log(store.getState().getAllApprovedProvider,"lassl")
+            console.log(store.getState().getFinancialService,"jassl")
+            console.log(store.getState().getBusinessTypes,"hassl")
+            console.log(store.getState().getCountries,"oassl")
+            console.log(store.getState().getAllProvidersDetails,"passl")
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
             if (store.getState().getAllApprovedProvider.error) {
                 this.setState({
                     open: true
@@ -148,7 +157,11 @@ class Home extends React.Component {
             })
         }
         else if (filterValue.city != null && filterValue.city != null) {
+<<<<<<< HEAD
             this.setState({city:filterValue.city})
+=======
+            console.log("See this",this.state.allProvidersDetails)
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
             this.state.allProvidersDetails.map((obj) => {
                 if (obj.country == filterValue.country && obj.City == filterValue.city) {
                     filterArr.push(obj)
@@ -230,6 +243,7 @@ class Home extends React.Component {
         this.setState({allProfile:true})
     }
 
+<<<<<<< HEAD
 allProfile=()=>{
 let arr=[]
 arr=this.state.allProvidersDetails.filter((provider)=>{
@@ -238,6 +252,93 @@ arr=this.state.allProvidersDetails.filter((provider)=>{
             {
                   return true
                 }
+=======
+
+
+    logic_for_profiles_based_on_city(){
+        console.log(this.state.allproviderDetails,"home2233")
+        var fullname_array=[]
+       console.log(this.state.allproviderDetails,"outside");
+        return(
+        <div>    
+        {
+            (this.state.searchedResult!=[] && this.state.searchedResult.length) ? this.state.searchedResult.map((itemz, index) => {
+                console.log(itemz,"inside");
+                return (
+                    <div>
+                        <div>
+                            <span style={{display: 'none'}}>
+                                {!fullname_array.includes(itemz.fullName)?
+                                (
+                                    fullname_array.push(itemz.fullName)
+                                )
+                                :
+                                (
+                                ""
+                                )    
+                                }
+                                
+                            </span>
+
+                            {index<2 ?
+                            (
+                            <div>
+                                <div class="carddd" style={{ backgroundColor: "#FFF" }}>
+
+<div class="header_element">
+
+    <div class="left_header">
+
+        <img src={itemz.providerIdentityImg} style={media}></img><br />
+
+        {itemz.approved == true ?
+            (
+                <CheckCircleIcon style={{ backgroundColor: '#fff', color: '#0077b3', fontSize: '16px', border: '1px solid #fff', borderRadius: '50%', marginTop: '-22px' }} />
+            )
+            :
+            (
+                <span style={{ marginTop: '-22px' }}>.</span>
+            )
+        }
+
+
+    </div>
+
+    <div class="right_header">
+
+        <Typography variant="body2" color="textprimary" style={{ fontSize: '14px' }}>
+            {itemz.fullName}&nbsp;
+            <span style={{ display: 'none' }}>{share_link = `provider/profile?id=${itemz.partnerId}`}</span>
+            <span style={{ display: 'none' }}>{share_link_2 = `?id=${itemz.partnerId}`}</span>
+
+            <Link style={{ float: 'right', marginRight: '15px', color: '#4d4d4d' }} ><Sharefunctionality b1={share_link_2} brand={share_link} style={{ fontSize: '12px' }} /></Link>
+        </Typography>
+
+        <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#808080' }}>
+            <WorkIcon style={{ fontSize: '11px', marginTop: '-2px' }} />
+        &nbsp;
+        {itemz.OrganizationName.substr(0, 11)}
+
+            {itemz.OrganizationName.length > 8 ?
+                (
+                    <HtmlTooltip
+                        placement="top-start"
+                        title={
+                            <React.Fragment>
+                                {itemz.OrganizationName}
+                            </React.Fragment>
+                        }
+                    >
+                        <Link underlineNone class="link_hover" style={{ color: '#0077b3', textDecoration: 'none' }}>
+                            ...
+                        </Link>
+                    </HtmlTooltip>
+                )
+                :
+                (
+                    ""
+                )
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
             }
             )
 console.log(arr,9899)
@@ -293,12 +394,22 @@ this.setState({searchedResult:arr})
                         : ('')
                 }
 
+<<<<<<< HEAD
                 <div className="carddd" style={{ textAlign: 'center', backgroundColor: '#fff', height: '215px' }}>
                     <br /><br />
                     <CheckCircleOutlinedIcon style={{ color: '#006699' }} /><br />
                     <Link  onClick={this.allProfile} variant="caption">See all profiles from<br />{this.state.city}<br />{this.props.rcn}</Link>
                     <br />
                 </div>
+=======
+        <div class="carddd" style={{textAlign: 'center', backgroundColor: '#fff',height: '215px'}}>
+            <br/><br/>
+            <CheckCircleOutlinedIcon style={{color: '#006699'}}/><br/>
+            <Link variant="caption">See all profiles from<br/>{store_your_city_name_through_google_api}<br/>City Profiles
+            </Link> 
+            <br/>
+        </div>
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
 
 
             </div>
@@ -348,12 +459,24 @@ this.setState({searchedResult:arr})
 
                     <br /><br />
                     <Grid container spacing={2} xs={12} style={{ marginTop: 70 }} >
+<<<<<<< HEAD
 
                         <div class="profiles_based_on_city">
                             <div style={{ paddingLeft: '15px' }}>Profiles based on {this.state.city}</div><br /><br />
                             {this.logic_for_profiles_based_on_city()}
                         </div>
 
+=======
+                    
+                    <div class="profiles_based_on_city">           
+                        <div style={{paddingLeft: '15px'}}>
+                            Profiles based on {store_your_city_name_through_google_api}
+                        </div>
+                        <br/><br/>
+                        {this.logic_for_profiles_based_on_city()}
+                    </div>
+                    
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
                     </Grid>
                     {/*end of div of profile based city*/}
 
@@ -363,8 +486,74 @@ this.setState({searchedResult:arr})
 
                             <div style={{ textAlign: 'left', paddingLeft: '15px' }}>All Profiles</div><br /><br />
                             {
+<<<<<<< HEAD
                                 (this.state.allproviderDetails != [] && this.state.allProvidersDetails.length) ? this.state.allProvidersDetails.map((itemz, index) => {
 
+=======
+                                (this.state.allproviderDetails != [] && this.state.allProvidersDetails.length>0) ? this.state.allProvidersDetails.map((itemz, index) => {
+                                    return (
+
+                                        <div class="carddd" style={{ backgroundColor: "#FFF" }}>
+
+                                            <div class="header_element">
+
+                                                <div class="left_header">
+
+                                                    <img src={itemz.providerIdentityImg} style={media}></img><br />
+
+                                                    {itemz.approved == true ?
+                                                        (
+                                                            <CheckCircleIcon style={{ backgroundColor: '#fff', color: '#0077b3', fontSize: '16px', border: '1px solid #fff', borderRadius: '50%', marginTop: '-22px' }} />
+                                                        )
+                                                        :
+                                                        (
+                                                            <span style={{ marginTop: '-22px' }}>.</span>
+                                                        )
+                                                    }
+
+
+                                                </div>
+
+                                                <div class="right_header">
+
+                                                    <Typography variant="body2" color="textprimary" style={{ fontSize: '14px' }}>
+                                                        {itemz.fullName}&nbsp;
+                                                        <span style={{ display: 'none' }}>{share_link = `provider/profile?id=${itemz.partnerId}`}</span>
+                                                        <span style={{ display: 'none' }}>{share_link_2 = `?id=${itemz.partnerId}`}</span>
+
+                                                        <Link style={{ float: 'right', marginRight: '15px', color: '#4d4d4d' }} ><Sharefunctionality b1={share_link_2} brand={share_link} style={{ fontSize: '12px' }} /></Link>
+                                                    </Typography>
+
+                                                    <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#808080' }}>
+                                                        <WorkIcon style={{ fontSize: '11px', marginTop: '-2px' }} />
+                                        &nbsp;
+                                        {itemz.OrganizationName.substr(0, 11)}
+
+                                                        {itemz.OrganizationName.length > 8 ?
+                                                            (
+                                                                <HtmlTooltip
+                                                                    placement="top-start"
+                                                                    title={
+                                                                        <React.Fragment>
+                                                                            {itemz.OrganizationName}
+                                                                        </React.Fragment>
+                                                                    }
+                                                                >
+                                                                    <Link underlineNone class="link_hover" style={{ color: '#0077b3', textDecoration: 'none' }}>
+                                                                        ...
+                                            </Link>
+                                                                </HtmlTooltip>
+                                                            )
+                                                            :
+                                                            (
+                                                                ""
+                                                            )
+                                                        }
+                                                        <br />
+                                                        <LocationOnOutlinedIcon style={{ fontSize: '12px' }} /> {itemz.country}
+
+                                                    </Typography>
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
 
                                     return (
                                         <div>
@@ -383,6 +572,103 @@ this.setState({searchedResult:arr})
                                            
                                             </div>
 
+<<<<<<< HEAD
+=======
+
+                                            <div class="cardd_paddingg">
+
+                                                <Typography variant="body2" color="textPrimary" style={{ fontSize: '13px' }}>
+                                                    {itemz.partnerId}
+                                                </Typography>
+
+                                                <Typography variant="caption" color="textSecondary" >
+                                                    {itemz.partnerType[0].name}
+
+
+                                                    {itemz.partnerType.length > 1 ?
+                                                        (
+                                                            <HtmlTooltip
+                                                                placement="top-start"
+                                                                title={
+                                                                    <React.Fragment>
+
+                                                                        {itemz.partnerType != undefined && itemz.partnerType.map((expertise) => {
+                                                                            return (
+                                                                                <span key={expertise.id}>{expertise.name},&nbsp;</span>
+                                                                            )
+                                                                        })
+                                                                        }
+
+                                                                    </React.Fragment>
+                                                                }
+                                                            >
+                                                                <Link underlineNone style={{ color: '#0077b3', textDecoration: 'none' }}>
+                                                                    &nbsp; &  more
+                                        </Link>
+                                                            </HtmlTooltip>
+                                                        )
+                                                        :
+                                                        (
+                                                            ""
+                                                        )
+                                                    }
+                                                </Typography>
+
+
+
+                                                <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#595959' }}>
+                                                    Fees {itemz.Fees} &nbsp;
+
+                                                </Typography>
+
+
+                                                <br />
+                                                <Link underlineNone class="link_hover" style={{ color: '#4d4d4d' }} to={`/provider/profile?id=${itemz.partnerId}`}>
+                                                    View Profile
+                                                </Link>
+                                                &nbsp;&nbsp;
+
+
+                                                <Link underlineNone class="link_hover" style={{color: '#4d4d4d',textDecoration: 'none'}}>
+                                                    <span style={{display: 'none'}}>{modal_data_1=itemz.email}</span>
+                                                    <span style={{display: 'none'}}>{modal_data_2=itemz.mobileNumber}</span>
+                                                    <span style={{display: 'none'}}>{modal_data_3=itemz.country}</span>
+                                                    <span style={{display: 'none'}}>{modal_data_4=itemz.approved}</span>
+                                                    <span style={{display: 'none'}}>{modal_data_5=itemz.City}</span>
+
+                                                    <span style={{display: 'none'}}>{modal_data_6=itemz.ALineOne}</span>
+                                                    <span style={{display: 'none'}}>{modal_data_7=itemz.ALineTwo}</span>
+                                                    <span style={{display: 'none'}}>{modal_data_8=itemz.PinCode}</span>
+
+                                                    <Contact_modal m1={modal_data_1} m2={modal_data_2} m3={modal_data_3} m4={modal_data_4} 
+                                                        m5={modal_data_5} m6={modal_data_6} m7={modal_data_7} m8={modal_data_8}
+                                                    />
+                                                </Link>
+
+
+
+
+
+                                                {itemz.partnerType.length > 1 ? 
+                                                    (
+                                                        <FavoriteBorderIcon style={{float: 'right', fontSize: '14px', color: '#666666',cursor: 'pointer', marginTop: '5px'}}/>
+                                                    )
+                                                    :
+                                                    (
+                                                        <FavoriteIcon style={{float: 'right', fontSize: '14px',color: '#0077b3', cursor: 'pointer', marginTop: '7px'}}/>
+                                                    )
+                                                }
+
+                                            </div>
+
+
+
+                                        </div>
+
+
+
+
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
                                     )
                                 }
                                 
