@@ -15,7 +15,7 @@ export function userUpdate(email, name, phone_number, id, country, photo) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': localStorage.getItem("token")
+                'x-api-key': sessionStorage.getItem("token")
             },
             body: JSON.stringify({
                 email: email,
@@ -28,6 +28,7 @@ export function userUpdate(email, name, phone_number, id, country, photo) {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=>{
+                    console.log(res)
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
