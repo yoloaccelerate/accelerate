@@ -12,7 +12,7 @@ exports.getProviderDetails = (req, res) => {
         if(err) {
             res.status(400).json(err);
         } else {
-            console.log(providers,req.params.partnerId,"yolo fetching partner id")
+            // console.log(providers,req.params.partnerId,"yolo fetching partner id")
             res.status(200).json(providers);
         }
     })

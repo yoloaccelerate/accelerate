@@ -15,7 +15,7 @@ export function getUserDetails() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': sessionStorage.getItem('token')
+                'x-api-key': localStorage.getItem('token')
             }
         }).then(res=> {
             if(res.status === 200){

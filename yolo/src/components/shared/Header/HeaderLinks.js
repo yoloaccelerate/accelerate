@@ -192,11 +192,12 @@ export default function HeaderLinks(props) {
   };
 
   const logout = () => {
-     sessionStorage.removeItem('token');
-      window.localStorage.removeItem('userProfile');
-      window.localStorage.removeItem('providerProfile');
-      sessionStorage.removeItem("ProviderName")
-      sessionStorage.removeItem("ProviderProfile")
+    localStorage.removeItem('token');
+    localStorage.removeItem('userProfile');
+    localStorage.removeItem('providerProfile');
+    localStorage.removeItem("providerName");
+    localStorage.removeItem("userName");
+    //   sessionStorage.removeItem("ProviderProfile")
       window.location.reload(false);
   }
 
@@ -250,7 +251,7 @@ useEffect(() => {
     if (history.location.pathname !== '/login' || '/register') {
         setIsLoggedIn(true);
     }
-    if (localStorage.getItem("userProfile")==='true'||sessionStorage.getItem("ProviderProfile")) {
+    if (localStorage.getItem("userProfile")==='true'|| localStorage.getItem("providerProfile")) {
         setIsLoggedIn(true);
     }
     if (localStorage.getItem("providerProfile")==='true') {
@@ -264,14 +265,15 @@ useEffect(() => {
         setFinancialTypes(store.getState().getFinancialService.success);
         
     });
-    if (localStorage.getItem('userProfile') === 'true'||sessionStorage.getItem("ProviderProfile")) {
-        if(store.getState().getUserDetails.success.length>0){
-            console.log("yes",name);
-            setName(store.getState().getUserDetails.success[0].name);
+    if (localStorage.getItem('userProfile') === 'true'||localStorage.getItem("providerProfile")) {
+        console.log("yes", store.getState());
+        if(localStorage.getItem("userName")){
+            
+            setName(localStorage.getItem("userName"));
         }
-        else if(sessionStorage.getItem("ProviderName"))
+        else if(localStorage.getItem("providerName"))
         {
-            setName(sessionStorage.getItem("ProviderName"))
+            setName(localStorage.getItem("providerName"))
         }
         else{
             localStorage.setItem('userProfile', true);
@@ -302,7 +304,8 @@ const [anchorEl, setAnchorEl] = React.useState(null);
         }
         if (localStorage.getItem('providerProfile')) {
             localStorage.setItem('providerProfile', false);
-            history.push('/provider/dashboard');
+            // history.push('/provider/dashboard');
+            history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)
         }
 
     }
@@ -320,7 +323,7 @@ const navigatetoLogin = () => {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
       {
-        localStorage.getItem('userProfile') ? null:
+        localStorage.getItem('userProfile') || localStorage.getItem('providerProfile') ? null:
         <CustomDropdown
           noLiPadding
           buttonText="Provider"
@@ -343,7 +346,7 @@ const navigatetoLogin = () => {
       <ListItem className={classes.listItem}>
 
       {
-        localStorage.getItem('userProfile') ? <Button
+        localStorage.getItem('userProfile') || localStorage.getItem('providerProfile') ? <Button
         color="transparent"
         target="_blank"
         className={classes.navLink}
@@ -380,7 +383,7 @@ const navigatetoLogin = () => {
       <ListItem className={classes.listItem}>
         
       {
-        localStorage.getItem('userProfile') ? <Button
+        localStorage.getItem('userProfile') || localStorage.getItem('providerProfile')? <Button
         color="info"
         target="_blank"
         className={classes.navLink}

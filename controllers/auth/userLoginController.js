@@ -27,7 +27,8 @@ exports.userLogin = (req, res) => {
                 )
                 res.status(200).json({
                     token,
-                    status: true
+                    status: true,
+                    name:user[0].name
                 })
             }
         }

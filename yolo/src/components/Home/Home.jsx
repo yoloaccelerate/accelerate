@@ -109,7 +109,7 @@ class Home extends React.Component {
 
 
         store.subscribe(() => {
-            console.log(store.getState().getAllApprovedProvider, "lassl")
+            console.log(store.getState(), "lassl")
             if (store.getState().getAllApprovedProvider.error) {
                 this.setState({
                     open: true

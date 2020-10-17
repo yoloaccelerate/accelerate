@@ -29,7 +29,7 @@ export default function MobileHeader(props){
         case "info":
             return history.push('/')
         default:
-        return history.push('/')
+            return history.push('/')
     }
    
     

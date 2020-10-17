@@ -83,9 +83,9 @@ export default class ProviderLogin extends React.Component {
 
     login = (e) => {
         e.preventDefault();
-        console.log(this.state.email, this.state.password)
         this.props.providerLogin(this.state.email, this.state.password);
         store.subscribe(()=> {
+            console.log(store.getState());
             if(store.getState().providerLogin.error) {
                 this.setState({
                     open: true
@@ -95,15 +95,16 @@ export default class ProviderLogin extends React.Component {
                 })
             } else {
                 
-                console.log("provider profile",store.getState().providerLogin.success)
-                sessionStorage.setItem('token', store.getState().providerLogin.success.partnerId);
+                // console.log("provider profile",store.getState().providerLogin.success)
+                localStorage.setItem('token', store.getState().providerLogin.success.token);
                 //setName(store.getState().providerLogin.success[0].name);
                 window.localStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
-                window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
+                window.localStorage.setItem('providerId',store.getState().providerLogin.success.partnerId);
+                window.localStorage.setItem('providerName',store.getState().providerLogin.success.name);
                 //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
-                window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
-               setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},2000) 
+                // window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
+               setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},1000) 
                }
         })
     }
