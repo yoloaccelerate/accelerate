@@ -20,6 +20,7 @@ export function getUserDetails() {
         }).then(res=> {
             if(res.status === 200){
                 return res.json().then(res=> {
+                    // console.log(res);
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

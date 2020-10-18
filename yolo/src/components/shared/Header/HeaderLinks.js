@@ -196,6 +196,7 @@ export default function HeaderLinks(props) {
     localStorage.removeItem('userProfile');
     localStorage.removeItem('providerProfile');
     localStorage.removeItem("providerName");
+    localStorage.removeItem("providerId");
     localStorage.removeItem("userName");
     //   sessionStorage.removeItem("ProviderProfile")
       window.location.reload(false);

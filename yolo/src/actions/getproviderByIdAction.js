@@ -11,7 +11,6 @@ import {
 export function getProviderById() {
     return (dispatch) => {
         dispatch(loading(true));
-        console.log("providerId",sessionStorage.getItem('token'))
         return fetch('/api/provider/pro/login',{
             method: 'GET',
             headers: {

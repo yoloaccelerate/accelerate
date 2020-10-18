@@ -52,7 +52,7 @@ export default class UserProfile extends React.Component {
         this.props.getUserDetails();
         this.props.getCountries();
         setTimeout(()=>{
-            console.log(this.props.userDetails);
+            // console.log(this.props.userDetails);
             this.setState({
                 userDetails: this.props.userDetails.getUserDetails.success
             })
@@ -145,15 +145,23 @@ export default class UserProfile extends React.Component {
                 })
             } else{ 
                 // console.log("update profile--->",this.state.userDetails)
-                console.log(this.props.userDetails);
+                // console.log(this.props.userDetails);
                 this.setState({open: true});
                 this.setState({
-                    errorMessage: this.props.userDetails.userUpdate.success,
+                    errorMessage: this.props.userDetails.userUpdate.success.message,
                     disableName:true,
                     disableEmail:true,
                     disableNumber:true,
                     updateDetails: true
                 })
+                // overriding token and name with new token
+                localStorage.setItem('token',this.props.userDetails.userUpdate.success.token);
+                localStorage.setItem('userName',this.props.userDetails.userUpdate.success.name);
+                this.props.getUserDetails();
+                // setTimeout(()=>{
+                //     console.log(this.props.userDetails);
+                // },1000)
+                
             }
         },1000);
         
