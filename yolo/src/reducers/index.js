@@ -22,6 +22,8 @@ import updateUserReducer from './userUpdate';
 import getAllApprovedProviderReducer from './getAllProvider';
 import getProviderByIdReducer from './getProviderById';
 import getAllProvidersDetailsReducer from './getAllProvidersDetails'
+import providerUpdateServiceReducer from './providerUpdate'
+import providerUpdateExpertiseReducer from './providerExpertiseUpdate'
 
 export default combineReducers({
     getCountries: getCountriesReducer,
@@ -41,5 +43,7 @@ export default combineReducers({
     userUpdate: updateUserReducer,
     getAllApprovedProvider: getAllApprovedProviderReducer,
     getProviderById: getProviderByIdReducer,
-    getAllProvidersDetails:getAllProvidersDetailsReducer
+    getAllProvidersDetails:getAllProvidersDetailsReducer,
+    providerUpdate:providerUpdateServiceReducer,
+    providerExpertieUpdate:providerUpdateExpertiseReducer
 });

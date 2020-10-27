@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderContainer from '../../containers/headerContainer';
+import ProviderCard from '../Card/providerCard'
 import {
     Button, Snackbar, Grid,
     Card, Avatar, CardActionArea,
@@ -50,16 +51,16 @@ var media = {
 var share_link = {}
 var share_link_2 = {}
 
-var modal_data_1={}
-var modal_data_2={}
-var modal_data_3={}
-var modal_data_4={}
-var modal_data_5={}
-var modal_data_6={}
-var modal_data_7={}
-var modal_data_8={}
+var modal_data_1 = {}
+var modal_data_2 = {}
+var modal_data_3 = {}
+var modal_data_4 = {}
+var modal_data_5 = {}
+var modal_data_6 = {}
+var modal_data_7 = {}
+var modal_data_8 = {}
 
-var store_your_city_name_through_google_api="Bengaluru"
+var store_your_city_name_through_google_api = "Bengaluru"
 
 
 
@@ -79,6 +80,7 @@ class Home extends React.Component {
         super();
         this.state = {
             open: false,
+            allProfile:true,
             errorMessage: '',
             providerData: [],
             allProviderData: [],
@@ -89,22 +91,26 @@ class Home extends React.Component {
             allService: [],
             allExpertise: [],
             allCountry: [],
-            allProvidersDetails:[],
-            searchedResult:[]
+            allProvidersDetails: [],
+            searchedResult: [],
+            city:'',
+            allProfileMessage:'See all profiles'
         }
     }
 
     componentDidMount() {
         document.title = 'Welcome to Infosys - Yolo Network';
         this.props.getAllProvider();
-       
+
         this.props.getAllService();
         this.props.getAllBusinessType();
         this.props.getCountriesList();
         this.props.getAllProvidersDetails();
-       
+        this.setState({city:'Delhi'})
+
+
         store.subscribe(() => {
-            console.log(store.getState().getAllApprovedProvider,"lassl")
+            console.log(store.getState().getAllApprovedProvider, "lassl")
             if (store.getState().getAllApprovedProvider.error) {
                 this.setState({
                     open: true
@@ -113,25 +119,28 @@ class Home extends React.Component {
                     errorMessage: String(store.getState().getAllApprovedProvider.error)
                 })
             } else {
-              this.setState({
+                this.setState({
                     providerData: this.props.providerData,
                     allProviderData: store.getState().getAllApprovedProvider.success,
                     allService: store.getState().getFinancialService.success,
                     allExpertise: store.getState().getBusinessTypes.success,
                     allCountry: store.getState().getCountries.countries,
-                    allProvidersDetails: store.getState().getAllProvidersDetails.success
+                    allProvidersDetails: store.getState().getAllProvidersDetails.success,
+                    allProfile:false
                 })
-           
-               
+
+
             }
         })
     }
 
     filterFunction = (filterValue, field) => {
         this.setState({ filteredData: [] })
+        this.setState({city:filterValue.city})
         let filterArr = []
         let searchData = []
-        console.log(filterValue,field,"998899")
+        console.log(filterValue, field, "998899")
+
         if (filterValue.country != null && filterValue.city == null) {
             this.state.allProvidersDetails.map((obj) => {
                 if (obj.country == filterValue.country) {
@@ -140,6 +149,7 @@ class Home extends React.Component {
             })
         }
         else if (filterValue.city != null && filterValue.city != null) {
+            this.setState({city:filterValue.city})
             this.state.allProvidersDetails.map((obj) => {
                 if (obj.country == filterValue.country && obj.City == filterValue.city) {
                     filterArr.push(obj)
@@ -149,12 +159,12 @@ class Home extends React.Component {
         else if (filterValue.city == null && filterValue.city == null) {
             this.state.allProvidersDetails.map((obj) => {
                 filterArr.push(obj)
-              
+
             })
         }
 
         if (field == "name") {
-            console.log(filterArr,33)
+            console.log(filterArr, 33)
             for (let obj of filterArr) {
                 if (obj.fullName == filterValue.name) {
                     searchData.push(obj)
@@ -187,11 +197,11 @@ class Home extends React.Component {
             }
         }
 
-        if (searchData.length==0) {
+        if (searchData.length == 0) {
             this.setState({ searchedResult: filterArr })
         }
         else {
-            console.log(searchData,"bruce")
+            console.log(searchData, "bruce")
             this.setState({ searchedResult: searchData })
         }
     }
@@ -217,222 +227,89 @@ class Home extends React.Component {
     handleClickOpen = () => {
         this.setState({ dialogOpen: true });
     }
-
-
-
-    logic_for_profiles_based_on_city(){
-console.log(this.state.allproviderDetails,"home2233")
-        var fullname_array=[]
-       console.log(this.state.allproviderDetails,"outside");
-        return(
-        <div>    
+    viewAllProfile=()=>{
+        if(!this.state.allProfile)
         {
-            (this.state.searchedResult!=[] && this.state.searchedResult.length) ? this.state.searchedResult.map((itemz, index) => {
-                console.log(itemz,"inside");
-                return (
-                    <div>
-                        <div>
-                            <span style={{display: 'none'}}>
-                                {!fullname_array.includes(itemz.fullName)?
-                                (
-                                    fullname_array.push(itemz.fullName)
-                                )
-                                :
-                                (
-                                ""
-                                )    
-                                }
-                                
-                            </span>
-
-                            {index<2 ?
-                            (
-                            <div>
-                                <div class="carddd" style={{ backgroundColor: "#FFF" }}>
-
-<div class="header_element">
-
-    <div class="left_header">
-
-        <img src={itemz.providerIdentityImg} style={media}></img><br />
-
-        {itemz.approved == true ?
-            (
-                <CheckCircleIcon style={{ backgroundColor: '#fff', color: '#0077b3', fontSize: '16px', border: '1px solid #fff', borderRadius: '50%', marginTop: '-22px' }} />
-            )
-            :
-            (
-                <span style={{ marginTop: '-22px' }}>.</span>
-            )
-        }
-
-
-    </div>
-
-    <div class="right_header">
-
-        <Typography variant="body2" color="textprimary" style={{ fontSize: '14px' }}>
-            {itemz.fullName}&nbsp;
-            <span style={{ display: 'none' }}>{share_link = `provider/profile?id=${itemz.partnerId}`}</span>
-            <span style={{ display: 'none' }}>{share_link_2 = `?id=${itemz.partnerId}`}</span>
-
-            <Link style={{ float: 'right', marginRight: '15px', color: '#4d4d4d' }} ><Sharefunctionality b1={share_link_2} brand={share_link} style={{ fontSize: '12px' }} /></Link>
-        </Typography>
-
-        <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#808080' }}>
-            <WorkIcon style={{ fontSize: '11px', marginTop: '-2px' }} />
-        &nbsp;
-        {itemz.OrganizationName.substr(0, 11)}
-
-            {itemz.OrganizationName.length > 8 ?
-                (
-                    <HtmlTooltip
-                        placement="top-start"
-                        title={
-                            <React.Fragment>
-                                {itemz.OrganizationName}
-                            </React.Fragment>
-                        }
-                    >
-                        <Link underlineNone class="link_hover" style={{ color: '#0077b3', textDecoration: 'none' }}>
-                            ...
-                        </Link>
-                    </HtmlTooltip>
-                )
-                :
-                (
-                    ""
-                )
-            }
-            <br />
-            <LocationOnOutlinedIcon style={{ fontSize: '12px' }} /> {itemz.country}
-
-        </Typography>
-
-    </div>
-</div>
-
-
-<div class="cardd_paddingg">
-
-    <Typography variant="body2" color="textPrimary" style={{ fontSize: '13px' }}>
-        {itemz.partnerId}
-    </Typography>
-
-    <Typography variant="caption" color="textSecondary" >
-        {itemz.partnerType[0].name}
-
-
-        {itemz.partnerType.length > 1 ?
-            (
-                <HtmlTooltip
-                    placement="top-start"
-                    title={
-                        <React.Fragment>
-
-                            {itemz.partnerType != undefined && itemz.partnerType.map((expertise) => {
-                                return (
-                                    <span>{expertise.name},&nbsp;</span>
-                                )
-                            })
-                            }
-
-                        </React.Fragment>
-                    }
-                >
-                    <Link underlineNone style={{ color: '#0077b3', textDecoration: 'none' }}>
-                        &nbsp; &  more
-</Link>
-                </HtmlTooltip>
-            )
-            :
-            (
-                ""
-            )
-        }
-    </Typography>
-
-
-
-    <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#595959' }}>
-        Fees {itemz.Fees} &nbsp;
-
-    </Typography>
-
-
-    <br />
-    <Link underlineNone class="link_hover" style={{ color: '#4d4d4d' }} to={`/provider/profile?id=${itemz.partnerId}`}>
-        View Profile
-    </Link>
-    &nbsp;&nbsp;
-
-
-    <Link underlineNone class="link_hover" style={{color: '#4d4d4d',textDecoration: 'none'}}>
-        <span style={{display: 'none'}}>{modal_data_1=itemz.email}</span>
-        <span style={{display: 'none'}}>{modal_data_2=itemz.mobileNumber}</span>
-        <span style={{display: 'none'}}>{modal_data_3=itemz.country}</span>
-        <span style={{display: 'none'}}>{modal_data_4=itemz.approved}</span>
-        <span style={{display: 'none'}}>{modal_data_5=itemz.City}</span>
-
-        <span style={{display: 'none'}}>{modal_data_6=itemz.ALineOne}</span>
-        <span style={{display: 'none'}}>{modal_data_7=itemz.ALineTwo}</span>
-        <span style={{display: 'none'}}>{modal_data_8=itemz.PinCode}</span>
-
-        <Contact_modal m1={modal_data_1} m2={modal_data_2} m3={modal_data_3} m4={modal_data_4} 
-            m5={modal_data_5} m6={modal_data_6} m7={modal_data_7} m8={modal_data_8}
-        />
-    </Link>
-
-
-
-
-
-    {itemz.partnerType.length > 1 ? 
-        (
-            <FavoriteBorderIcon style={{float: 'right', fontSize: '14px', color: '#666666',cursor: 'pointer', marginTop: '5px'}}/>
-        )
-        :
-        (
-            <FavoriteIcon style={{float: 'right', fontSize: '14px',color: '#0077b3', cursor: 'pointer', marginTop: '7px'}}/>
-        )
+        this.setState({allProfile:true,allProfileMessage:'View Less'})
     }
+    else{
+        this.setState({allProfile:false,allProfileMessage:'See all profiles'})
+    }
+       }
 
-</div>
+allProfile=()=>{
+let arr=[]
+arr=this.state.allProvidersDetails.filter((provider)=>{
+    
+    if(provider.City==this.state.city)
+            {
+                  return true
+                }
+            }
+            )
+console.log(arr,9899)
+this.setState({searchedResult:arr})
+}
+
+    logic_for_profiles_based_on_city() {
+        console.log(this.state.allproviderDetails, "home2233")
+        var fullname_array = []
+        console.log(this.state.allproviderDetails, "outside");
+        return (
+            <div>
+                {
+                    (this.state.searchedResult != [] && this.state.searchedResult.length) ? this.state.searchedResult.map((itemz, index) => {
+                        console.log(itemz, "inside");
+                        return (
+                            <div>
+                                <div>
+                                    <span style={{ display: 'none' }}>
+                                        {!fullname_array.includes(itemz.fullName) ?
+                                            (
+                                                fullname_array.push(itemz.fullName)
+                                            )
+                                            :
+                                            (
+                                                ""
+                                            )
+                                        }
+
+                                    </span>
+
+                                    {index < 2 ?
+                                        (
+                                            <div>
+                                                <ProviderCard itemz={itemz} />
+                                            </div>
+                                        )
+                                        :
+                                        ("")
+
+
+                                    }
 
 
 
-</div>
 
-</div>
-)
-:
-("")
-
-                                
-                            }
+                                </div>
 
 
-                             
+                            </div>
+                        )
+                    })
+                        : ('')
+                }
 
-                        </div>        
-                        
-                        
-                    </div>
-                    )
-            })
-            : ('')
-        }
-
-        <div class="carddd" style={{textAlign: 'center', backgroundColor: '#fff',height: '215px'}}>
-            <br/><br/>
-            <CheckCircleOutlinedIcon style={{color: '#006699'}}/><br/>
-            <Link variant="caption">See all profiles from<br/>{store_your_city_name_through_google_api}<br/>{this.props.rcn}</Link> 
-            <br/>
-        </div>
+                <div className="carddd" style={{ textAlign: 'center', backgroundColor: '#fff', height: '215px' }}>
+                    <br /><br />
+                    <CheckCircleOutlinedIcon style={{ color: '#006699' }} /><br />
+                    <Link  onClick={this.allProfile} variant="caption">See all profiles from<br />{this.state.city}<br />{this.props.rcn}</Link>
+                    <br />
+                </div>
 
 
-    </div>
-    )/*end of return  statement*/
+            </div>
+        )/*end of return  statement*/
     }
 
 
@@ -453,22 +330,22 @@ console.log(this.state.allproviderDetails,"home2233")
                                         getAllService={this.state.allService}
                                         getAllExpertise={this.state.allExpertise}
                                         getAllCountries={this.state.allCountry}
-                                        filterFunction={this.filterFunction} 
-                                       providerData={this.state.allProviderData}
-                                        />
+                                        filterFunction={this.filterFunction}
+                                        providerData={this.state.allProviderData}
+                                    />
                                 </div>
                             </GridItem>
                         </GridContainer>
                     </div>
-                    
+
 
                     <div class="mobile_search">
                         <ResponsivecountrySelect
-                        getAllProvider={this.state.allProviderData}
-                        getAllService={this.state.allService}
-                        getAllExpertise={this.state.allExpertise}
-                        getAllCountries={this.state.allCountry}
-                        filterFunction={this.filterFunction}/>
+                            getAllProvider={this.state.allProviderData}
+                            getAllService={this.state.allService}
+                            getAllExpertise={this.state.allExpertise}
+                            getAllCountries={this.state.allCountry}
+                            filterFunction={this.filterFunction} />
                     </div>
 
 
@@ -476,14 +353,14 @@ console.log(this.state.allproviderDetails,"home2233")
 
                 <div className={classNames(classes.main, classes.mainRaised)} style={{ padding: 2, backgroundColor: "#F8F8F8" }}>
 
-                    <br/><br/>
+                    <br /><br />
                     <Grid container spacing={2} xs={12} style={{ marginTop: 70 }} >
-                    
-                    <div class="profiles_based_on_city">           
-        <div style={{paddingLeft: '15px'}}>Profiles based on {store_your_city_name_through_google_api}</div><br/><br/>
-                        {this.logic_for_profiles_based_on_city()}
-                    </div>
-                    
+
+                        <div class="profiles_based_on_city">
+                            <div style={{ paddingLeft: '15px' }}>Profiles based on {this.state.city}</div><br /><br />
+                            {this.logic_for_profiles_based_on_city()}
+                        </div>
+
                     </Grid>
                     {/*end of div of profile based city*/}
 
@@ -491,175 +368,44 @@ console.log(this.state.allproviderDetails,"home2233")
                     <Grid container spacing={2} xs={12} style={{ marginTop: 70 }} >
                         <div class="grid_roww" >
 
-                            <div style={{textAlign:'left',paddingLeft: '15px'}}>All Profiles</div><br/><br/>
+                            <div style={{ textAlign: 'left', paddingLeft: '15px' }}>All Profiles</div><br /><br />
                             {
                                 (this.state.allproviderDetails != [] && this.state.allProvidersDetails.length) ? this.state.allProvidersDetails.map((itemz, index) => {
-                                       
+
 
                                     return (
-
-                                        <div class="carddd" style={{ backgroundColor: "#FFF" }}>
-
-                                            <div class="header_element">
-
-                                                <div class="left_header">
-
-                                                    <img src={itemz.providerIdentityImg} style={media}></img><br />
-
-                                                    {itemz.approved == true ?
-                                                        (
-                                                            <CheckCircleIcon style={{ backgroundColor: '#fff', color: '#0077b3', fontSize: '16px', border: '1px solid #fff', borderRadius: '50%', marginTop: '-22px' }} />
-                                                        )
-                                                        :
-                                                        (
-                                                            <span style={{ marginTop: '-22px' }}>.</span>
-                                                        )
-                                                    }
-
-
+                                        <div>
+                                        {index < 7 || this.state.allProfile ?
+                                            (
+                                                <div>
+                                                    <ProviderCard itemz={itemz} />
                                                 </div>
-
-                                                <div class="right_header">
-
-                                                    <Typography variant="body2" color="textprimary" style={{ fontSize: '14px' }}>
-                                                        {itemz.fullName}&nbsp;
-                                                        <span style={{ display: 'none' }}>{share_link = `provider/profile?id=${itemz.partnerId}`}</span>
-                                                        <span style={{ display: 'none' }}>{share_link_2 = `?id=${itemz.partnerId}`}</span>
-
-                                                        <Link style={{ float: 'right', marginRight: '15px', color: '#4d4d4d' }} ><Sharefunctionality b1={share_link_2} brand={share_link} style={{ fontSize: '12px' }} /></Link>
-                                                    </Typography>
-
-                                                    <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#808080' }}>
-                                                        <WorkIcon style={{ fontSize: '11px', marginTop: '-2px' }} />
-                                        &nbsp;
-                                        {itemz.OrganizationName.substr(0, 11)}
-
-                                                        {itemz.OrganizationName.length > 8 ?
-                                                            (
-                                                                <HtmlTooltip
-                                                                    placement="top-start"
-                                                                    title={
-                                                                        <React.Fragment>
-                                                                            {itemz.OrganizationName}
-                                                                        </React.Fragment>
-                                                                    }
-                                                                >
-                                                                    <Link underlineNone class="link_hover" style={{ color: '#0077b3', textDecoration: 'none' }}>
-                                                                        ...
-                                            </Link>
-                                                                </HtmlTooltip>
-                                                            )
-                                                            :
-                                                            (
-                                                                ""
-                                                            )
-                                                        }
-                                                        <br />
-                                                        <LocationOnOutlinedIcon style={{ fontSize: '12px' }} /> {itemz.country}
-
-                                                    </Typography>
-
-                                                </div>
+                                            )
+                                            :
+                                            ("")
+    
+    
+                                        }
+                                          
+                                           
                                             </div>
-
-
-                                            <div class="cardd_paddingg">
-
-                                                <Typography variant="body2" color="textPrimary" style={{ fontSize: '13px' }}>
-                                                    {itemz.partnerId}
-                                                </Typography>
-
-                                                <Typography variant="caption" color="textSecondary" >
-                                                    {itemz.partnerType[0].name}
-
-
-                                                    {itemz.partnerType.length > 1 ?
-                                                        (
-                                                            <HtmlTooltip
-                                                                placement="top-start"
-                                                                title={
-                                                                    <React.Fragment>
-
-                                                                        {itemz.partnerType != undefined && itemz.partnerType.map((expertise) => {
-                                                                            return (
-                                                                                <span>{expertise.name},&nbsp;</span>
-                                                                            )
-                                                                        })
-                                                                        }
-
-                                                                    </React.Fragment>
-                                                                }
-                                                            >
-                                                                <Link underlineNone style={{ color: '#0077b3', textDecoration: 'none' }}>
-                                                                    &nbsp; &  more
-                                        </Link>
-                                                            </HtmlTooltip>
-                                                        )
-                                                        :
-                                                        (
-                                                            ""
-                                                        )
-                                                    }
-                                                </Typography>
-
-
-
-                                                <Typography variant="caption" component="p" style={{ fontSize: '12px', color: '#595959' }}>
-                                                    Fees {itemz.Fees} &nbsp;
-
-                                                </Typography>
-
-
-                                                <br />
-                                                <Link underlineNone class="link_hover" style={{ color: '#4d4d4d' }} to={`/provider/profile?id=${itemz.partnerId}`}>
-                                                    View Profile
-                                                </Link>
-                                                &nbsp;&nbsp;
-
-
-                                                <Link underlineNone class="link_hover" style={{color: '#4d4d4d',textDecoration: 'none'}}>
-                                                    <span style={{display: 'none'}}>{modal_data_1=itemz.email}</span>
-                                                    <span style={{display: 'none'}}>{modal_data_2=itemz.mobileNumber}</span>
-                                                    <span style={{display: 'none'}}>{modal_data_3=itemz.country}</span>
-                                                    <span style={{display: 'none'}}>{modal_data_4=itemz.approved}</span>
-                                                    <span style={{display: 'none'}}>{modal_data_5=itemz.City}</span>
-
-                                                    <span style={{display: 'none'}}>{modal_data_6=itemz.ALineOne}</span>
-                                                    <span style={{display: 'none'}}>{modal_data_7=itemz.ALineTwo}</span>
-                                                    <span style={{display: 'none'}}>{modal_data_8=itemz.PinCode}</span>
-
-                                                    <Contact_modal m1={modal_data_1} m2={modal_data_2} m3={modal_data_3} m4={modal_data_4} 
-                                                        m5={modal_data_5} m6={modal_data_6} m7={modal_data_7} m8={modal_data_8}
-                                                    />
-                                                </Link>
-
-
-
-
-
-                                                {itemz.partnerType.length > 1 ? 
-                                                    (
-                                                        <FavoriteBorderIcon style={{float: 'right', fontSize: '14px', color: '#666666',cursor: 'pointer', marginTop: '5px'}}/>
-                                                    )
-                                                    :
-                                                    (
-                                                        <FavoriteIcon style={{float: 'right', fontSize: '14px',color: '#0077b3', cursor: 'pointer', marginTop: '7px'}}/>
-                                                    )
-                                                }
-
-                                            </div>
-
-
-
-                                        </div>
-
-
-
 
                                     )
-                                }) : <span>We do not have enough data right now. Please check back later.</span>
+                                }
+                                
+                                ) : <span>We do not have enough data right now. Please check back later.</span>
                             }
-                        </div>
+                            { this.state.allProvidersDetails.length>0?
+                                (<div class="carddd" style={{ textAlign: 'center', backgroundColor: '#fff', height: '215px' }}>
+                                    <br /><br />
+                                    <CheckCircleOutlinedIcon style={{ color: '#006699' }} /><br />
+                                    <Link onClick={this.viewAllProfile} variant="caption" >{this.state.allProfileMessage} <br /><br />{this.props.rcn}</Link>
+                                    <br />   
+                                    </div>                                       
+                               ):('')
+                            }
+                             </div>
+                        
                     </Grid>
 
 
@@ -670,7 +416,7 @@ console.log(this.state.allproviderDetails,"home2233")
 
 
 
-                    </div>{/*end of content div*/}
+                </div>{/*end of content div*/}
 
 
 
@@ -697,4 +443,4 @@ console.log(this.state.allproviderDetails,"home2233")
 }
 
 
-export default  (withStyles(styles, { withTheme: true })(Home));
+export default (withStyles(styles, { withTheme: true })(Home));

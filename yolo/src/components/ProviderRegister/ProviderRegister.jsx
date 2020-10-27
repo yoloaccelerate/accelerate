@@ -515,7 +515,7 @@ export default class ProviderRegister extends React.Component {
 
     handleSelectedexpertise = (e, value) => {
        
-        this.setState({ OrgExpertise: [...this.state.OrgExpertise,value] });
+        this.setState({ OrgExpertise: value });
         this.handleServicesDetails()
     }
 
@@ -527,10 +527,7 @@ export default class ProviderRegister extends React.Component {
         this.setState({ open: false });
     };
 
-    handleClick = () => {
-
-    }
-
+   
     createOrganization = (e) => {
         e.preventDefault();
         this.props.registerProvider(

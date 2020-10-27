@@ -25,7 +25,7 @@ export function providerLogin(email, password) {
             if(res.status === 200) {
                 return res.json().then(res=> {
                     console.log(res )
-                    dispatch(loading(true));
+                    dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
             } else if(res.status === 500) {
@@ -38,13 +38,17 @@ export function providerLogin(email, password) {
                 })
             }
         }).catch(err=> {
-            console.log(err)
+            //console.log(err)
             // dispatch(loading(false));
             // dispatch(isError(err));
         })
     }
 }
 
+// const loginProviderAction=(username,password)=>{
+//    return  {type:'PROVIDER_LOGIN_IS_SUCCESS',payload:{userName:username,password:password}}
+// }
+// export default loginProviderAction
 export function loading(loading) {
     return {
         type: PROVIDER_LOGIN_LOADING_TOGGLE,

@@ -6,6 +6,7 @@ const userModel = require('../../model/userModel'),
         JWTCertifier = require('../../helpers/JWTCertifier');
 
 exports.getUserDetails = (req, res) => {
+    console.log(req.headers['x-api-key'])
     JWTCertifier.getTokenDecoded(req.headers['x-api-key']).then(user=>{
         userModel.find({email: user.email}, (error, docs)=> {
             if(error) {

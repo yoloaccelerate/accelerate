@@ -1,5 +1,5 @@
 import React from "react";
-
+import{Link} from 'react-router-dom'
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -93,7 +93,8 @@ export default function Header(props) {
         <img src ={logo} width="25px" height="25px" style={{cursor: 'pointer'}}
         onClick={navigatetoHome}></img>&nbsp; &nbsp;
         <Typography variant="h6" style={{cursor: 'pointer', color: '#4d4d4d'}} onClick={navigatetoHome}>
-          <span class="brand">YOLOJ</span>
+          {/* <span class="brand">YOLOJ</span> */}
+          <Link to={'/'}>YOLOJ</Link>
         </Typography>
         
 

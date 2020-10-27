@@ -192,9 +192,11 @@ export default function HeaderLinks(props) {
   };
 
   const logout = () => {
-      window.localStorage.removeItem('token');
+     sessionStorage.removeItem('token');
       window.localStorage.removeItem('userProfile');
       window.localStorage.removeItem('providerProfile');
+      sessionStorage.removeItem("providerName")
+      sessionStorage.removeItem("providerProfile")
       window.location.reload(false);
   }
 
@@ -248,7 +250,7 @@ useEffect(() => {
     if (history.location.pathname !== '/login' || '/register') {
         setIsLoggedIn(true);
     }
-    if (localStorage.getItem("userProfile")==='true') {
+    if (localStorage.getItem("userProfile")==='true'||sessionStorage.getItem("ProviderProfile")) {
         setIsLoggedIn(true);
     }
     if (localStorage.getItem("providerProfile")==='true') {
@@ -262,18 +264,25 @@ useEffect(() => {
         setFinancialTypes(store.getState().getFinancialService.success);
         
     });
-    if (localStorage.getItem('userProfile') === 'true') {
+    if (localStorage.getItem('userProfile') === 'true'||sessionStorage.getItem("providerName")!=undefined) {
         if(store.getState().getUserDetails.success.length>0){
             console.log("yes",name);
-            setName(store.getState().getUserDetails.success[0].name);
-        }else{
+           setName(store.getState().getUserDetails.success[0].name) 
+        }
+        else if(sessionStorage.getItem("providerName"))
+        {
+            console.log("mayank",sessionStorage.getItem("providerName"))
+            setName(sessionStorage.getItem("providerName"))
+            console.log(name,"anand")
+        }
+        else{
             localStorage.setItem('userProfile', true);
             
         }
     }
 
 
-}, []);
+}, [setName]);
 
 
 const classes = useStyles();
@@ -313,7 +322,7 @@ const navigatetoLogin = () => {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
       {
-        localStorage.getItem('userProfile') ? null:
+        localStorage.getItem('userProfile')||sessionStorage.getItem('providerProfile') ? null:
         <CustomDropdown
           noLiPadding
           buttonText="Provider"
@@ -336,7 +345,7 @@ const navigatetoLogin = () => {
       <ListItem className={classes.listItem}>
 
       {
-        localStorage.getItem('userProfile') ? <Button
+        localStorage.getItem('userProfile')||sessionStorage.getItem('providerProfile') ? <Button
         color="transparent"
         target="_blank"
         className={classes.navLink}
@@ -360,7 +369,7 @@ const navigatetoLogin = () => {
         target="_blank"
         className={classes.navLink}
         >
-            <Link to={'contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
+            <Link to={'/contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
                 Contact Us
             </Link>
             
@@ -373,7 +382,7 @@ const navigatetoLogin = () => {
       <ListItem className={classes.listItem}>
         
       {
-        localStorage.getItem('userProfile') ? <Button
+        localStorage.getItem('userProfile')||sessionStorage.getItem('providerProfile') ? <Button
         color="info"
         target="_blank"
         className={classes.navLink}

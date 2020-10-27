@@ -8,14 +8,14 @@ import {
     USER_UPDATE_IS_SUCCESS 
 } from '../types/user';
 
-export function userUpdate(email, name, phone_number, id, country, photo) {
+export function userUpdate(email, name, phone_number, id) {
     return(dispatch) => {
         dispatch(loading(true));
         return fetch('/api/user/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': localStorage.getItem("token")
+                'x-api-key': sessionStorage.getItem("token")
             },
             body: JSON.stringify({
                 email: email,
@@ -28,6 +28,7 @@ export function userUpdate(email, name, phone_number, id, country, photo) {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=>{
+                    console.log(res,"user")
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

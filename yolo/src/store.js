@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
 import rootReducer from './reducers/index';
 
+import providerloginAction from'./saga/saga'
 const createBrowserHistory = require("history").createBrowserHistory;
 
 let store = createStore(rootReducer, applyMiddleware(
-    thunk
+  thunk
 ))
+
 
 let history = createBrowserHistory();
 

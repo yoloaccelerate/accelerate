@@ -1,8 +1,19 @@
 import React from 'react';
 import { 
-    Button, Snackbar, Grid,
-    Card, Avatar, CardActionArea, Typography,
+    Button, Snackbar, Grid, TextField,
+    Card, Avatar, CardActionArea, Typography,CircularProgress
 } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 import log from '../../utils/logger.service'
 import {Link} from 'react-router-dom';
@@ -39,6 +50,7 @@ import Similar_Profiles_service from './Similar_Profiles_service.jsx';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { TransferWithinAStationSharp, RssFeed } from '@material-ui/icons';
 
 
 
@@ -98,15 +110,15 @@ const moveleft = () =>{
 
 
 
-const HtmlTooltip = withStyles((theme) => ({
-    tooltip: {
-      backgroundColor: '#f5f5f9',
-      color: 'rgba(0, 0, 0, 0.87)',
-      padding: '2px 5px 2px 5px',
-      fontSize: theme.typography.pxToRem(12),
-      border: '1px solid #dadde9',
-    },
-  }))(Tooltip);
+// const HtmlTooltip = withStyles((theme) => ({
+//     tooltip: {
+//       backgroundColor: '#f5f5f9',
+//       color: 'rgba(0, 0, 0, 0.87)',
+//       padding: '2px 5px 2px 5px',
+//       fontSize: theme.typography.pxToRem(12),
+//       border: '1px solid #dadde9',
+//     },
+//   }))(Tooltip);
 
 
 export default class ProviderProfile extends React.Component {
@@ -114,80 +126,196 @@ export default class ProviderProfile extends React.Component {
     constructor(props){
         super();
         this.state = {
-            providerData:[],
-            cityData:[],
-            city:''
+            providerData:{},
+            servicesData:[],
+            expertiseList:[],
+            city:'',
+            rap:['a','b','c'],
+            provider:false,
+            services:[],
+            servivesList:[],
+            update:false,
+           expertise:[],
+           expertiseSelected:[],
+            selectedExpertiseValue:[],
+            updateExpertise:false
         }   
     }
-    
+    openUpdateExpertise=()=>{
+        this.setState({updateExpertise:true})
+    }
     
     componentDidMount() {
-       let demo= window.location.search;
-       let  myParam = demo.split("=");
-       let Id = myParam[1];
+      
        var pcity = '';
-        fetch('/api/provider/'+Id, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res=> {
-                if(res.status === 200) {
-                    return res.json().then(res=> {
-                        this.setState({
-                            providerData:res,
-                            city:res.City
-                        }) 
-                        this.CitySelect()
-                        pcity = this.state.providerData.City
-                        console.log("Pcityy==",pcity)
+       this.props.getFinancialServiceList();
+       this.props.getExpertise();
+       this.providerDetail()
+            store.subscribe(() => {
+                this.setState({
+                    services: store.getState().getFinancialService.success,
+                    expertise:store.getState().getBusinessTypes.success
+                });
+                setTimeout(()=>{
+                        this.state.services.map((item) => {
+                           
+                            var joined = this.state.servivesList.concat(item.name);
+                            this.setState({ servivesList: [...new Set(joined)] });
+                    
+                        });
 
-                    })
-                } 
-            }).catch(err=> {
-               console.log(err);
+
+                        this.state.expertise.map((item) => {
+                           
+                            var joined = this.state.expertiseList.concat(item.name);
+                            this.setState({ expertiseList: [...new Set(joined)] });
+                    
+                        });
+                    },1000)
+              
             })
+// setTimeout(()=>{
+//     this.state.servivesList.map((item) => {
+//         console.log(item,"anand")
+//         var joined = this.state.servivesList.concat(item.name);
+//         this.setState({ servivesList: [...new Set(joined)] });
+
+//     });
+// },400)
+                
+             
          
+           
+           
+
+           
             }
 
+            closeDialog=()=>{
+             this.setState({update:false})
+            }
 
+            providerDetail=()=>{
+                let demo= window.location.search;
+                let  myParam = demo.split("=");
+                let Id = myParam[1];
 
-            CitySelect = () => {
-                fetch('/api/provider/city/'+this.state.city, {
+                fetch('/api/provider/'+Id, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 }).then(res=> {
-                    console.log("response is=======", res)
+                
                     if(res.status === 200) {
                         return res.json().then(res=> {
+                           console.log(res,"popp")
+                            let arr=[];
+                            let arr2=[];
+                          res.servicesOffered.map(ser=>{
+                              console.log(ser,223)
+                            arr.push(ser.name)
+                          })
+                          res.partnerType.map(exp=>{
+                            console.log(exp.name,2996)
+                            arr2.push(exp.name);
+                          })
                             this.setState({
-                                cityData:res
-                                
-                            })           
-    
+                                providerData:res,
+                                provider:true,
+                               servicesData:arr,
+                               expertiseSelected:arr2,
+                               selectedValue:arr,
+                               selectedExpertiseValue:arr2
+                            }) 
+                          
                         })
                     } 
                 }).catch(err=> {
-                   console.log(err);
+                   console.log(err,6566);
                 })
+            }
+
+
+
+            handleSelectedservices=(event, value)=>{
+                console.log(value,67676)
+                if(value.length>0){
+                this.setState({selectedValue:value})
+                }
+            }
+
+            handleSelectedExpertise=(event, value)=>{
+                console.log(value)
+                this.setState({selectedExpertiseValue:value})
+            }
+
+
+
+    //         CitySelect = () => {
+    //             fetch('/api/provider/city/'+this.state.city, {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 }
+    //             }).then(res=> {
+    //                 console.log("response is=======", res)
+    //                 if(res.status === 200) {
+    //                     return res.json().then(res=> {
+    //                         this.setState({
+    //                             cityData:res
+                                
+    //                         })           
     
-                //console.log("ityyyyyy data is ---", this.state.cityData)
+    //                     })
+    //                 } 
+    //             }).catch(err=> {
+    //                console.log(err);
+    //             })
+    
+    //             //console.log("ityyyyyy data is ---", this.state.cityData)
              
-    }  
+    // }  
 
 
-      
-                
+      updateProfile=()=>{
+          console.log("working")
+         
+          this.setState({update:true})
+
+
+      }
+  
+
+updateExpertise=()=>{
+
+    let demo= window.location.search;
+    let  myParam = demo.split("=");
+    let Id = myParam[1];
+      this.props.updateExpertise(Id,this.state.selectedExpertiseValue)
+      setTimeout(()=>{this.providerDetail();},1000)
+      this.setState({updateExpertise:false})
+    //   window.location.reload();
+  } 
+
+
+
+          updateService=()=>{
+            let demo= window.location.search;
+            let  myParam = demo.split("=");
+            let Id = myParam[1];
+            console.log(this.state.selectedValue,"amamaa")
+              this.props.updateService(Id,this.state.selectedValue)
+              setTimeout(()=>{this.providerDetail();},1000)
+              this.setState({update:false})
+            //   window.location.reload();
+          }      
     
     render() {
+        console.log(this.state.selectedValue)
     
-   
-            return(
-         
-            
-
+   return(<div> {this.state.provider?
+           (
                 <div style={{width: '100%', marginTop: '100px'}}>
 
                 <HeaderContainer />
@@ -423,7 +551,7 @@ export default class ProviderProfile extends React.Component {
 
                             <Typography color="text" variant="body" style={{fontSize: '18px'}}>
                                 Work Info
-                                <DescriptionOutlinedIcon style={{float: 'right',fontSize: '17px', color: '#006699'}}/>
+                              
                             </Typography>
 
                             <div style={{width: '100%', padding: '5%', backgroundColor: 'rgba(236, 242, 249,0.7)', marginTop: '10px'}}>
@@ -440,25 +568,80 @@ export default class ProviderProfile extends React.Component {
 
                             <div style={{width: '100%', padding: '5%', backgroundColor: 'rgba(236, 242, 249,0.7)', marginTop: '10px'}}>
                                 <Typography color="Primary" variant="caption">Services</Typography>
+                                <DescriptionOutlinedIcon style={{float: 'right',fontSize: '17px', color: '#006699'}} onClick={this.updateProfile}/>
                                 <br/>
 
-                                {this.state.providerData.servicesOffered!=undefined  && this.state.providerData.servicesOffered[0].name!=undefined && this.state.providerData.servicesOffered.length > 1 ?
+                                {this.state.providerData.servicesOffered!=undefined  && this.state.providerData.servicesOffered.length > 0 ?
                                 (
                                     
                                     <div style={{marginLeft: '-15px'}}>
 
                                     <Accordion  style={{background: 'none', boxShadow: 'none', border: 'none'}}>
-                                        <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon/>}
-                                        aria-controls="panel1a-content"
-                                        id="panel1a-header"
-                                        >
+                                      
+                                    
 
-                                        <Typography color="text" variant="caption">
-                                            {this.state.providerData.servicesOffered[0].name}
-                                        </Typography>
-                                
-                                        </AccordionSummary>
+                                   { this.state.update? (
+                                              <Dialog
+                                              open={this.state.update}
+                                              style={{width:`2000`}}
+                                            //   onClose={handleClose}
+                                            //   PaperComponent={PaperComponent}
+                                              aria-labelledby="draggable-dialog-title"
+                                            >
+                                              <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                                                Subscribe
+                                              </DialogTitle>
+                                              <DialogContent>
+                                                <DialogContentText>
+                                                    <Autocomplete
+                                                multiple
+                                                id="checkboxes-tags-demo"
+                                                size="small"
+                                                // value={this.state.servicesData}
+                                                defaultValue={this.state.servicesData}
+                                                options={this.state.servivesList}
+                                                disableCloseOnSelect
+                                                getOptionLabel={(option) => option}
+                                                onChange={(event, value) => this.handleSelectedservices(event, value)}
+                                                renderOption={(option, { selected }) => (
+                                                    <React.Fragment>
+                                                        <Checkbox
+                                                            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                                                            checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                                            style={{ marginRight: 8 }}
+                                                            checked={selected}
+                                                        />
+                                                        {option}
+                                                    </React.Fragment>
+                                                )}
+                                                className="dropDown"
+                                                renderInput={(params) => (
+                                                    <TextField {...params} variant="outlined" label="Select your service Type" placeholder="" />
+                                                )}
+                                            />
+                                                </DialogContentText>
+                                              </DialogContent>
+                                              <DialogActions>
+                                                <Button autoFocus color="primary" onClick={this.closeDialog}>
+                                                  Cancel
+                                                </Button>
+                                                <Button  color="primary" onClick={this.updateService}>
+                                                 Update
+                                                </Button>
+                                              </DialogActions>
+                                            </Dialog>)       :(
+                                            <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon/>}
+                                            aria-controls="panel1a-content"
+                                            id="panel1a-header"
+                                            >
+                                            <Typography color="text" variant="caption">
+                                                {this.state.providerData.servicesOffered[0].name}
+                                            </Typography>  
+                                            </AccordionSummary>
+                                        )
+                                        }
+                                       
 
                                         <AccordionDetails style={{marginTop: '-20px'}}>
 
@@ -466,17 +649,17 @@ export default class ProviderProfile extends React.Component {
                                                 
                                                 {this.state.providerData.servicesOffered!=undefined && this.state.providerData.servicesOffered.map((expertise)=>{
                                                 return(
-                                                    <span>
+                                                    <div>
                                                         {expertise.name!=this.state.providerData.servicesOffered[0].name ?
                                                         (
-                                                            expertise.name + ", " 
+                                                            expertise.name +','
                                                         )
                                                         :
                                                         (
                                                             ""
                                                         )
                                                         }
-                                                    </span>
+                                                    </div>
                                                 )
                                                 })
                                                 }
@@ -494,9 +677,40 @@ export default class ProviderProfile extends React.Component {
 
                                        this.state.providerData.servicesOffered!=undefined && this.state.providerData.servicesOffered[0].name!=undefined  ?
                                         (
+                                            !this.state.update? (
+                                            //     <Autocomplete
+                                            //     multiple
+                                            //     id="checkboxes-tags-demo"
+                                            //     size="small"
+                                                
+                                            //     options={this.state.c}
+                                            //     disableCloseOnSelect
+                                            //     getOptionLabel={(option) => option}
+                                            //     // onChange={(event, value) => this.handleSelectedservices(event, value)}
+                                            //     renderOption={(option, { selected }) => (
+                                            //         <React.Fragment>
+                                            //             <Checkbox
+                                            //                 icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                                            //                 checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                            //                 style={{ marginRight: 8 }}
+                                            //                 checked={selected}
+                                            //             />
+                                            //             {option}
+                                            //         </React.Fragment>
+                                            //     )}
+                                            //     className="dropDown"
+                                            //     renderInput={(params) => (
+                                            //         <TextField {...params} variant="outlined" label="Select your service Type" placeholder="services" />
+                                            //     )}
+                                            // />
+                                            <div>mayank</div>
+                                            )
+                                        :(
                                             <Typography color="text" variant="caption">
                                                 {this.state.providerData.servicesOffered[0].name}
-                                            </Typography>    
+                                            </Typography>  
+                                        )
+                                    
                                         )
                                         :
                                         (
@@ -516,6 +730,7 @@ export default class ProviderProfile extends React.Component {
 
                             <div style={{width: '100%', padding: '5%', backgroundColor: 'rgba(236, 242, 249,0.7)', marginTop: '5px'}}>
                                 <Typography color="Primary" variant="caption">Expertise</Typography>
+                                <DescriptionOutlinedIcon style={{float: 'right',fontSize: '17px', color: '#006699'}} onClick={this.openUpdateExpertise}/>
                                 <br/>
                                 
                                 {this.state.providerData.partnerType!=undefined  && this.state.providerData.partnerType[0].name!=undefined && this.state.providerData.partnerType.length > 1 ?
@@ -673,7 +888,7 @@ export default class ProviderProfile extends React.Component {
                         <div class="similar_container" id="similar_profile_location">
 
                             <div class="sim_con">
-                                <Similar_Profiles_location rcn={relevant_city_name}/>
+                                {/* <Similar_Profiles_location rcn={relevant_city_name}/> */}
                             </div>
 
                         </div> 
@@ -692,7 +907,7 @@ export default class ProviderProfile extends React.Component {
                         }      
                         <div class="similar_container" id="similar_profile_expertise">
                             <div class="sim_con">
-                                <Similar_Profiles_expertise ren={relevant_expertise_name}/>
+                                {/* <Similar_Profiles_expertise ren={relevant_expertise_name}/> */}
                             </div>
                         </div> 
                         
@@ -710,7 +925,7 @@ export default class ProviderProfile extends React.Component {
                         }      
                         <div class="similar_container" id="similar_profile_service">
                             <div class="sim_con">
-                                <Similar_Profiles_service rsn={relevant_service_name}/>
+                                {/* <Similar_Profiles_service rsn={relevant_service_name}/> */}
                             </div>
                         </div> 
 
@@ -732,8 +947,74 @@ export default class ProviderProfile extends React.Component {
 
             </div>       
                
-            )
+                    
+               ):(<div style={{marginTop: '250px'}}>
+                   
+                   <CircularProgress color="secondary" />
+               </div>)
+                    }
+
+
+
+                                         <Dialog
+                                              open={this.state.updateExpertise}
+                                              style={{width:`2000`}}
+                                            //   onClose={handleClose}
+                                            //   PaperComponent={PaperComponent}
+                                              aria-labelledby="draggable-dialog-title"
+                                            >
+                                              <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                                                Update
+                                              </DialogTitle>
+                                              <DialogContent>
+                                                <DialogContentText>
+                                                    <Autocomplete
+                                                multiple
+                                                id="checkboxes-tags-demo"
+                                                size="small"
+                                                // value={this.state.servicesData}
+                                                 defaultValue={this.state.expertiseSelected}
+                                                options={this.state.expertiseList}
+                                                disableCloseOnSelect
+                                                getOptionLabel={(option) => option}
+                                                onChange={(event, value) => this.handleSelectedExpertise(event, value)}
+                                                renderOption={(option, { selected }) => (
+                                                    <React.Fragment>
+                                                        <Checkbox
+                                                            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                                                            checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                                            style={{ marginRight: 8 }}
+                                                            checked={selected}
+                                                        />
+                                                        {option}
+                                                    </React.Fragment>
+                                                )}
+                                                className="dropDown"
+                                                renderInput={(params) => (
+                                                    <TextField {...params} variant="outlined" label="Select your service Type" placeholder="" />
+                                                )}
+                                            />
+                                                </DialogContentText>
+                                              </DialogContent>
+                                              <DialogActions>
+                                                <Button autoFocus color="primary" onClick={this.closeDialog}>
+                                                  Cancel
+                                                </Button>
+                                                <Button  color="primary" onClick={this.updateExpertise}>
+                                                 Update
+                                                </Button>
+                                              </DialogActions>
+                                            </Dialog> 
+                                           
+                                        
+
+
+                    </div>
+   )
+
     }
+            
+
 }
 
 

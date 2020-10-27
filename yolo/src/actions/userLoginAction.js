@@ -24,6 +24,7 @@ export function userLogin (email, password) {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=>{
+                    console.log(223,res)
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

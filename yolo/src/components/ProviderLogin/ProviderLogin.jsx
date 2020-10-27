@@ -64,6 +64,7 @@ export default class ProviderLogin extends React.Component {
 
     change = (e) => {
         const { name, value } = e.target;
+        
         let errors = this.state.errors;
         switch(name) {
             case 'email':
@@ -79,6 +80,7 @@ export default class ProviderLogin extends React.Component {
         this.setState({errors, [name]: value}, ()=> {
             return null;
         });
+        this.setState({open:false});
     }
 
     login = (e) => {
@@ -87,23 +89,25 @@ export default class ProviderLogin extends React.Component {
         this.props.providerLogin(this.state.email, this.state.password);
         store.subscribe(()=> {
             if(store.getState().providerLogin.error) {
+
                 this.setState({
                     open: true
                 })
                 this.setState({
                     errorMessage: store.getState().providerLogin.error
                 })
-            } else {
+            } else if(store.getState().providerLogin.success.status) {
+                
                 console.log("provider profile",store.getState().providerLogin.success)
-                window.localStorage.setItem('token', store.getState().providerLogin.success.token);
+                sessionStorage.setItem('token', store.getState().providerLogin.success.partnerId);
                 //setName(store.getState().providerLogin.success[0].name);
-                window.localStorage.setItem('providerProfile', true);
+               sessionStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
-                window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
+                // window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
                 //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
-                window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
-
-               this.navigateToDashboard()}
+                sessionStorage.setItem('providerName',store.getState().providerLogin.success.name);
+               setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},500) 
+               }
         })
     }
 
@@ -113,14 +117,14 @@ export default class ProviderLogin extends React.Component {
                 <HeaderContainer />
           
                 
-                <div class="section box_shadow">
+                <div className="section box_shadow">
 
 
-                    <div class="login_background">
+                    <div className="login_background">
                         
-                        <div class="sub_login_background" >
+                        <div className="sub_login_background" >
 
-                            <div class="sub_section_content_login_background">
+                            <div className="sub_section_content_login_background">
                                 
                                 <br/>
                                 <Typography variant="h5">Yoloj <img src ={logo} style={{width: '16px', height: '16px'}}/></Typography>
@@ -144,9 +148,9 @@ export default class ProviderLogin extends React.Component {
                     </div>
 
 
-                    <div class="sub_section">
+                    <div className="sub_section">
 
-                        <div class="login_section">
+                        <div className="login_section">
 
                         <img src ={logo}/>
                     
@@ -201,7 +205,7 @@ export default class ProviderLogin extends React.Component {
                                     
                         </div>
 
-                        <div class="forget_section">
+                        <div className="forget_section">
                             <label>Don't have an account ?</label>
                             <Link to={this.navigateToRegister}>&nbsp;Sign Up</Link>
                         </div>
