@@ -75,14 +75,22 @@ export default class Login extends React.Component {
                 })
             }
             if(store.getState().userLogin.success.status === true) {
+<<<<<<< HEAD
                 console.log(store.getState().userLogin.success.token)
                sessionStorage.setItem('token', store.getState().userLogin.success.token);
+=======
+               localStorage.setItem('token', store.getState().userLogin.success.token);
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                 this.setState({
                     open: false
                 });
 
                 window.localStorage.setItem('userProfile', true);
+<<<<<<< HEAD
                 // sessionStorage.setItem("userName",store.getState().getUserDetails.success[0].name)
+=======
+                window.localStorage.setItem('userName', store.getState().userLogin.success.name);
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                 window.location.reload(false);
                 history.push('/');
             }

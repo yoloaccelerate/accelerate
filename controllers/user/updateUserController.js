@@ -30,9 +30,17 @@ exports.updateUser = (req, res) => {
                         }else{
                             console.log("no");
                         }
+                        let token = JWTCertifier.generateJWT(
+                            users2[0].email,
+                            users2[0].name,
+                            1
+                        )
+                        res.status(200).json({message:"Profile successfully updated.",
+                                token,
+                                name:users2[0].name   
+                    });
                     })
                     
-                    res.status(200).json("Profile successfully updated.");
                 }
             })
         
@@ -59,9 +67,23 @@ exports.updateUser = (req, res) => {
                                 }else{
                                     console.log("no");
                                 }
+<<<<<<< HEAD
                             })
                             
                             res.status(200).json("Profile successfully updated.");
+=======
+                                let token = JWTCertifier.generateJWT(
+                                    users2[0].email,
+                                    users2[0].name,
+                                    1
+                                )
+                                res.status(200).json({message:"Profile successfully updated.",
+                                        token,
+                                        name:users2[0].name   
+                            });
+                            })
+                            
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                         }
                     })
                 }

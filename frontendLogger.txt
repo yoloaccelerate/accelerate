@@ -3245,6 +3245,10 @@ Request from IP: 49.36.146.117, os.name = Windows,browser.name = Chrome, at 10/9
 User is on Provider Login at 10/9/2020, 8:48:23 PM
 Request from IP: 49.36.146.117, os.name = Windows,browser.name = Chrome, at 10/9/2020, 8:49:01 PM
 Request from IP: 49.36.146.117, os.name = Windows,browser.name = Chrome, at 10/9/2020, 8:49:01 PM
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
 Request from IP: 47.30.191.216, os.name = Windows,browser.name = Chrome, at 10/12/2020, 11:36:25 AM
 Request from IP: 47.30.191.216, os.name = Windows,browser.name = Chrome, at 10/12/2020, 11:36:36 AM
 User is on Provider Login at 10/12/2020, 11:36:43 AM
@@ -3463,6 +3467,7 @@ User is on Provider Login at 10/13/2020, 6:07:04 PM
 Request from IP: 49.36.144.147, os.name = Windows,browser.name = Chrome, at 10/13/2020, 6:08:39 PM
 Request from IP: 49.36.144.147, os.name = Windows,browser.name = Chrome, at 10/13/2020, 6:17:07 PM
 User is on Provider Login at 10/13/2020, 6:17:24 PM
+<<<<<<< HEAD
 Request from IP: 49.36.144.147, os.name = Windows,browser.name = Chrome, at 10/14/2020, 12:59:35 PM
 User is on Provider Login at 10/14/2020, 12:59:43 PM
 User is on Provider Login at 10/14/2020, 12:59:56 PM
@@ -4085,3 +4090,7 @@ Request from IP: 49.36.149.191, os.name = Windows,browser.name = Chrome, at 10/2
 Request from IP: 49.36.149.191, os.name = Windows,browser.name = Chrome, at 10/27/2020, 1:58:09 PM
 Request from IP: 49.36.149.191, os.name = Windows,browser.name = Chrome, at 10/27/2020, 2:00:18 PM
 Request from IP: 49.36.149.191, os.name = Windows,browser.name = Chrome, at 10/27/2020, 2:00:18 PM
+=======
+=======
+>>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1

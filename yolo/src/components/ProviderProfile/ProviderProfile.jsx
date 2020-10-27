@@ -127,6 +127,7 @@ export default class ProviderProfile extends React.Component {
         super();
         this.state = {
             providerData:{},
+<<<<<<< HEAD
             servicesData:[],
             expertiseList:[],
             city:'',
@@ -139,6 +140,11 @@ export default class ProviderProfile extends React.Component {
            expertiseSelected:[],
             selectedExpertiseValue:[],
             updateExpertise:false
+=======
+            cityData:[],
+            city:'',
+            provider:false
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         }   
     }
     openUpdateExpertise=()=>{
@@ -148,6 +154,7 @@ export default class ProviderProfile extends React.Component {
     componentDidMount() {
       
        var pcity = '';
+<<<<<<< HEAD
        this.props.getFinancialServiceList();
        this.props.getExpertise();
        this.providerDetail()
@@ -173,6 +180,33 @@ export default class ProviderProfile extends React.Component {
                         });
                     },1000)
               
+=======
+
+        fetch('/api/provider/'+Id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res=> {
+            
+                if(res.status === 200) {
+                    return res.json().then(res=> {
+                        console.log(res,"mayank")
+                      
+                      setTimeout(()=>{  this.setState({
+                            providerData:res,
+                            provider:true
+                           
+                        }) },2000)
+                     
+                       
+                       
+
+                    })
+                } 
+            }).catch(err=> {
+               console.log(err,6566);
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
             })
 // setTimeout(()=>{
 //     this.state.servivesList.map((item) => {
@@ -200,6 +234,7 @@ export default class ProviderProfile extends React.Component {
                 let  myParam = demo.split("=");
                 let Id = myParam[1];
 
+<<<<<<< HEAD
                 fetch('/api/provider/'+Id, {
                     method: 'GET',
                     headers: {
@@ -252,6 +287,8 @@ export default class ProviderProfile extends React.Component {
 
 
 
+=======
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
     //         CitySelect = () => {
     //             fetch('/api/provider/city/'+this.state.city, {
     //                 method: 'GET',
@@ -316,6 +353,12 @@ updateExpertise=()=>{
     
    return(<div> {this.state.provider?
            (
+<<<<<<< HEAD
+=======
+         
+            
+
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                 <div style={{width: '100%', marginTop: '100px'}}>
 
                 <HeaderContainer />
@@ -948,6 +991,7 @@ updateExpertise=()=>{
             </div>       
                
                     
+<<<<<<< HEAD
                ):(<div style={{marginTop: '250px'}}>
                    
                    <CircularProgress color="secondary" />
@@ -1009,6 +1053,10 @@ updateExpertise=()=>{
                                         
 
 
+=======
+               ):(<span>Loading</span>)
+                    }
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                     </div>
    )
 

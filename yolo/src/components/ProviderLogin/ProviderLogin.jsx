@@ -85,9 +85,9 @@ export default class ProviderLogin extends React.Component {
 
     login = (e) => {
         e.preventDefault();
-        console.log(this.state.email, this.state.password)
         this.props.providerLogin(this.state.email, this.state.password);
         store.subscribe(()=> {
+            console.log(store.getState());
             if(store.getState().providerLogin.error) {
 
                 this.setState({
@@ -96,17 +96,32 @@ export default class ProviderLogin extends React.Component {
                 this.setState({
                     errorMessage: store.getState().providerLogin.error
                 })
+<<<<<<< HEAD
             } else if(store.getState().providerLogin.success.status) {
                 
                 console.log("provider profile",store.getState().providerLogin.success)
                 sessionStorage.setItem('token', store.getState().providerLogin.success.partnerId);
+=======
+            } else {
+                
+                // console.log("provider profile",store.getState().providerLogin.success)
+                localStorage.setItem('token', store.getState().providerLogin.success.token);
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                 //setName(store.getState().providerLogin.success[0].name);
                sessionStorage.setItem('providerProfile', true);
                 //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
+<<<<<<< HEAD
                 // window.localStorage.setItem('providerId',store.getState().providerLogin.success.providerId);
                 //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
                 sessionStorage.setItem('providerName',store.getState().providerLogin.success.name);
                setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},500) 
+=======
+                window.localStorage.setItem('providerId',store.getState().providerLogin.success.partnerId);
+                window.localStorage.setItem('providerName',store.getState().providerLogin.success.name);
+                //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
+                // window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
+               setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},1000) 
+>>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                }
         })
     }
