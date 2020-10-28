@@ -94,11 +94,7 @@ export default function Header(props) {
         onClick={navigatetoHome}></img>&nbsp; &nbsp;
         <Typography variant="h6" style={{cursor: 'pointer', color: '#4d4d4d'}} onClick={navigatetoHome}>
           {/* <span class="brand">YOLOJ</span> */}
-<<<<<<< HEAD
-          <Link to={'/'}>YOLOJ</Link>
-=======
           <Link to='/'>YOLOJ</Link>
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         </Typography>
         
 

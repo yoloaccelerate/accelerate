@@ -19,6 +19,7 @@ import utilsReducer from './utils';
 import getUnapprovedProvidersReducer from './getUnapprovedList';
 import approveProviderReducer from './approveProvider';
 import updateUserReducer from './userUpdate';
+import updateProviderReducer from './providerUpdateBasic';
 import getAllApprovedProviderReducer from './getAllProvider';
 import getProviderByIdReducer from './getProviderById';
 import getAllProvidersDetailsReducer from './getAllProvidersDetails'
@@ -41,9 +42,10 @@ export default combineReducers({
     getUnapproved: getUnapprovedProvidersReducer,
     approveProvider: approveProviderReducer,
     userUpdate: updateUserReducer,
+    providerUpdate: updateProviderReducer,
     getAllApprovedProvider: getAllApprovedProviderReducer,
     getProviderById: getProviderByIdReducer,
     getAllProvidersDetails:getAllProvidersDetailsReducer,
-    providerUpdate:providerUpdateServiceReducer,
+    providerUpdateService:providerUpdateServiceReducer,
     providerExpertieUpdate:providerUpdateExpertiseReducer
 });

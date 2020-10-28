@@ -192,13 +192,6 @@ export default function HeaderLinks(props) {
   };
 
   const logout = () => {
-<<<<<<< HEAD
-     sessionStorage.removeItem('token');
-      window.localStorage.removeItem('userProfile');
-      window.localStorage.removeItem('providerProfile');
-      sessionStorage.removeItem("providerName")
-      sessionStorage.removeItem("providerProfile")
-=======
     localStorage.removeItem('token');
     localStorage.removeItem('userProfile');
     localStorage.removeItem('providerProfile');
@@ -206,7 +199,6 @@ export default function HeaderLinks(props) {
     localStorage.removeItem("providerId");
     localStorage.removeItem("userName");
     //   sessionStorage.removeItem("ProviderProfile")
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
       window.location.reload(false);
   }
 
@@ -260,11 +252,7 @@ useEffect(() => {
     if (history.location.pathname !== '/login' || '/register') {
         setIsLoggedIn(true);
     }
-<<<<<<< HEAD
-    if (localStorage.getItem("userProfile")==='true'||sessionStorage.getItem("ProviderProfile")) {
-=======
     if (localStorage.getItem("userProfile")==='true'|| localStorage.getItem("providerProfile")) {
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         setIsLoggedIn(true);
     }
     if (localStorage.getItem("providerProfile")==='true') {
@@ -278,18 +266,6 @@ useEffect(() => {
         setFinancialTypes(store.getState().getFinancialService.success);
         
     });
-<<<<<<< HEAD
-    if (localStorage.getItem('userProfile') === 'true'||sessionStorage.getItem("providerName")!=undefined) {
-        if(store.getState().getUserDetails.success.length>0){
-            console.log("yes",name);
-           setName(store.getState().getUserDetails.success[0].name) 
-        }
-        else if(sessionStorage.getItem("providerName"))
-        {
-            console.log("mayank",sessionStorage.getItem("providerName"))
-            setName(sessionStorage.getItem("providerName"))
-            console.log(name,"anand")
-=======
     if (localStorage.getItem('userProfile') === 'true'||localStorage.getItem("providerProfile")) {
         console.log("yes", store.getState());
         if(localStorage.getItem("userName")){
@@ -299,7 +275,6 @@ useEffect(() => {
         else if(localStorage.getItem("providerName"))
         {
             setName(localStorage.getItem("providerName"))
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         }
         else{
             localStorage.setItem('userProfile', true);
@@ -349,11 +324,7 @@ const navigatetoLogin = () => {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
       {
-<<<<<<< HEAD
-        localStorage.getItem('userProfile')||sessionStorage.getItem('providerProfile') ? null:
-=======
         localStorage.getItem('userProfile') || localStorage.getItem('providerProfile') ? null:
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         <CustomDropdown
           noLiPadding
           buttonText="Provider"
@@ -376,11 +347,7 @@ const navigatetoLogin = () => {
       <ListItem className={classes.listItem}>
 
       {
-<<<<<<< HEAD
-        localStorage.getItem('userProfile')||sessionStorage.getItem('providerProfile') ? <Button
-=======
         localStorage.getItem('userProfile') || localStorage.getItem('providerProfile') ? <Button
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         color="transparent"
         target="_blank"
         className={classes.navLink}
@@ -404,11 +371,7 @@ const navigatetoLogin = () => {
         target="_blank"
         className={classes.navLink}
         >
-<<<<<<< HEAD
             <Link to={'/contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
-=======
-            <Link to={'./contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                 Contact Us
             </Link>
             
@@ -421,11 +384,7 @@ const navigatetoLogin = () => {
       <ListItem className={classes.listItem}>
         
       {
-<<<<<<< HEAD
-        localStorage.getItem('userProfile')||sessionStorage.getItem('providerProfile') ? <Button
-=======
         localStorage.getItem('userProfile') || localStorage.getItem('providerProfile')? <Button
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         color="info"
         target="_blank"
         className={classes.navLink}

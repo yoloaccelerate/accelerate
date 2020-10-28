@@ -14,7 +14,7 @@ exports.registerPartner = (req, res) => {
             res.status(400).json(err);
         } else {
             if(!users.length) {
-                console.log("Object Rcvd",req);
+                // console.log("Object Rcvd",req);
                 providerModel.create({
                     partnerId: nameExtractor.getPartnerId(req.body.fullName,req.body.mobileNumber),
                     fullName: req.body.fullName,

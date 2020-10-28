@@ -1,43 +1,42 @@
-/**
- * @description Controller for updating user details.
- * @author Jithin Zacharia
- */
+const providerModel = require('../../model/providerModel');
+const nameExtractor = require('../../helpers/generatePartnerId');
 
-const userModel = require('../../model/userModel');
-const objectId =require('mongodb').ObjectId;
-
-exports.updateUser = (req, res) => {
-    userModel.find({"_id": objectId(req.body.id)}, (err, users)=> {
+exports.getProviderUpdate = (req, res) => {
+    providerModel.find({partnerId: req.body.provider_id}, (err, users)=> {
+        // console.log(users);
         if(err) {
             res.status(400).json(err);
         } else if(!users.length) {
-            res.status(400).json("User not found. Please register to continue");
+            res.status(400).json("provider not found. Please register to continue");
         }else if(users.length) {
             if(users[0].email==req.body.email){
-                userModel.findOneAndUpdate({"_id": objectId(req.body.id)}, {$set: {
+                providerModel.findOneAndUpdate({partnerId: req.body.provider_id}, {$set: {
                 email: req.body.email,
-                name: req.body.name,
-                phone_number: req.body.phone_number,
+                fullName: req.body.name,
+                mobileNumber: req.body.phone_number,
+                providerIdentityImg:req.body.providerImg,
+                partnerId:nameExtractor.getPartnerId(req.body.name,req.body.phone_number),
                 // country: req.body.country,
                 // photo: req.body.photo
             }}, (error, newUser) => {
                 if(error) {
                     res.status(400).json(error);
                 } else {
-                    userModel.find({email: req.body.email}, (err, users2)=> {
+                    providerModel.find({email: req.body.email}, (err, users2)=> {
                         if(users2.length){
-                            console.log(users2);
+                            console.log(users2[0].fullName,users2[0].partnerId);
                         }else{
                             console.log("no");
                         }
                         let token = JWTCertifier.generateJWT(
                             users2[0].email,
-                            users2[0].name,
-                            1
+                            users2[0].fullName,
+                            2
                         )
                         res.status(200).json({message:"Profile successfully updated.",
                                 token,
-                                name:users2[0].name   
+                                name:users2[0].fullName,
+                                partnerId:users2[0].partnerId   
                     });
                     })
                     
@@ -45,36 +44,39 @@ exports.updateUser = (req, res) => {
             })
         
     }else{
-        userModel.find({email: req.body.email}, (err, users1)=> {
+        providerModel.find({email: req.body.email}, (err, users1)=> {
                 if(err) {
                     res.status(400).json(err);
                 } else if(users1.length) {
                     res.status(200).json("EMAIL ID already exist");
                 }else {
-                    userModel.findOneAndUpdate({"_id": objectId(req.body.id)}, {$set: {
+                    providerModel.findOneAndUpdate({partnerId: req.body.provider_id}, {$set: {
                         email: req.body.email,
-                        name: req.body.name,
-                        phone_number: req.body.phone_number,
+                        fullName: req.body.name,
+                        mobileNumber: req.body.phone_number,
+                        providerIdentityImg:req.body.providerImg,
+                        partnerId:nameExtractor.getPartnerId(req.body.name,req.body.phone_number),
                         // country: req.body.country,
                         // photo: req.body.photo
                     }}, (error, newUser) => {
                         if(error) {
                             res.status(400).json(error);
                         } else {
-                            userModel.find({email: req.body.email}, (err, users2)=> {
+                            providerModel.find({email: req.body.email}, (err, users2)=> {
                                 if(users2.length){
-                                    console.log(users2);
+                                    // console.log(users2);
                                 }else{
                                     console.log("no");
                                 }
                                 let token = JWTCertifier.generateJWT(
                                     users2[0].email,
-                                    users2[0].name,
-                                    1
+                                    users2[0].fullName,
+                                    2
                                 )
                                 res.status(200).json({message:"Profile successfully updated.",
                                         token,
-                                        name:users2[0].name   
+                                        name:users2[0].fullName,
+                                        partnerId:users2[0].partnerId   
                             });
                             })
                             

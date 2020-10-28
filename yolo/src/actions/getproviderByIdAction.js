@@ -11,22 +11,13 @@ import {
 export function getProviderById() {
     return (dispatch) => {
         dispatch(loading(true));
-<<<<<<< HEAD
-        console.log("providerId",sessionStorage.getItem('token'))
-=======
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
-        return fetch('/api/provider/pro/login',{
+        return fetch('/api/provider/login',{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-<<<<<<< HEAD
-                'x-api-key':sessionStorage.getItem('token')
-=======
                 'x-api-key':localStorage.getItem('token')
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
             }
         }).then(res=> {
-            console.log(res,200)
             if(res.status === 200){
                 return res.json().then(res=> {
                     dispatch(loading(false));

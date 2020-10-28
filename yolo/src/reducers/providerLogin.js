@@ -14,11 +14,7 @@ let defaultState = {
 }
 
 const loginProviderReduer = (state=defaultState, action) => {
-<<<<<<< HEAD
-    console.log(action,989922);
-=======
-    // console.log(action,989922);
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
+   
     if(action.type === PROVIDER_LOGIN) {
         return {
             ...state,
@@ -33,11 +29,7 @@ const loginProviderReduer = (state=defaultState, action) => {
         }
     }
     if(action.type === PROVIDER_LOGIN_IS_SUCCESS) {
-<<<<<<< HEAD
-        console.log(action.payload,989922);
-=======
         // console.log(action.payload,989922);
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         return {
             ...state,
             success: action.payload

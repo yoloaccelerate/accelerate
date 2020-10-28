@@ -8,23 +8,27 @@ import {
     PROVIDER_UPDATE_IS_SUCCESS 
 } from '../types/provider';
 
-export function providerUpdate(name) {
+export function providerUpdate(email,name,phone_number,providerImg,provider_id) {
     return(dispatch) => {
         dispatch(loading(true));
-        return fetch('/api/user/update', {
+        return fetch('/api/provider/update', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': window.localStorage.getItem('token')
+                'x-api-key': localStorage.getItem('token')
             },
             body: JSON.stringify({
-
+                email:email,
                 name: name,
-         
+                phone_number:phone_number,
+                providerImg:providerImg,
+                provider_id:provider_id,
+               
             })
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=>{
+                    console.log(res)
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })

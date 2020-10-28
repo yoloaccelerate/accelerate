@@ -4,11 +4,8 @@
  */
 
 const provideModel = require('../../model/providerModel');
-<<<<<<< HEAD
 const services = require('../../model/finanialServiceModel');
 const expertise = require('../../model/businessTypeModel')
-=======
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
 JWTCertifier = require('../../helpers/JWTCertifier');
 
 exports.getProviderDetails = (req, res) => {
@@ -17,16 +14,12 @@ exports.getProviderDetails = (req, res) => {
         if (err) {
             res.status(400).json(err);
         } else {
-<<<<<<< HEAD
-            console.log(req.params.partnerId, "yolo fetching partner id")
-=======
+            // console.log(req.params.partnerId, "yolo fetching partner id")
             // console.log(providers,req.params.partnerId,"yolo fetching partner id")
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
             res.status(200).json(providers);
         }
     })
 }
-<<<<<<< HEAD
 
 
 exports.updateProviderService = (req, res) => {
@@ -107,30 +100,16 @@ exports.updateProviderExpertise = (req, res) => {
 
 
 exports.getProviderDetail = (req, res) => {
-    console.log(22, req.headers['x-api-key'])
+    // console.log(22, req.headers['x-api-key'])
     JWTCertifier.getTokenDecoded(req.headers['x-api-key']).then(user => {
         provideModel.find({ email: user.email }, (error, docs) => {
             if (error) {
                 res.status(400).json(error)
             } else {
-                console.log(docs.partnerId, '11')
+                // console.log(docs.partnerId, '11')
                 res.status(200).json(docs.partnerId);
             }
         })
     })
-=======
-exports.getProviderDetail = (req, res) => {
-    console.log(22,req.headers['x-api-key'])
-    JWTCertifier.getTokenDecoded(req.headers['x-api-key']).then(user=>{
-        provideModel.find({email: user.email}, (error, docs)=> {
-            if(error) {
-                res.status(400).json(error)
-            } else {
-                console.log(docs.partnerId,'11')
-                res.status(200).json(docs.partnerId);
-            }
-        })
-    })   
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
 }
 

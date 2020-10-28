@@ -1,20 +1,18 @@
 import React from 'react';
 import { 
     Button, Snackbar, Grid, TextField,
-    Card, Avatar, CardActionArea, Typography,CircularProgress
+    Card, Avatar, CardActionArea, Typography,CircularProgress,IconButton
 } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-
+import EditIcon from '@material-ui/icons/Edit';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-
 import log from '../../utils/logger.service'
 import {Link} from 'react-router-dom';
 import { store } from '../../store';
@@ -31,7 +29,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from "@material-ui/core/styles";
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
 import Chip from '@material-ui/core/Chip';
-
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import Sharefunctionality from '../Home/Sharefunctionality';
 
 import HeaderContainer from '../../containers/headerContainer';
@@ -127,7 +125,6 @@ export default class ProviderProfile extends React.Component {
         super();
         this.state = {
             providerData:{},
-<<<<<<< HEAD
             servicesData:[],
             expertiseList:[],
             city:'',
@@ -139,25 +136,40 @@ export default class ProviderProfile extends React.Component {
            expertise:[],
            expertiseSelected:[],
             selectedExpertiseValue:[],
-            updateExpertise:false
-=======
-            cityData:[],
-            city:'',
-            provider:false
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
+            updateExpertise:false,
+            open:false,
+            errors: {
+                name: '',
+                email: '',
+                phone_number: '',
+                // message: ''
+            },
+            name:'',
+            email:'',
+            phone_number:'',
+            providerImg:'',
+            errorMessage:'',
+            open1:false
         }   
     }
     openUpdateExpertise=()=>{
         this.setState({updateExpertise:true})
     }
+    handleClickOpen = () => {
+        this.setState({open:true});
+      };
     
+    handleClose = () => {
+        this.setState({
+            open:false,
+            open1:false});
+      };
     componentDidMount() {
       
        var pcity = '';
-<<<<<<< HEAD
        this.props.getFinancialServiceList();
        this.props.getExpertise();
-       this.providerDetail()
+       this.providerDetail();
             store.subscribe(() => {
                 this.setState({
                     services: store.getState().getFinancialService.success,
@@ -173,57 +185,17 @@ export default class ProviderProfile extends React.Component {
 
 
                         this.state.expertise.map((item) => {
-                           
+                        //    
                             var joined = this.state.expertiseList.concat(item.name);
                             this.setState({ expertiseList: [...new Set(joined)] });
                     
                         });
                     },1000)
               
-=======
-
-        fetch('/api/provider/'+Id, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res=> {
-            
-                if(res.status === 200) {
-                    return res.json().then(res=> {
-                        console.log(res,"mayank")
-                      
-                      setTimeout(()=>{  this.setState({
-                            providerData:res,
-                            provider:true
-                           
-                        }) },2000)
-                     
-                       
-                       
-
-                    })
-                } 
-            }).catch(err=> {
-               console.log(err,6566);
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
             })
-// setTimeout(()=>{
-//     this.state.servivesList.map((item) => {
-//         console.log(item,"anand")
-//         var joined = this.state.servivesList.concat(item.name);
-//         this.setState({ servivesList: [...new Set(joined)] });
-
-//     });
-// },400)
-                
-             
-         
-           
-           
 
            
-            }
+    }
 
             closeDialog=()=>{
              this.setState({update:false})
@@ -232,9 +204,16 @@ export default class ProviderProfile extends React.Component {
             providerDetail=()=>{
                 let demo= window.location.search;
                 let  myParam = demo.split("=");
-                let Id = myParam[1];
+                let Id;
+                // let Id = myParam[1];
+                // let Id =localStorage.getItem('providerId');
+                if(localStorage.getItem('providerId')){
+                    Id =localStorage.getItem('providerId');
+                }else{
+                    Id =myParam[1];
+                }
 
-<<<<<<< HEAD
+
                 fetch('/api/provider/'+Id, {
                     method: 'GET',
                     headers: {
@@ -261,7 +240,11 @@ export default class ProviderProfile extends React.Component {
                                servicesData:arr,
                                expertiseSelected:arr2,
                                selectedValue:arr,
-                               selectedExpertiseValue:arr2
+                               selectedExpertiseValue:arr2,
+                               name: res.fullName,
+                               email: res.email,
+                               phone_number:res.mobileNumber,
+                               providerImg:res.providerIdentityImg,
                             }) 
                           
                         })
@@ -286,42 +269,11 @@ export default class ProviderProfile extends React.Component {
             }
 
 
-
-=======
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
-    //         CitySelect = () => {
-    //             fetch('/api/provider/city/'+this.state.city, {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 }
-    //             }).then(res=> {
-    //                 console.log("response is=======", res)
-    //                 if(res.status === 200) {
-    //                     return res.json().then(res=> {
-    //                         this.setState({
-    //                             cityData:res
-                                
-    //                         })           
-    
-    //                     })
-    //                 } 
-    //             }).catch(err=> {
-    //                console.log(err);
-    //             })
-    
-    //             //console.log("ityyyyyy data is ---", this.state.cityData)
-             
-    // }  
-
-
       updateProfile=()=>{
           console.log("working")
          
           this.setState({update:true})
-
-
-      }
+            }
   
 
 updateExpertise=()=>{
@@ -330,7 +282,7 @@ updateExpertise=()=>{
     let  myParam = demo.split("=");
     let Id = myParam[1];
       this.props.updateExpertise(Id,this.state.selectedExpertiseValue)
-      setTimeout(()=>{this.providerDetail();},1000)
+      setTimeout(()=>{this.providerDetail();},500)
       this.setState({updateExpertise:false})
     //   window.location.reload();
   } 
@@ -348,17 +300,99 @@ updateExpertise=()=>{
             //   window.location.reload();
           }      
     
+          change = (e) => {
+                
+            const { name, value } = e.target;
+            // console.log(this.state.countries_code);
+            let errors = this.state.errors;
+            var regex=/^[A-z]{3,}$/;
+           
+            switch (name) {
+    
+                case 'name':
+                    errors.name = value.length < 3 ? 'Name should be more than 3 characters long': null;
+                    if (value.length < 3) {
+                        errors.name = 'Name should be more than 3 characters long'
+                    }
+                    else if(!regex.test(value.replace(/\s/g,'')))
+                    {
+                        errors.name="Name should contain only alphabets"
+                    }
+                     else {
+                        this.setState({ name: value });
+                        errors.name = '';
+                    }
+                    break;
+                case 'email':
+                    errors.email = value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) ? '' : 'Invalid Email Address';
+                    if (!value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z]+\.)+[a-zA-Z]{2,}))$/)) {
+                        errors.email = 'Invalid Email Address';
+                    } else {
+                        this.setState({ email: value });
+                        errors.email = '';
+                    }
+                    break;
+                case 'phone_number':
+                    errors.phone_number = value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/) ? '' : 'Invalid phone number.';
+                    if (!value.match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/)) {
+                        errors.phone_number = 'Invalid phone number.';
+                    } else {
+                        this.setState({ phone_number: value });
+                        errors.phone_number = '';
+                    }
+                    break;
+                default:
+                    break;
+            }
+            this.setState({ errors, [name]: value }, () => {
+                return null;
+            });
+            // this.handleUpdate();
+        }
+        
+        updatePhoto=(e)=>{
+            let reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onloadend = () => {
+            this.setState({
+                providerImg: reader.result
+            });
+        };
+        }
+
+        update=()=>{
+            this.props.providerUpdate(this.state.email,this.state.name,this.state.phone_number,this.state.providerImg,this.state.providerData.partnerId);
+            setTimeout(()=>{
+                console.log(this.props.updateData);
+                if(this.props.updateData.providerUpdate.error) {
+                    this.setState({open: true});
+                    this.setState({
+                        open1:true,
+                        errorMessage: this.props.updateData.providerUpdate.error
+                    })
+                } else{ 
+                    // console.log("update profile--->",this.statupdateData.provider                     // console.log(this.propsupdateData.provider                      this.setState({open: true});
+                    this.setState({
+                        open1:true,
+                        errorMessage: this.props.updateData.providerUpdate.success.message,
+                    })
+                    // overriding token and name with new token
+                    localStorage.setItem('token',this.props.updateData.providerUpdate.success.token);
+                    localStorage.setItem('providerName',this.props.updateData.providerUpdate.success.name);
+                    localStorage.setItem('providerId',this.props.updateData.providerUpdate.success.partnerId);
+                    // this.props.getUserDetails();
+                    // setTimeout(()=>{
+                    //     console.log(this.props.userDetails);
+                    // },1000)
+                    
+                }
+            },1000);
+        }
+
     render() {
-        console.log(this.state.selectedValue)
     
    return(<div> {this.state.provider?
            (
-<<<<<<< HEAD
-=======
-         
-            
-
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                 <div style={{width: '100%', marginTop: '100px'}}>
 
                 <HeaderContainer />
@@ -394,6 +428,11 @@ updateExpertise=()=>{
                             <Typography color="text" variant="button" style={{fontSize: '16px'}}>
                                 {this.state.providerData.fullName }&nbsp;||&nbsp;
                                 {this.state.providerData.partnerId }&nbsp;
+                            </Typography>
+                            <Typography color="text" variant="body" style={{fontSize: '18px'}}>
+                                <IconButton style={{float: 'right'}}>
+                               <EditIcon style={{float: 'right',fontSize: '17px', color: '#006699'}} onClick={this.handleClickOpen} />
+                               </IconButton>
                             </Typography>
 
                             
@@ -594,7 +633,7 @@ updateExpertise=()=>{
 
                             <Typography color="text" variant="body" style={{fontSize: '18px'}}>
                                 Work Info
-                              
+                                <DescriptionOutlinedIcon style={{float: 'right',fontSize: '17px', color: '#006699'}}/>
                             </Typography>
 
                             <div style={{width: '100%', padding: '5%', backgroundColor: 'rgba(236, 242, 249,0.7)', marginTop: '10px'}}>
@@ -862,7 +901,88 @@ updateExpertise=()=>{
 
 
                 </div> 
-
+                <div>
+     
+      <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">update</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Update your details here
+          </DialogContentText>
+          <img src ={this.state.providerImg} class="rounded_image"></img>
+            <br/>
+                   
+            <AddAPhotoIcon style={{ backgroundColor: '#fff',color: '#0077b3', fontSize: '25px',border: '1px solid #fff', borderRadius: '50%', marginLeft: '50px', marginTop:'-25px'}} 
+             />
+             <br></br>
+            <input
+                accept="image/*"
+                id="raised-button-file"
+                multiple
+                type="file"
+                onChange={(e) => { this.updatePhoto(e) }}
+            />
+                    
+          <TextField
+            autoFocus
+            margin="dense"
+            id="email"
+            label="Email Address"
+            type="email"
+            name="email"
+            value={this.state.email}
+            onChange={(e)=>{this.change(e)}}
+            fullWidth
+          />
+          <TextField
+            // autoFocus
+            margin="dense"
+            id="name"
+            label="name"
+            type="name"
+            name="name"
+            value={this.state.name}
+            onChange={(e)=>{this.change(e)}}
+            fullWidth
+          /><TextField
+            // autoFocus
+            margin="dense"
+            id="phoneno"
+            label="phoneno"
+            type="phoneno"
+            name="phone_number"
+            value={this.state.phone_number}
+            onChange={(e)=>{this.change(e)}}
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.update} color="primary">
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+    {/* <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    open1={this.state.open1}
+                    autoHideDuration={3000}
+                    onClose={(e,r)=>this.handleClose(e,r)}
+                    message={this.state.errorMessage}
+                    action={
+                    <React.Fragment>
+                        <Button color="secondary" size="small" onClick={(e,r)=>this.handleClose(e,r)}>
+                            Hide
+                        </Button>
+                    </React.Fragment>
+                    }
+                /> */}
                 
 
 
@@ -991,7 +1111,6 @@ updateExpertise=()=>{
             </div>       
                
                     
-<<<<<<< HEAD
                ):(<div style={{marginTop: '250px'}}>
                    
                    <CircularProgress color="secondary" />
@@ -1053,10 +1172,6 @@ updateExpertise=()=>{
                                         
 
 
-=======
-               ):(<span>Loading</span>)
-                    }
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                     </div>
    )
 

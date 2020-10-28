@@ -93,12 +93,7 @@ class Home extends React.Component {
             allCountry: [],
             allProvidersDetails: [],
             searchedResult: [],
-<<<<<<< HEAD
-            city:'',
-            allProfileMessage:'See all profiles'
-=======
             city:''
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
         }
     }
 
@@ -114,11 +109,7 @@ class Home extends React.Component {
 
 
         store.subscribe(() => {
-<<<<<<< HEAD
-            console.log(store.getState().getAllApprovedProvider, "lassl")
-=======
             console.log(store.getState(), "lassl")
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
             if (store.getState().getAllApprovedProvider.error) {
                 this.setState({
                     open: true
@@ -236,19 +227,8 @@ class Home extends React.Component {
         this.setState({ dialogOpen: true });
     }
     viewAllProfile=()=>{
-<<<<<<< HEAD
-        if(!this.state.allProfile)
-        {
-        this.setState({allProfile:true,allProfileMessage:'View Less'})
-    }
-    else{
-        this.setState({allProfile:false,allProfileMessage:'See all profiles'})
-    }
-       }
-=======
         this.setState({allProfile:true})
     }
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
 
 allProfile=()=>{
 let arr=[]
@@ -408,19 +388,11 @@ this.setState({searchedResult:arr})
                                 
                                 ) : <span>We do not have enough data right now. Please check back later.</span>
                             }
-<<<<<<< HEAD
-                            { this.state.allProvidersDetails.length>0?
-                                (<div class="carddd" style={{ textAlign: 'center', backgroundColor: '#fff', height: '215px' }}>
-                                    <br /><br />
-                                    <CheckCircleOutlinedIcon style={{ color: '#006699' }} /><br />
-                                    <Link onClick={this.viewAllProfile} variant="caption" >{this.state.allProfileMessage} <br /><br />{this.props.rcn}</Link>
-=======
                             {!this.state.allProfile&& this.state.allProvidersDetails.length>0?
                                 (<div class="carddd" style={{ textAlign: 'center', backgroundColor: '#fff', height: '215px' }}>
                                     <br /><br />
                                     <CheckCircleOutlinedIcon style={{ color: '#006699' }} /><br />
                                     <Link onClick={this.viewAllProfile} variant="caption" >See all profiles <br /><br />{this.props.rcn}</Link>
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
                                     <br />   
                                     </div>                                       
                                ):('')

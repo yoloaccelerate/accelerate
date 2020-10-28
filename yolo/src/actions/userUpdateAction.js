@@ -28,11 +28,7 @@ export function userUpdate(email, name, phone_number, id) {
         }).then(res=> {
             if(res.status === 200) {
                 return res.json().then(res=>{
-<<<<<<< HEAD
-                    console.log(res,"user")
-=======
-                    console.log(res)
->>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
+                    // console.log(res,"user")
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
