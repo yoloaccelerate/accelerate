@@ -107,7 +107,7 @@ export default class ProviderLogin extends React.Component {
                 window.localStorage.setItem('providerName',store.getState().providerLogin.success.name);
                 //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
                 // window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
-               setTimeout(()=>{history.push(`/provider/profile?id=${store.getState().providerLogin.success.partnerId}`)},1000) 
+               setTimeout(()=>{history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)},1000) 
                }
         })
     }
