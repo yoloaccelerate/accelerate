@@ -10,7 +10,8 @@ class ProviderLoginContainer extends React.Component {
         return(
             <ProviderLogin 
                 providerLogin = {this.props.providerLogin}
-                getProvider={this.props.getProvider}
+                data={this.props.data}
+                // getProvider={this.props.getProvider}
             />
         )
     }
@@ -18,7 +19,7 @@ class ProviderLoginContainer extends React.Component {
 
 const mapStateToProps=state=>{
 return{
-    data:state.getProviderById.success
+    data:state
 }
 
 }
@@ -26,8 +27,8 @@ return{
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
         providerLogin: providerLoginAction.providerLogin,
-        getProvider:getProviderByIdAction.getProviderById
+        // getProvider:getProviderByIdAction.getProviderById
     }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(ProviderLoginContainer);
+export default connect(mapStateToProps , mapDispatchToProps)(ProviderLoginContainer);

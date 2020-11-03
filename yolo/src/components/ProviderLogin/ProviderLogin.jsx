@@ -84,32 +84,32 @@ export default class ProviderLogin extends React.Component {
     }
 
     login = (e) => {
+        
         e.preventDefault();
+        
         this.props.providerLogin(this.state.email, this.state.password);
-        store.subscribe(()=> {
-            console.log(store.getState());
-            if(store.getState().providerLogin.error) {
+        setTimeout(()=>{
+            if(this.props.data.providerLogin.error) {
 
                 this.setState({
                     open: true
                 })
                 this.setState({
-                    errorMessage: store.getState().providerLogin.error
+                    errorMessage: this.props.data.providerLogin.error
                 })
             } else {
-                
-                // console.log("provider profile",store.getState().providerLogin.success)
-                localStorage.setItem('token', store.getState().providerLogin.success.token);
-                //setName(store.getState().providerLogin.success[0].name);
+                localStorage.setItem('token', this.props.data.providerLogin.success.token);
+                // setName(this.props.data.providerLogin.success[0].name);
                localStorage.setItem('providerProfile', true);
-                //window.localStorage.setItem('setemail',store.getState().providerLogin.success.email);
-                window.localStorage.setItem('providerId',store.getState().providerLogin.success.partnerId);
-                window.localStorage.setItem('providerName',store.getState().providerLogin.success.name);
-                //console.log("provider id  is-----",store.getState().providerLogin.success.providerId);
-                // window.localStorage.setItem('providerData',JSON.stringify(store.getState().providerLogin.success.partnerData));
-               setTimeout(()=>{history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)},1000) 
+                //window.localStorage.setItem('setemail',this.props.data.providerLogin.success.email);
+                localStorage.setItem('providerId',this.props.data.providerLogin.success.partnerId);
+                localStorage.setItem('providerName',this.props.data.providerLogin.success.name);
+                //console.log("provider id  is-----",this.props.data.providerLogin.success.providerId);
+                // window.localStorage.setItem('providerData',JSON.stringify(this.props.data.providerLogin.success.partnerData));
+            //    setTimeout(()=>{history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)},1000) 
+                history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)
                }
-        })
+            },1000);
     }
 
     render() {

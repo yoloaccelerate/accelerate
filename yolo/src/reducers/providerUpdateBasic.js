@@ -12,7 +12,6 @@
     }
     
     const updateProviderReducer = (state=defaultState, action) => {
-        console.log(action.type,action.payload)
         if(action.type ===PROVIDER_UPDATE_IS_LOADING) {
             return {
                 ...state,
@@ -27,7 +26,6 @@
             }
         }
         if(action.type ===  PROVIDER_UPDATE_IS_SUCCESS) {
-            console.log(action.payload)
             return {
                 ...state,
                 success: action.payload

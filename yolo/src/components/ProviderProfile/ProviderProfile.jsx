@@ -167,6 +167,7 @@ export default class ProviderProfile extends React.Component {
     componentDidMount() {
       
        var pcity = '';
+    //    console.log(this.props.updateData);
        this.props.getFinancialServiceList();
        this.props.getExpertise();
        this.providerDetail();
@@ -207,11 +208,11 @@ export default class ProviderProfile extends React.Component {
                 let Id;
                 // let Id = myParam[1];
                 // let Id =localStorage.getItem('providerId');
-                if(localStorage.getItem('providerId')){
-                    Id =localStorage.getItem('providerId');
-                }else{
-                    Id =myParam[1];
-                }
+                localStorage.getItem('providerId')
+                Id =localStorage.getItem('providerId');
+                // }else{
+                //     Id =myParam[1];
+                // }
 
 
                 fetch('/api/provider/'+Id, {
@@ -227,11 +228,11 @@ export default class ProviderProfile extends React.Component {
                             let arr=[];
                             let arr2=[];
                           res.servicesOffered.map(ser=>{
-                              console.log(ser,223)
+                            //   console.log(ser,223)
                             arr.push(ser.name)
                           })
                           res.partnerType.map(exp=>{
-                            console.log(exp.name,2996)
+                            // console.log(exp.name,2996)
                             arr2.push(exp.name);
                           })
                             this.setState({
@@ -361,9 +362,13 @@ updateExpertise=()=>{
         }
 
         update=()=>{
+            this.handleClose();
+            console.log("hiiii1");
             this.props.providerUpdate(this.state.email,this.state.name,this.state.phone_number,this.state.providerImg,this.state.providerData.partnerId);
+            console.log("hiiii2");
             setTimeout(()=>{
-                console.log(this.props.updateData);
+                console.log("hii3");
+                console.log(this.props.updateData.providerUpdate);
                 if(this.props.updateData.providerUpdate.error) {
                     this.setState({open: true});
                     this.setState({
@@ -380,13 +385,18 @@ updateExpertise=()=>{
                     localStorage.setItem('token',this.props.updateData.providerUpdate.success.token);
                     localStorage.setItem('providerName',this.props.updateData.providerUpdate.success.name);
                     localStorage.setItem('providerId',this.props.updateData.providerUpdate.success.partnerId);
+                    // setTimeout(()=>{this.providerDetail()},500);
                     // this.props.getUserDetails();
                     // setTimeout(()=>{
                     //     console.log(this.props.userDetails);
                     // },1000)
+                    this.providerDetail();
                     
                 }
-            },1000);
+            },5000);
+            
+            // this.providerDetail();
+            // setTimeout(()=>{this.providerDetail()},500);
         }
 
     render() {
