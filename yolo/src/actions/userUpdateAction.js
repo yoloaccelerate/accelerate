@@ -15,7 +15,7 @@ export function userUpdate(email, name, phone_number, id) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': sessionStorage.getItem("token")
+                'x-api-key': localStorage.getItem("token")
             },
             body: JSON.stringify({
                 email: email,
