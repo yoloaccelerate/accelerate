@@ -363,12 +363,12 @@ updateExpertise=()=>{
 
         update=()=>{
             this.handleClose();
-            console.log("hiiii1");
+            // console.log("hiiii1");
             this.props.providerUpdate(this.state.email,this.state.name,this.state.phone_number,this.state.providerImg,this.state.providerData.partnerId);
-            console.log("hiiii2");
+            // console.log("hiiii2");
             setTimeout(()=>{
-                console.log("hii3");
-                console.log(this.props.updateData.providerUpdate);
+                // console.log("hii3");
+                // console.log(this.props.updateData.providerUpdate);
                 if(this.props.updateData.providerUpdate.error) {
                     this.setState({open: true});
                     this.setState({
@@ -382,18 +382,25 @@ updateExpertise=()=>{
                         errorMessage: this.props.updateData.providerUpdate.success.message,
                     })
                     // overriding token and name with new token
-                    localStorage.setItem('token',this.props.updateData.providerUpdate.success.token);
-                    localStorage.setItem('providerName',this.props.updateData.providerUpdate.success.name);
-                    localStorage.setItem('providerId',this.props.updateData.providerUpdate.success.partnerId);
+                    console.log("jjjj",this.props.updateData);
+                    store.subscribe(()=>{
+                        console.log("hiii",store.getState())
+                    
+                    localStorage.setItem('token',store.getState().providerUpdate.success.token);
+                    localStorage.setItem('providerName',store.getState().providerUpdate.success.name);
+                    localStorage.setItem('providerId',store.getState().providerUpdate.success.partnerId);
                     // setTimeout(()=>{this.providerDetail()},500);
                     // this.props.getUserDetails();
                     // setTimeout(()=>{
                     //     console.log(this.props.userDetails);
                     // },1000)
+                });
+                setTimeout(() => {
                     this.providerDetail();
+                }, 1000); 
                     
                 }
-            },5000);
+            },10);
             
             // this.providerDetail();
             // setTimeout(()=>{this.providerDetail()},500);

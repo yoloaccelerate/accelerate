@@ -268,19 +268,34 @@ useEffect(() => {
         
     });
     if (localStorage.getItem('userProfile') === 'true'||localStorage.getItem("providerProfile")) {
-        console.log("yes", store.getState());
+        console.log("yes", store.getState().providerUpdate);
+        console.log("yes", store.getState().providerLogin);
+        if(localStorage.getItem("providerName")){
+            
+            setName(localStorage.getItem("providerName"));
+        }
+        store.subscribe(() => {
+            console.log("yes", store.getState());
         if(localStorage.getItem("userName")){
             
             setName(localStorage.getItem("userName"));
         }
-        else if(localStorage.getItem("providerName"))
-        {
-            setName(localStorage.getItem("providerName"))
+        else if(localStorage.getItem("providerName")){
+        // console.log("hiiii1");
+            if(store.getState().providerUpdate.success.name){
+                setName(store.getState().providerUpdate.success.name)
+                // console.log("hiiii2");
+            }
+        //   else{
+        //     setName(store.getState().providerLogin.success.name)
+        //     console.log("hiiii3");
+        //   }
         }
         else{
             localStorage.setItem('userProfile', true);
             
         }
+    });
     }
 
 
