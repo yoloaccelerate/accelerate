@@ -49,8 +49,9 @@ import Similar_Profiles_service from './Similar_Profiles_service.jsx';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { TransferWithinAStationSharp, RssFeed } from '@material-ui/icons';
-
-
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 var share_link={}
 
@@ -149,7 +150,8 @@ export default class ProviderProfile extends React.Component {
             phone_number:'',
             providerImg:'',
             errorMessage:'',
-            open1:false
+            open1:false,
+            anchor:null
         }   
     }
     openUpdateExpertise=()=>{
@@ -158,15 +160,22 @@ export default class ProviderProfile extends React.Component {
     handleClickOpen = () => {
         this.setState({open:true});
       };
-    
+    handleClick = (event) => {
+        this.setState({anchor:event.currentTarget});
+      };
     handleClose = () => {
         this.setState({
             open:false,
-            open1:false});
+            open1:false,
+            anchor:null
+        });
       };
     componentDidMount() {
       
-       var pcity = '';
+    //    var pcity = '';
+        if(localStorage.getItem("userName")){
+        this.viewers();
+        }
     //    console.log(this.props.updateData);
        this.props.getFinancialServiceList();
        this.props.getExpertise();
@@ -197,6 +206,27 @@ export default class ProviderProfile extends React.Component {
 
            
     }
+    viewers=()=>{
+        let demo= window.location.search;
+        let  myParam = demo.split("=");
+        let partnerId = myParam[1];
+        console.log(partnerId);
+        fetch('/api/provider/viewers',{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId:localStorage.getItem("userId"),
+                partnerId:partnerId
+            })
+        })
+        //.then(res=>{
+        //     if(res.status=200){
+
+        //     }
+        // })
+    }
 
             closeDialog=()=>{
              this.setState({update:false})
@@ -206,14 +236,11 @@ export default class ProviderProfile extends React.Component {
                 let demo= window.location.search;
                 let  myParam = demo.split("=");
                 let Id;
-                // let Id = myParam[1];
-                // let Id =localStorage.getItem('providerId');
-                localStorage.getItem('providerId')
-                Id =localStorage.getItem('providerId');
-                // }else{
-                //     Id =myParam[1];
-                // }
-
+                if(localStorage.getItem('providerId')){
+                    Id =localStorage.getItem('providerId');
+                }else{
+                    Id = myParam[1];                    
+                }
 
                 fetch('/api/provider/'+Id, {
                     method: 'GET',
@@ -382,9 +409,9 @@ updateExpertise=()=>{
                         errorMessage: this.props.updateData.providerUpdate.success.message,
                     })
                     // overriding token and name with new token
-                    console.log("jjjj",this.props.updateData);
+                    // console.log("jjjj",this.props.updateData);
                     store.subscribe(()=>{
-                        console.log("hiii",store.getState())
+                        // console.log("hiii",store.getState())
                     
                     localStorage.setItem('token',store.getState().providerUpdate.success.token);
                     localStorage.setItem('providerName',store.getState().providerUpdate.success.name);
@@ -651,6 +678,18 @@ updateExpertise=()=>{
                             <Typography color="text" variant="body" style={{fontSize: '18px'}}>
                                 Work Info
                                 <DescriptionOutlinedIcon style={{float: 'right',fontSize: '17px', color: '#006699'}}/>
+                                <NotificationsIcon aria-label="more" aria-controls="simple-menu" aria-haspopup="true" style={{float: 'right',fontSize: '17px', color: '#006699'}} onClick={this.handleClick} />
+                                <Menu
+                                    id="simple-menu"
+                                    anchor={this.state.anchor}
+                                    keepMounted
+                                    open={Boolean(this.state.anchor)}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                                </Menu>
                             </Typography>
 
                             <div style={{width: '100%', padding: '5%', backgroundColor: 'rgba(236, 242, 249,0.7)', marginTop: '10px'}}>

@@ -116,6 +116,10 @@ const partnerSchema = new mongoose.Schema({
         required: true,
         
     },
+    viewers:{
+        type:Array,
+        // required: true,
+    },
     indChecked: {
         type: Array,
         required: true,

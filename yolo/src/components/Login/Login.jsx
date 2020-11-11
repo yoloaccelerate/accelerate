@@ -63,7 +63,7 @@ export default class Login extends React.Component {
 
     login = (e) => {
         e.preventDefault();
-        {console.log('login props');console.log(this)}
+        console.log(store.getState().userLogin,"kkkkkk");
         this.props.userLogin(this.state.email, this.state.password);
         store.subscribe(()=> {
             if(store.getState().userLogin.error) {
@@ -80,8 +80,9 @@ export default class Login extends React.Component {
                     open: false
                 });
 
-                window.localStorage.setItem('userProfile', true);
-                window.localStorage.setItem('userName', store.getState().userLogin.success.name);
+                localStorage.setItem('userProfile', true);
+                localStorage.setItem('userName', store.getState().userLogin.success.name);
+                localStorage.setItem('userId', store.getState().userLogin.success.userId);
                 window.location.reload(false);
                 history.push('/');
             }

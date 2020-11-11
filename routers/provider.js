@@ -10,6 +10,7 @@ const getProviderUpdateController= require('../controllers/provider/getProviderU
 JWTCertifier = require('../helpers/JWTCertifier');
 
 router.get('/all', getProviderController.getAllProvider);
+router.put('/viewers', getProviderController.getViewers);
 router.get('/pro/login',JWTCertifier.verifyJWT,getProviderDetailsController.getProviderDetail)
 router.get('/:partnerId',getProviderDetailsController.getProviderDetails)
 router.put('/update/service/:pid',getProviderDetailsController.updateProviderService)

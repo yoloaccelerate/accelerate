@@ -198,6 +198,7 @@ export default function HeaderLinks(props) {
     localStorage.removeItem("providerName");
     localStorage.removeItem("providerId");
     localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
     //   sessionStorage.removeItem("ProviderProfile")
     //   window.location.reload(false);
     history.push('/login');
@@ -292,7 +293,7 @@ useEffect(() => {
         //   }
         }
         else{
-            localStorage.setItem('userProfile', true);
+            // localStorage.setItem('userProfile', true);
             
         }
     });

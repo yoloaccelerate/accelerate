@@ -14,3 +14,15 @@ exports.getAllProvider = (req, res) => {
         }
     })
 }
+
+exports.getViewers=(req,res)=>{
+    console.log("hiiiii2")
+    provideModel.updateOne({ partnerId: req.body.partnerId },{$push:{viewers:req.body.userId}}, (err, provider) => {
+        if (err) {
+            res.status(400).json(err);
+        } else {
+            console.log(provider.viewers);
+        }
+    })
+    
+}
