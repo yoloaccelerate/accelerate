@@ -6,6 +6,7 @@ import LoginContainer from './containers/userLoginContainer';
 import RegisterContainer from './containers/userRegisterContainer';
 import ProviderLoginContainer from './containers/providerLoginContainer';
 import ProviderRegisterContainer from './containers/providerRegisterContainer';
+import GoogleForms from './components/GoogleForms/GoogleForms'
 import ProviderDashboardContainer from './containers/providerDashboardContainer';
 import AdminLoginContainer from './containers/adminLoginContainer';
 import NotFound from './components/NotFound/NotFound';
@@ -123,6 +124,7 @@ function App() {
             <Route exact path="/" component={ HomeContainer } />
             <Route exact path="/register" component={ RegisterContainer } />
             <Route exact path="/login" component={ LoginContainer } />
+            <Route exact path="/feedback" component={ GoogleForms } />
             <Route exact path="/search" component={ Search } />
             <Route exact path="/chooseLoginRegister" component={ ChooseLoginRegister } />
 
