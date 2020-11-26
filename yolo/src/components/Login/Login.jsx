@@ -199,6 +199,8 @@ export default class Login extends React.Component {
                         </div>
 
                         <div class="forget_section">
+                            <Link style={{color: '#4d4d4d'}} to={'./feedback'}>Having Login Issues! Give Feedback</Link>
+                            <br/>
                             <Link style={{color: '#4d4d4d'}} to={'./register'}> Don't have an account ?&nbsp;Sign Up</Link>
                         </div>
 

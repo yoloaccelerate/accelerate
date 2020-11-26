@@ -285,6 +285,8 @@ export default class Register extends React.Component {
 
 
                             <div class="forget_section">
+                                <Link style={{color: '#4d4d4d'}} to={'./feedback'}>Having Issues Registering! Give Feedback</Link>
+                                <br/>
                                 <Link to="/login" style={{color: '#4d4d4d'}} >Already have an account ? Sign In</Link>
                             </div>
       

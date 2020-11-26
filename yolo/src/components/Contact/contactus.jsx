@@ -141,11 +141,16 @@ switch(name)
 
                             <div class="padding_div">
 
-                                <Typography variant="body" style={black_heading}>Post your Queries</Typography>
+
+                                <Typography variant="body" style={black_heading}>
+                                    <Link style={{color: '#4d4d4d'}} to={'./feedback'}>
+                                        Have Queries! Give Feedback
+                                    </Link>
+                                </Typography>
 
                                 <br/><br/>
                             
-                                <form  autoCapitalize="off" onSubmit={(e)=>this.shareUs(e)}>
+                                {/* <form  autoCapitalize="off" onSubmit={(e)=>this.shareUs(e)}>
                                     <TextField 
                                         id="name"
                                         label="Enter your Name"
@@ -192,7 +197,7 @@ switch(name)
                                     <br/>
                                     <Button variant="contained" size="small" type="submit" style={{backgroundColor: 'rgb(255, 117, 26)', color: '#fff'}}>Share with us</Button>
 
-                                </form>
+                                </form> */}
                                 
                             </div>
 
