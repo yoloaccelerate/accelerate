@@ -73,8 +73,14 @@ export default class Login extends React.Component {
                 this.setState({
                     errorMessage: store.getState().userLogin.error
                 })
+                console.log(store.getState().userLogin,"error wala");
+                console.log(this.state.errorMessage,"error message")
+                
+                
             }
             if(store.getState().userLogin.success.status === true) {
+                console.log("logged in")
+                console.log(store.getState().userLogin,"login wala");
                localStorage.setItem('token', store.getState().userLogin.success.token);
                 this.setState({
                     open: false
@@ -94,7 +100,7 @@ export default class Login extends React.Component {
         let errors = this.state.errors;
         switch(name) {
             case 'email':
-                errors.email = value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z]+\.)+[a-zA-Z]{2,}))$/) ? '' : 'Invalid Email Address';
+                errors.email = value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ? '' : 'Invalid Email Address';
                 break;
             case 'password':
                 errors.password = value.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/) ? '' : 'Password should be atleast 7 characters with alphanumeric characters';
@@ -183,7 +189,7 @@ export default class Login extends React.Component {
                                     type="password"
                                     error={this.state.errors.password}
                                     helperText={this.state.errors.password}
-                                    autoFocus
+                                    
                                     required
                                     onChange={(e)=> this.change(e)}
                                     style={{marginBottom: 50}}
@@ -194,8 +200,9 @@ export default class Login extends React.Component {
                             <Button variant="contained" type="submit" fullWidth style={button_style}>Login</Button>
                             </form>
                         </CardContent>
-                       
-
+                        {this.state.open?
+                            <p style={{color: 'Red'}}> Invalid Credentials</p>: null}
+            
                         </div>
 
                         <div class="forget_section">

@@ -138,7 +138,7 @@ class Home extends React.Component {
         this.setState({city:filterValue.city})
         let filterArr = []
         let searchData = []
-        console.log(filterValue, field, "998899")
+        console.log(filterValue, field, "check kro")
 
         if (filterValue.country != null && filterValue.city == null) {
             this.state.allProvidersDetails.map((obj) => {
@@ -163,7 +163,7 @@ class Home extends React.Component {
         }
 
         if (field == "name") {
-            console.log(filterArr, 33)
+            console.log(filterArr,"dekho")
             for (let obj of filterArr) {
                 if (obj.fullName == filterValue.name) {
                     searchData.push(obj)
@@ -171,6 +171,7 @@ class Home extends React.Component {
             }
         }
         else if (field == "orgName") {
+            console.log(filterArr,"orgDekho")
             for (let obj of filterArr) {
                 if (obj.OrganizationName == filterValue.orgName) {
                     searchData.push(obj)
@@ -308,7 +309,7 @@ this.setState({searchedResult:arr})
 
 
     render() {
-        console.log(this.state.allproviderDetails)
+        console.log(this.state.allproviderDetails,"check me")
         const { classes } = this.props;
         return (
             <div>

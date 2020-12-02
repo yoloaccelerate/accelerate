@@ -208,7 +208,7 @@ export default class Register extends React.Component {
                                         type="email"
                                         error={this.state.errors.email}
                                         helperText={this.state.errors.email}
-                                        autoFocus
+    
                                         required
                                         onChange={(e)=> this.change(e)}
                                         inputProps={{style: {fontSize: 12}}}
@@ -224,7 +224,7 @@ export default class Register extends React.Component {
                                         type="password"
                                         error={this.state.errors.password}
                                         helperText={this.state.errors.password}
-                                        autoFocus
+    
                                         required
                                         onChange={(e)=> this.change(e)}
                                         inputProps={{style: {fontSize: 12}}}
@@ -240,7 +240,7 @@ export default class Register extends React.Component {
                                         type="password"
                                         error={this.state.errors.confirm_password}
                                         helperText={this.state.errors.confirm_password}
-                                        autoFocus
+    
                                         required
                                         onChange={(e)=> this.change(e)}
                                         inputProps={{style: {fontSize: 12}}}
@@ -271,7 +271,7 @@ export default class Register extends React.Component {
                                             className="phoneNumber"
                                             error={this.state.errors.phone_number}
                                             helperText={this.state.errors.phone_number}
-                                            autoFocus
+        
                                             required
                                             style={{marginBottom: 15,width: '55%',marginLeft:'5%',borderRadius: '1px'}}
                                             onChange={(e)=> this.change(e)}
@@ -285,8 +285,6 @@ export default class Register extends React.Component {
 
 
                             <div class="forget_section">
-                                <Link style={{color: '#4d4d4d'}} to={'./feedback'}>Having Issues Registering! Give Feedback</Link>
-                                <br/>
                                 <Link to="/login" style={{color: '#4d4d4d'}} >Already have an account ? Sign In</Link>
                             </div>
       

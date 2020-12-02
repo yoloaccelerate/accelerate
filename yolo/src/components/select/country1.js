@@ -75,11 +75,32 @@ class Country extends React.Component {
 getNames=()=>{
   let orgNameUnique = []
       let nameUnique = []
+      let spellFlag=true;
 
   for (let obj of this.props.providerData) {
-    console.log(1)
-    orgNameUnique.push(obj.OrganizationName)
-    nameUnique.push(obj.fullName)
+    if(orgNameUnique.length>0){
+      for ( let org of orgNameUnique){
+        if(org.toUpperCase()!=obj.OrganizationName.toUpperCase()){
+          spellFlag=true;
+          
+          }
+          else{
+            spellFlag=false;
+            break
+          }
+      }
+    }
+    else{
+      spellFlag=true
+    }
+    
+    if(spellFlag){
+      orgNameUnique.push(obj.OrganizationName)
+        nameUnique.push(obj.fullName)
+        console.log("inserted org")
+    }
+
+    
   }
   console.log(orgNameUnique,"orgName")
   orgNameUnique = orgNameUnique.filter(function (item, pos) {

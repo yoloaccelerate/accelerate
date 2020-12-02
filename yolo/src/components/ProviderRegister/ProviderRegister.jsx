@@ -306,7 +306,7 @@ export default class ProviderRegister extends React.Component {
                 errors.lastName = value.length < 3 || value.match(/[0-9 \W]/) ? 'Last name should be min 3 characters long and only contain alphabets' : null;
                 break;
             case 'email':
-                errors.email = value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) ? null : 'Invalid Email Address';
+                errors.email = value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ? null : 'Invalid Email Address';
                 break;
             case 'password':
                 errors.password = value.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/) ? null : 'Password should be atleast 7 characters with alphanumeric characters';
