@@ -63,7 +63,6 @@ export default class Login extends React.Component {
 
     login = (e) => {
         e.preventDefault();
-        console.log(store.getState().userLogin,"kkkkkk");
         this.props.userLogin(this.state.email, this.state.password);
         store.subscribe(()=> {
             if(store.getState().userLogin.error) {
@@ -73,14 +72,9 @@ export default class Login extends React.Component {
                 this.setState({
                     errorMessage: store.getState().userLogin.error
                 })
-                console.log(store.getState().userLogin,"error wala");
-                console.log(this.state.errorMessage,"error message")
-                
-                
+    
             }
             if(store.getState().userLogin.success.status === true) {
-                console.log("logged in")
-                console.log(store.getState().userLogin,"login wala");
                localStorage.setItem('token', store.getState().userLogin.success.token);
                 this.setState({
                     open: false

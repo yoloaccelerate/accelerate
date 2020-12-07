@@ -28,7 +28,17 @@ export function userLogin (email, password) {
                     dispatch(loading(false));
                     dispatch(isSuccess(res));
                 })
-            } else if(res.status === 500) {
+            }
+            else if(res.status === 422) {
+                console.log("worked")
+                return res.json().then(res=>{
+                    console.log(422,res)
+                    dispatch(loading(false));
+                    dispatch(isError(res)) 
+                })
+                
+            }
+            else if(res.status === 500) {
                 dispatch(loading(false));
                 dispatch(isError('Something went wrong from our end. Please try again later.'))
             } else {

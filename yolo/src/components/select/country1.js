@@ -168,7 +168,7 @@ getNames=()=>{
                 break;
                 case"orgName":
                 this.setState({filterValue:{...filterValue,orgName:e.target.innerHTML} });
-                 this.props.filterFunction({...this.state.filterValue,orgName:e.target.innerHTML}, this.state.filterValueField)
+                this.props.filterFunction({...this.state.filterValue,orgName:e.target.innerHTML}, this.state.filterValueField)
                 break;
                 case"expertise":
                 this.setState({filterValue:{...filterValue,expertise:e.target.innerHTML} });

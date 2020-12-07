@@ -12,8 +12,8 @@ exports.userLogin = (req, res) => {
         if(err) {
             res.status(400).json(err);
         } else {
-            if(!user) {
-                res.status(400).json("User does not exits. Please try again later.");
+            if(user.length==0) {
+                res.status(400).json("User does not exits. Please enter correct credentials.");
             } else if(passwordValidator.comparePassword(
                 req.body.password,
                 user[0].password

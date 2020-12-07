@@ -58,9 +58,7 @@ export default class ProviderLogin extends React.Component {
         this.setState({open: false});
     };
     
-    navigateToDashboard = () => {
-        history.push('/provider/dashboard');
-    }
+    
 
     change = (e) => {
         const { name, value } = e.target;
@@ -208,7 +206,7 @@ export default class ProviderLogin extends React.Component {
 
                         <div className="forget_section">
                             <label>Don't have an account ?</label>
-                            <Link to={this.navigateToRegister}>&nbsp;Sign Up</Link>
+                            <Link to={'./register'}>&nbsp;Sign Up</Link>
                         </div>
 
                     </div>
