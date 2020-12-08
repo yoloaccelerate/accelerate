@@ -83,9 +83,9 @@ export default function TransitionsModal(props) {
 
                   <div class="inner_content">
                     <LocationOnRoundedIcon style={{fontSize: '12px' , color: '#00b3b3'}}/>&nbsp;
-                        {props.m6},&nbsp;{props.m7}&nbsp;,City - {props.m3}
+                        {props.m6},&nbsp;{props.m7}&nbsp;,{props.m5},{props.m3}
                         <br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Country - {props.m5},&nbsp;Pin Code - {props.m8}
+                        &nbsp;&nbsp;&nbsp;&nbsp;,Pin Code - {props.m8}
                   </div>
 
                 </div>
