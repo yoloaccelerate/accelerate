@@ -152,19 +152,15 @@ export default function ProviderCard(props)
     <Typography variant="body2" color="textPrimary" style={{ fontSize: '13px' }}>
         {props.itemz.partnerId}
     </Typography>
-
     <Typography variant="caption" color="textSecondary" >
         {props.itemz.partnerType[0].name}
-
-
         {props.itemz.partnerType.length > 1 ?
             (
-                <HtmlTooltip
-                    placement="top-start"
-                    title={
-                        <React.Fragment>
-
-                            {props.itemz.partnerType != undefined && props.itemz.partnerType.map((expertise) => {
+            <HtmlTooltip
+                placement="top-start"
+                title={
+                <React.Fragment>
+                    {props.itemz.partnerType != undefined && props.itemz.partnerType.map((expertise) => {
                                 return (
                                     <span>{expertise.name},&nbsp;</span>
                                 )
@@ -216,12 +212,7 @@ export default function ProviderCard(props)
             m5={modal_data_5} m6={modal_data_6} m7={modal_data_7} m8={modal_data_8}
         />
     </Link>
-
-
-
-
-
-    {props.itemz.partnerType.length > 1 ? 
+    {props.itemz.idType.length < 1 ? 
         (
             <FavoriteBorderIcon style={{float: 'right', fontSize: '14px', color: '#666666',cursor: 'pointer', marginTop: '5px'}}/>
         )
@@ -232,11 +223,6 @@ export default function ProviderCard(props)
     }
 
 </div>
-
-
-
 </div>
-
 </div>
-    )
-}
+)}

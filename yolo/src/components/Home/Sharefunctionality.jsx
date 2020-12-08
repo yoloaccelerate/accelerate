@@ -38,7 +38,7 @@ export default function SimplePopover(props) {
     setAnchorEl(null);
   };
 
-
+  
 
 
 
@@ -66,7 +66,7 @@ export default function SimplePopover(props) {
 
   };
 
-
+  console.log(window.location.protocol,"//",window.location.host,"/","ooooooooo")
   
 
 
@@ -98,54 +98,29 @@ export default function SimplePopover(props) {
 
         <Typography className={classes.typography}>
 
-          {window.location.href=="http://localhost:3000/" || window.location.href=="http://localhost:3000/provider/profile" ?
-            (   
-            <span>
-              {window.location.href=="http://localhost:3000/" ?
-              (
-                <span>
-                  <input type="text" value={"http://localhost:3000/"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/>
-                </span> 
-              )
-              :
-              (
-                <span>
-                  <input type="text" value={"http://localhost:3000"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/>
-                </span>
-              )
-              }
-            
-            </span>
-            )
-
-
-
-
-            :
-
-
-
-
-
-            (
+          {/* {window.location.href=="http://localhost:3000/" || window.location.href=="http://localhost:3000/provider/profile" 
+          ? */}
+            {/* ( */}
               <span>
-              {window.location.href=="http://3.94.90.131:3000/" ?
-              (
-                <span>
-                  <input type="text" value={"http://3.94.90.131:3000/"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/>
-                </span> 
-              )
-              :
-              (
-                <span>
-                  <input type="text" value={"http://3.94.90.131:3000"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/>
-                </span>
-              )
-              }
-            
+              {/* {window.location.href=="http://localhost:3000/" 
+            ? */}
+              {/* ( */}
+                <span><input type="text" value={window.location.host+'/'+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/></span>
+                {/* ) */}
+            {/* :
+              (<span><input type="text" value={"http://localhost:3000"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/></span>)
+              } */}
             </span>
-            )
-          }
+            {/* ) */}
+          {/* :
+            (<span>{window.location.href=="http://3.94.90.131:3000/" 
+            ?
+              (<span><input type="text" value={"http://3.94.90.131:3000/"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/></span>)
+            :
+              (<span><input type="text" value={"http://3.94.90.131:3000"+props.brand} id="myInput" style={{position: 'fixed', top: '-1000px'}}/></span>)
+              }
+            </span>)
+          } */}
 
           <Button onClick={copy} style={{fontSize: '12px'}}><AlternateEmailRoundedIcon/>&nbsp;Copy Link</Button>
 

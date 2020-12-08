@@ -42,7 +42,7 @@ export default function TransitionsModal(props) {
 
   return (
     <span>
-      <Link to='/contactus' style={{color: '#4d4d4d'}} onClick={handleOpen}>
+      <Link style={{color: '#4d4d4d'}} onClick={handleOpen}>
         Contact Me
       </Link>
       <Modal
