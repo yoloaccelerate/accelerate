@@ -166,6 +166,7 @@ export default class ProviderRegister extends React.Component {
             ALine1: '',
             ALine2: '',
             PinCode: '',
+            imgUpload: false,
 
             // countries: [
             //     { id: 1, name: 'Australia', hasChild: true, expanded: true },
@@ -256,15 +257,37 @@ export default class ProviderRegister extends React.Component {
         }
     }
 
-    name = (e) => {
-        let reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onloadend = () => {
-            this.setState({
-                base64: reader.result
-            });
-        };
-    }
+    // name = (e) => {
+    //     const file=e.target.files[0]
+    //     const fileName=file.name
+    //     console.log(file)
+    //     var idxDot = fileName.lastIndexOf(".") + 1;
+    //     var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+    //     if (!(extFile=="jpg" || extFile=="jpeg" || extFile=="png")){
+    //         alert("Only jpg/jpeg and png files are allowed!");
+    //         e.target.value=""
+            
+    //     }else if(file.size>3145728){
+    //         alert("Image size greater than 3mb not allowed!");
+    //         e.target.value=""
+
+    //     }else{
+    //         console.log("file read")
+    //         let reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.onloadend = () => {
+    //             console.log("file entered")
+    //             this.setState({
+    //                 base64: reader.result,
+    //                 imgUpload: true
+    //         });
+    //         this.change(e);
+    //         console.log(this.state.base64,"base64",this.state.imgUpload)
+    //     };     
+    //     } 
+
+        
+    // }
 
     classes = makeStyles({
         root: {
@@ -295,6 +318,39 @@ export default class ProviderRegister extends React.Component {
 
     change = (e) => {
         e.preventDefault()
+        console.log(e.target,"event")
+        if(e.target.id==="raised-button-file"){
+            const file=e.target.files[0]
+            const fileName=file.name
+            console.log(file)
+            var idxDot = fileName.lastIndexOf(".") + 1;
+            var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+            if (!(extFile=="jpg" || extFile=="jpeg" || extFile=="png")){
+                alert("Only jpg/jpeg and png files are allowed!");
+                e.target.value=""
+                
+            }else if(file.size>3145728){
+                alert("Image size greater than 3mb not allowed!");
+                e.target.value=""
+
+            }else{
+                console.log("file read")
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                    console.log("file entered")
+                    this.setState({
+                        base64: reader.result,
+                        imgUpload: true
+                    });
+                console.log(this.state.base64,"base64",this.state.imgUpload)
+                    };     
+                } 
+
+        
+        }
+        console.log(e.target.name,"target name")
+        console.log(e.target.value,"target value")
         const { name, value } = e.target;
         let errors = this.state.errors;
         switch (name) {
@@ -342,8 +398,12 @@ export default class ProviderRegister extends React.Component {
             this.setState({ partnerDetails: false })
         }
         setTimeout(() => {
+            console.log("image settimeout", this.state.imgUpload)
             if (this.state.errors.OrgName == null && this.state.errors.OrgAddress == null && this.state.errors.OrgRegNumber == null && this.state.errors.OrgPINType == null) {
-                if (this.state.Fees != '' && this.state.PinCode != '' && this.state.ALine1 != '' && this.state.ALine2 != '') {
+                console.log("image upload", this.state.imgUpload)
+                
+
+                if (this.state.Fees != '' && this.state.PinCode != '' && this.state.ALine1 != '' && this.state.ALine2 != '' && this.state.imgUpload ) {
                     this.setState({ organizationDetails: true })
                 }
                 else {
@@ -353,7 +413,7 @@ export default class ProviderRegister extends React.Component {
             else {
                 this.setState({ organizationDetails: false })
             }
-        }, 100);
+        }, 1000);
     }
 
     componentDidMount() {
@@ -1078,7 +1138,6 @@ export default class ProviderRegister extends React.Component {
                                         type="number"
                                         error={this.state.errors.phoneNumber}
                                         helperText={this.state.errors.phoneNumber}
-                                        autoFocus
                                         required
                                         onChange={(e) => this.change(e)}
                                         value={this.state.phoneNumber}
@@ -1127,6 +1186,7 @@ export default class ProviderRegister extends React.Component {
                                         fullWidth
                                         size="small"
                                         type="text"
+                                        autoFocus
                                         required
                                         placeholder="Enter Organization Name (As per goverment fillings)"
                                         id="OrgName"
@@ -1346,13 +1406,18 @@ export default class ProviderRegister extends React.Component {
 
                             <GridContainer>
                                 <GridItem>
-                                    <span style={{ float: "left" }}>Provide Your Profile Picture</span>
+                                    <span style={{ float: "left" }}>Upload profile picture with size less than 3mb.</span>
+                                    <br/>
                                     <input
-                                        accept="image/*"
+                                        accept=".jpg,.jpeg,.png"
                                         id="raised-button-file"
-                                        multiple
+                                        name="ProfilePicture"
+                                        style={{ float: "left" }}
+                                        helperText="Image size greater than 3mb not allowed."
                                         type="file"
-                                        onChange={(e) => { this.name(e) }}
+                                        required
+                                        onChange={(e) => { this.change(e) }}
+                                        
                                     />
                                 </GridItem>
                             </GridContainer>
@@ -1411,7 +1476,7 @@ export default class ProviderRegister extends React.Component {
 
 
                     </div>
-                    {/* <Snackbar
+                    <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'center',
@@ -1427,7 +1492,7 @@ export default class ProviderRegister extends React.Component {
                             </Button>
                             </React.Fragment>
                         }
-                    /> */}
+                    />
 
 
                 </div>
