@@ -10,6 +10,7 @@ const router = require('express').Router(),
     getBusinessTypeController = require('../controllers/common/getBusinessCategoriesController'),
     searchController = require('../controllers/common/searchController'),
     errorController = require('../controllers/common/serviceErrorController');
+    updateCityContorller = require('../controllers/common/updateCityContorller');
     fs = require('fs');
 
 //method for frontend logging
@@ -25,5 +26,5 @@ router.get('/services', getFinancialServiceController.getFiancialService);
 router.get('/business', getBusinessTypeController.getBusinessService);
 router.post('/search', searchController.serachByName);
 router.post('/error', validationMiddleware(errorSchema), errorController.registerError);
-
+router.put('/city', updateCityContorller.updateCity);
 module.exports = router;

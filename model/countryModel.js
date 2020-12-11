@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const countrySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     dial_code: {
         type: String,
@@ -15,8 +15,12 @@ const countrySchema = new mongoose.Schema({
     },
     code: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
+    cities: {
+        type: Array,
+        required: true,
+    },
 })
 
 module.exports = mongoose.model('countries', countrySchema);

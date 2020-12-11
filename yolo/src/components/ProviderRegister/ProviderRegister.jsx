@@ -544,6 +544,10 @@ export default class ProviderRegister extends React.Component {
             this.state.indCheckedForAPI,
             this.state.busCheckedForAPI
         );
+        if (this.state.others == true) {
+            console.log(this.state.City,this.state.OrgCountry)
+            this.props.updateCity(this.state.City, this.state.OrgCountry)
+        }
         store.subscribe(() => {
             console.log("error message-------->", store.getState().registerProvider.error)
             console.log("success message-------->", store.getState().registerProvider.success)
@@ -559,9 +563,7 @@ export default class ProviderRegister extends React.Component {
             }
 
         })
-        if (this.state.others == true) {
-            this.props.updateCity(this.state.City, this.state.OrgCountry)
-        }
+        
     }
 
     handleSelectedservices = (event, value) => {
