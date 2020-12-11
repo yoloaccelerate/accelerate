@@ -318,11 +318,11 @@ export default class ProviderRegister extends React.Component {
 
     change = (e) => {
         e.preventDefault()
-        console.log(e.target,"event")
+
         if(e.target.id==="raised-button-file"){
             const file=e.target.files[0]
             const fileName=file.name
-            console.log(file)
+
             var idxDot = fileName.lastIndexOf(".") + 1;
             var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
             if (!(extFile=="jpg" || extFile=="jpeg" || extFile=="png")){
@@ -349,8 +349,7 @@ export default class ProviderRegister extends React.Component {
 
         
         }
-        console.log(e.target.name,"target name")
-        console.log(e.target.value,"target value")
+
         const { name, value } = e.target;
         let errors = this.state.errors;
         switch (name) {

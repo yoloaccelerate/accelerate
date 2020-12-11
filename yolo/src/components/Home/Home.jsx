@@ -358,15 +358,10 @@ this.setState({searchedResult:arr})
                     </Grid>
                     {/*end of div of profile based city*/}
 
-
                     <Grid container spacing={2} xs={12} style={{ marginTop: 70 }} >
                         <div class="grid_roww" >
-
                             <div style={{ textAlign: 'left', paddingLeft: '15px' }}>All Profiles</div><br /><br />
-                            {
-                                (this.state.allproviderDetails != [] && this.state.allProvidersDetails.length) ? this.state.allProvidersDetails.map((itemz, index) => {
-
-
+                            {(this.state.allproviderDetails != [] && this.state.allProvidersDetails.length) ? this.state.allProvidersDetails.map((itemz, index) => {
                                     return (
                                         <div>
                                         {index < 7 || this.state.allProfile ?
