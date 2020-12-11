@@ -589,41 +589,95 @@ export default class ProviderRegister extends React.Component {
     };
 
    
-    createOrganization = (e) => {
+    createOrganization = async (e) => {
         e.preventDefault();
-        this.props.registerProvider(
-            this.state.firstName + " " + this.state.lastName,
-            this.state.password, this.state.email, this.state.phoneNumber,
-            this.state.Fees,this.state.OrgCountry, this.state.City
-            , this.state.ALine1, this.state.ALine2,
-            this.state.PinCode, this.state.OrgName,
-            this.state.OrgAddress, this.state.OrgRegNumber,
-            this.state.OrgPINType, this.state.actualServices,
-            this.state.base64, this.state.OrgExpertise,
-            this.state.indCheckedForAPI,
-            this.state.busCheckedForAPI
+    
+        await this.props.registerProvider(
+          this.state.firstName + " " + this.state.lastName,
+          this.state.password,
+          this.state.email,
+          this.state.phoneNumber,
+          this.state.Fees,
+          this.state.OrgCountry,
+          this.state.City,
+          this.state.ALine1,
+          this.state.ALine2,
+          this.state.PinCode,
+          this.state.OrgName,
+          this.state.OrgAddress,
+          this.state.OrgRegNumber,
+          this.state.OrgPINType,
+          this.state.actualServices,
+          this.state.base64,
+          this.state.OrgExpertise,
+          this.state.indCheckedForAPI,
+          this.state.busCheckedForAPI
         );
         if (this.state.others == true) {
-            console.log(this.state.City,this.state.OrgCountry)
-            this.props.updateCity(this.state.City, this.state.OrgCountry)
+          
+          this.props.updateCity(this.state.City, this.state.OrgCountry);
         }
-        store.subscribe(() => {
-            console.log("error message-------->", store.getState().registerProvider.error)
-            console.log("success message-------->", store.getState().registerProvider.success)
-            if (store.getState().registerProvider.error) {
-                this.setState({ open: true });
-                this.setState({ errorMessage: store.getState().registerProvider.error })
-                //alert(this.state.errorMessage)
-            }
-            if (store.getState().registerProvider.success) {
-                //alert('registration successful')
-                this.setState({ errorMessage: store.getState().registerProvider.success })
-                history.push('/provider/login');
-            }
-
-        })
-        
-    }
+        await store.subscribe(() => {
+          console.log(
+            "error message-------->",
+            store.getState().registerProvider.error
+          );
+          console.log(
+            "success message-------->",
+            store.getState().registerProvider.success
+          );
+          if (store.getState().registerProvider.error) {
+            this.setState({ open: true });
+            this.setState({
+              errorMessage: store.getState().registerProvider.error,
+            });
+            //alert(this.state.errorMessage)
+          }
+          if (store.getState().registerProvider.success) {
+            // alert("registration successful");
+            this.setState({
+              errorMessage: store.getState().registerProvider.success,
+            });
+          }
+        });
+        // TESTING CODE FROM LOGIN
+    
+        console.log("EMAIL ", " PASS ", this.state.email, this.state.password);
+        await this.props.providerLogin(this.state.email, this.state.password);
+    
+        if (this.props.data.providerLogin.error) {
+          this.setState({
+            open: true,
+          });
+          this.setState({
+            errorMessage: this.props.data.providerLogin.error,
+          });
+        } else {
+          localStorage.setItem(
+            "token",
+            this.props.data.providerLogin.success.token
+          );
+          // setName(this.props.data.providerLogin.success[0].name);
+          localStorage.setItem("providerProfile", true);
+          //window.localStorage.setItem('setemail',this.props.data.providerLogin.success.email);
+          localStorage.setItem(
+            "providerId",
+            this.props.data.providerLogin.success.partnerId
+          );
+          localStorage.setItem(
+            "providerName",
+            this.props.data.providerLogin.success.name
+          );
+    
+          //console.log("provider id  is-----",this.props.data.providerLogin.success.providerId);
+          // window.localStorage.setItem('providerData',JSON.stringify(this.props.data.providerLogin.success.partnerData));
+          //    setTimeout(()=>{history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)},1000)
+    
+          history.push(
+            `/provider/profile?id=${localStorage.getItem("providerId")}`
+          );
+        }
+      };
 
     handleSelectedservices = (event, value) => {
         this.setState({ selectedServices: [...this.state.selectedServices,value] });
