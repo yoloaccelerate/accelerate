@@ -4094,3 +4094,38 @@ Request from IP: 49.36.149.191, os.name = Windows,browser.name = Chrome, at 10/2
 =======
 >>>>>>> fa15ae34eb4b800a29090a050a34462d4dc4dab2
 >>>>>>> a99d4e44db915ab24bd957a18280f4c4cbc5e7d1
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 12:29:31 PM
+User is on Provider Register Page at 12/11/2020, 12:30:29 PM
+User is on Provider Login at 12/11/2020, 12:34:48 PM
+User is on Provider Login at 12/11/2020, 12:37:33 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 12:37:34 PM
+User is on Provider Register Page at 12/11/2020, 12:40:29 PM
+User is on Provider Login at 12/11/2020, 12:43:38 PM
+User is on Provider Login at 12/11/2020, 12:51:02 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 12:51:05 PM
+User is on Provider Register Page at 12/11/2020, 12:51:18 PM
+User is on Provider Login at 12/11/2020, 12:53:35 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:05:21 PM
+User is on Provider Register Page at 12/11/2020, 1:05:45 PM
+User is on Provider Login at 12/11/2020, 1:07:54 PM
+User is on Provider Login at 12/11/2020, 1:10:30 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:10:31 PM
+User is on Provider Register Page at 12/11/2020, 1:10:37 PM
+User is on Provider Login at 12/11/2020, 1:12:26 PM
+User is on Provider Register Page at 12/11/2020, 1:16:02 PM
+User is on Provider Login at 12/11/2020, 1:16:02 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:16:22 PM
+User is on Provider Register Page at 12/11/2020, 1:16:26 PM
+User is on Provider Login at 12/11/2020, 1:18:17 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:20:32 PM
+User is on Provider Register Page at 12/11/2020, 1:20:46 PM
+User is on Provider Login at 12/11/2020, 1:22:40 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:28:35 PM
+User is on Provider Register Page at 12/11/2020, 1:29:02 PM
+User is on Provider Login at 12/11/2020, 1:30:46 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:46:42 PM
+User is on Provider Register Page at 12/11/2020, 1:46:51 PM
+User is on Provider Login at 12/11/2020, 1:48:40 PM
+User is on Provider Login at 12/11/2020, 1:51:31 PM
+User is on Provider Login at 12/11/2020, 1:51:33 PM
+Request from IP: 45.127.45.111, os.name = Windows,browser.name = Chrome, at 12/11/2020, 1:51:40 PM

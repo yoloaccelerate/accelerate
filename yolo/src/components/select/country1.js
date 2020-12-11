@@ -226,10 +226,10 @@ getNames=()=>{
                  
                 return  ( <TextField {...params}
                                 placeholder="Select Country"
-                                inputProps={{
-                                  ...params.inputProps,
-                                  value:this.state.filterValue.country// disable autocomplete and autofill
-                                }}
+                                // inputProps={{
+                                //   ...params.inputProps,
+                                //   value:this.state.filterValue.country// disable autocomplete and autofill
+                                // }}
                                 variant="outlined" />)
                 
               }
@@ -249,10 +249,10 @@ getNames=()=>{
                 renderInput={(params) =>
                   <TextField {...params}
                    placeholder="Select City"
-                   inputProps={{
-                    ...params.inputProps,
-                    value:this.state.filterValue.city// disable autocomplete and autofill
-                  }}
+                  //  inputProps={{
+                  //   ...params.inputProps,
+                  //   value:this.state.filterValue.city// disable autocomplete and autofill
+                  // }}
                    variant="outlined" />
                 }
               />
@@ -269,10 +269,10 @@ getNames=()=>{
                 getOptionLabel={(option) => option}
                 renderInput={(params) =>
                   <TextField {...params}
-                  inputProps={{
-                    ...params.inputProps,
-                    value:this.state.filterValueField// disable autocomplete and autofill
-                  }}
+                  // inputProps={{
+                  //   ...params.inputProps,
+                  //   value:this.state.filterValueField// disable autocomplete and autofill
+                  // }}
                   placeholder="Search By" variant="outlined" />
                 }
               />
@@ -289,10 +289,10 @@ getNames=()=>{
                 getOptionLabel={(option) => this.state.searchByOrg ? option : (this.state.searchByName ? option : option.name)}
                 renderInput={(params) =>
                   <TextField {...params} 
-                  inputProps={{
-                    ...params.inputProps,
-                    value:this.state.selectedSearchByValue  //disable autocomplete and autofill
-                  }}
+                  // inputProps={{
+                  //   ...params.inputProps,
+                  //   value:this.state.selectedSearchByValue  //disable autocomplete and autofill
+                  // }}
                   placeholder="Type to search" variant="outlined" />
                 }
               />
