@@ -7,6 +7,7 @@ import * as getCountriesReducer from '../actions/getUtilsAction';
 import * as registerProvider from '../actions/registerProviderAction';
 import * as updateCity from '../actions/updateCityAction';
 import { bindActionCreators } from 'redux';
+import * as providerLoginAction from '../actions/loginProviderAction';
 
 class ProviderRegisterContainer extends React.Component {
     render() {
@@ -18,19 +19,26 @@ class ProviderRegisterContainer extends React.Component {
                 getCountriesList={this.props.getCountriesList}
                 registerProvider={this.props.registerProvider}
                 updateCity={this.props.updateCity}
+                providerLogin = {this.props.providerLogin}
+      data={this.props.data}
             />
         )
     }
 }
-
+const mapStateToProps=state=>{
+    return{
+        data:state
+    }
+}
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
         getFinancialServiceList: getFinancialService.getFinancialServiceList,
         getBusinessTypeList: getBusinessService.getBusinessTypes,
         getCountriesList: getCountriesReducer.getCountriesList,
         registerProvider: registerProvider.providerRegister,
+        providerLogin: providerLoginAction.providerLogin,
         updateCity: updateCity.cityUpdate
     }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(ProviderRegisterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProviderRegisterContainer);
