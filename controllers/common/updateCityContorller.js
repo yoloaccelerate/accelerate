@@ -5,6 +5,7 @@
 const countryModel = require("../../model/countryModel");
 
 exports.updateCity = (req, res) => {
+
   countryModel.find({ name: req.body.name }, (err, city) => {
     if (err) {
       res.status(400).json(err);
