@@ -617,6 +617,7 @@ export default class ProviderRegister extends React.Component {
           
           this.props.updateCity(this.state.City, this.state.OrgCountry);
         }
+        this.setState({open:true});
         await store.subscribe(() => {
           console.log(
             "error message-------->",
