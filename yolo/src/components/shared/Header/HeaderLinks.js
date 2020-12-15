@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
@@ -11,10 +11,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import { withStyles } from '@material-ui/core/styles';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
+import { withStyles } from "@material-ui/core/styles";
+import MuiDialogTitle from "@material-ui/core/DialogTitle";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -26,10 +26,9 @@ import Button from "../../CustomButtons/Button";
 import styles from "../../../assets/jss/material-kit-react/components/headerLinksStyle.js";
 
 const useStyles = makeStyles(styles);
-import { store, history } from '../../../store';
+import { store, history } from "../../../store";
 
 export default function HeaderLinks(props) {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [openDialog, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -42,374 +41,381 @@ export default function HeaderLinks(props) {
   const [selectedSearchItem, setselectedSearchItem] = useState("All");
   const [businessTypes, setBusinessTypes] = useState([]);
   const [financialTypes, setFinancialTypes] = useState([]);
-  const [selectedBusinessType, setSelectedBusinessType] = useState(["Company Secretary"]);
-  const [selectedFinancialType, setselectedFinancialType] = useState(["Banking"]);
+  const [selectedBusinessType, setSelectedBusinessType] = useState([
+    "Company Secretary",
+  ]);
+  const [selectedFinancialType, setselectedFinancialType] = useState([
+    "Banking",
+  ]);
   const [openProfile, setopenProfile] = useState(false);
   const [anchorMenuEl, setAnchorMenuEl] = React.useState(null);
   const [userName, setuserDetails] = useState([]);
 
-//location
-  const [lopen,setLopen] = useState(false);
-  const [scroll,setScroll]=useState("paper");
+  //location
+  const [lopen, setLopen] = useState(false);
+  const [scroll, setScroll] = useState("paper");
   const [countriesList, setCountriesList] = useState([]);
   const [selectedCountry1, setSelectedCountry1] = useState({
-      "name": "India",
-      "dial_code": "+91",
-      "code": "IN",
-      "popular_cities":[1,2,3,4,5,6,7,8,9],
-      "other_cities":[10,11,12,13,14,15,16,17,18,19,20]
-      });
+    name: "India",
+    dial_code: "+91",
+    code: "IN",
+    popular_cities: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    other_cities: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+  });
 
-      const Locationstyles = makeStyles(theme => ({
-        root: {
-          flexGrow: 1,
-        },
-        paper: {
-          padding: theme.spacing(2),
-          textAlign: 'center',
-          color: theme.palette.text.secondary,
-        },
-      }));
-    const classLocation = Locationstyles();
-    const handleClickLopen = () =>  {
-         setLopen(true);
-        setScroll("paper")
-      };
-    
-    const handleLclose = () => {
-        console.log("LOPEN-->",lopen);
-        setLopen(false);
-        console.log("LOPEN-->",lopen,value);
-      };
+  const Locationstyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+  }));
+  const classLocation = Locationstyles();
+  const handleClickLopen = () => {
+    setLopen(true);
+    setScroll("paper");
+  };
 
-    const [value, setValue] = React.useState({
-        "name": "India",
-        "dial_code": "+91",
-        "code": "IN",
-        "popular_cities":[1,2,3,4,5,6,7,8,9],
-        "other_cities":[10,11,12,13,14,15,16,17,18,19,20]
-        });
-        
-    const  getCity=(update)=>{
-        console.log("value---> ",update);
-        setValue(update)
-        let x;
-        for (x of countriesList){
-            if(x == update){
-                console.log("Foundd",x)
-               setSelectedCountry1(x)
-            }
-        }
+  const handleLclose = () => {
+    console.log("LOPEN-->", lopen);
+    setLopen(false);
+    console.log("LOPEN-->", lopen, value);
+  };
+
+  const [value, setValue] = React.useState({
+    name: "India",
+    dial_code: "+91",
+    code: "IN",
+    popular_cities: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    other_cities: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+  });
+
+  const getCity = (update) => {
+    console.log("value---> ", update);
+    setValue(update);
+    let x;
+    for (x of countriesList) {
+      if (x == update) {
+        console.log("Foundd", x);
+        setSelectedCountry1(x);
+      }
     }
+  };
 
-    const styles = (theme) => ({
-      root: {
-          margin: 0,
-          padding: theme.spacing(2),
-      },
-      closeButton: {
-          position: 'absolute',
-          right: theme.spacing(1),
-          top: theme.spacing(1),
-          color: theme.palette.grey[500],
-      },
+  const styles = (theme) => ({
+    root: {
+      margin: 0,
+      padding: theme.spacing(2),
+    },
+    closeButton: {
+      position: "absolute",
+      right: theme.spacing(1),
+      top: theme.spacing(1),
+      color: theme.palette.grey[500],
+    },
   });
 
   const menuClasses = makeStyles((theme) => ({
-      root: {
-          display: 'flex',
-      },
-      paper: {
-          marginRight: theme.spacing(2),
-      },
+    root: {
+      display: "flex",
+    },
+    paper: {
+      marginRight: theme.spacing(2),
+    },
   }));
 
   const [openProfilemenu, setopenProfilemenu] = React.useState(false);
   const anchorMenuRef = React.useRef(null);
 
   const handleMenuToggle = () => {
-      setopenProfilemenu((prevOpen) => !prevOpen);
+    setopenProfilemenu((prevOpen) => !prevOpen);
   };
 
   const handleMenuClose = (event) => {
-      if (anchorMenuRef.current && anchorMenuRef.current.contains(event.target)) {
-          return;
-      }
-      setopenProfilemenu(false);
+    if (anchorMenuRef.current && anchorMenuRef.current.contains(event.target)) {
+      return;
+    }
+    setopenProfilemenu(false);
   };
 
   const handleListKeyDown = (event) => {
-      if (event.key === 'Tab') {
-          event.preventDefault();
-          setopenProfilemenu(false);
-      }
-  }
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setopenProfilemenu(false);
+    }
+  };
 
   const useMultiStyles = makeStyles((theme) => ({
-      formControl: {
-          margin: theme.spacing(1),
-          minWidth: 120,
-          maxWidth: 300,
-      },
-      chips: {
-          display: 'flex',
-          flexWrap: 'wrap',
-      },
-      chip: {
-          margin: 2,
-      },
-      noLabel: {
-          marginTop: theme.spacing(3),
-      },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+      maxWidth: 300,
+    },
+    chips: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
+    chip: {
+      margin: 2,
+    },
+    noLabel: {
+      marginTop: theme.spacing(3),
+    },
   }));
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
-      PaperProps: {
-          style: {
-              maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-              width: 250,
-          },
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
       },
+    },
   };
 
   const handlemenuClick = (event) => {
-      setAnchorMenuEl(event.currentTarget);
+    setAnchorMenuEl(event.currentTarget);
   };
 
   const handlemenuClose = () => {
-      setAnchorMenuEl(null);
+    setAnchorMenuEl(null);
   };
 
   const handleBussinessChange = (event) => {
-      setSelectedBusinessType(event.target.value);
+    setSelectedBusinessType(event.target.value);
 
-      store.dispatch({
-          type: FILTER_BY_BUSINESS_SERVICES,
-          payload: event.target.value
-      })
+    store.dispatch({
+      type: FILTER_BY_BUSINESS_SERVICES,
+      payload: event.target.value,
+    });
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userProfile');
-    localStorage.removeItem('providerProfile');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userProfile");
+    localStorage.removeItem("providerProfile");
     localStorage.removeItem("providerName");
     localStorage.removeItem("providerId");
     localStorage.removeItem("userName");
     localStorage.removeItem("userId");
     //   sessionStorage.removeItem("ProviderProfile")
     //   window.location.reload(false);
-    history.push('/login');
-  }
+    history.push("/login");
+  };
 
- 
   const handleFinanceChange = (event) => {
-      setselectedFinancialType(event.target.value);
-      store.dispatch({
-          type: FILTER_BY_BUSINESS_SERVICES,
-          payload: event.target.value
-      })
+    setselectedFinancialType(event.target.value);
+    store.dispatch({
+      type: FILTER_BY_BUSINESS_SERVICES,
+      payload: event.target.value,
+    });
   };
 
   const DialogTitle = withStyles(styles)((props) => {
     const { children, classes, onClose, ...other } = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{children}</Typography>
-            {onClose ? (
-                <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-                </IconButton>
-            ) : null}
-        </MuiDialogTitle>
+      <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <Typography variant="h6">{children}</Typography>
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={onClose}
+          ></IconButton>
+        ) : null}
+      </MuiDialogTitle>
     );
-});
+  });
 
-const DialogContent = withStyles((theme) => ({
+  const DialogContent = withStyles((theme) => ({
     root: {
-        padding: theme.spacing(2),
+      padding: theme.spacing(2),
     },
-}))(MuiDialogContent);
+  }))(MuiDialogContent);
 
-const DialogActions = withStyles((theme) => ({
+  const DialogActions = withStyles((theme) => ({
     root: {
-        margin: 0,
-        padding: theme.spacing(1),
+      margin: 0,
+      padding: theme.spacing(1),
     },
-}))(MuiDialogActions);
+  }))(MuiDialogActions);
 
-const [openFilter, setopenFilter] = React.useState(false);
+  const [openFilter, setopenFilter] = React.useState(false);
 
-const handleClickOpen = () => {
+  const handleClickOpen = () => {
     setopenFilter(true);
-};
-const handleFilterClose = () => {
+  };
+  const handleFilterClose = () => {
     setopenFilter(false);
-};
+  };
 
-
-
-useEffect(() => {
-    if (history.location.pathname !== '/login' || '/register') {
-        setIsLoggedIn(true);
+  useEffect(() => {
+    if (history.location.pathname !== "/login" || "/register") {
+      setIsLoggedIn(true);
     }
-    if (localStorage.getItem("userProfile")==='true'|| localStorage.getItem("providerProfile")) {
-        setIsLoggedIn(true);
+    if (
+      localStorage.getItem("userProfile") === "true" ||
+      localStorage.getItem("providerProfile")
+    ) {
+      setIsLoggedIn(true);
     }
-    if (localStorage.getItem("providerProfile")==='true') {
-        setopenProfile(true);
+    if (localStorage.getItem("providerProfile") === "true") {
+      setopenProfile(true);
     }
     setIsLoggedIn(false);
     console.log(props);
     store.subscribe(() => {
-        setCountriesList(store.getState().getCountries.countries);
-        setBusinessTypes(store.getState().getBusinessTypes.success);
-        setFinancialTypes(store.getState().getFinancialService.success);
-        
+      setCountriesList(store.getState().getCountries.countries);
+      setBusinessTypes(store.getState().getBusinessTypes.success);
+      setFinancialTypes(store.getState().getFinancialService.success);
     });
-    if (localStorage.getItem('userProfile') === 'true'||localStorage.getItem("providerProfile")) {
-        console.log("yes", store.getState().providerUpdate);
-        console.log("yes", store.getState().providerLogin);
-        if(localStorage.getItem("providerName")){
-            
-            setName(localStorage.getItem("providerName"));
+    if (
+      localStorage.getItem("userProfile") === "true" ||
+      localStorage.getItem("providerProfile")
+    ) {
+      console.log("yes", store.getState().providerUpdate);
+      console.log("yes", store.getState().providerLogin);
+      if (localStorage.getItem("providerName")) {
+        setName(localStorage.getItem("providerName"));
+      }
+      store.subscribe(() => {
+        console.log("yes", store.getState());
+        if (localStorage.getItem("userName")) {
+          setName(localStorage.getItem("userName"));
+        } else if (localStorage.getItem("providerName")) {
+          // console.log("hiiii1");
+          if (store.getState().providerUpdate.success.name) {
+            setName(store.getState().providerUpdate.success.name);
+            // console.log("hiiii2");
+          }
+          //   else{
+          //     setName(store.getState().providerLogin.success.name)
+          //     console.log("hiiii3");
+          //   }
+        } else {
+          // localStorage.setItem('userProfile', true);
         }
-        store.subscribe(() => {
-            console.log("yes", store.getState());
-        if(localStorage.getItem("userName")){
-            
-            setName(localStorage.getItem("userName"));
-        }
-        else if(localStorage.getItem("providerName")){
-        // console.log("hiiii1");
-            if(store.getState().providerUpdate.success.name){
-                setName(store.getState().providerUpdate.success.name)
-                // console.log("hiiii2");
-            }
-        //   else{
-        //     setName(store.getState().providerLogin.success.name)
-        //     console.log("hiiii3");
-        //   }
-        }
-        else{
-            // localStorage.setItem('userProfile', true);
-            
-        }
-    });
+      });
     }
+  }, [setName]);
 
+  const classes = useStyles();
 
-}, [setName]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-const classes = useStyles();
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleProfile = () => {
-        if (localStorage.getItem('userProfile')) {
-            localStorage.setItem('userProfile', false);
-            history.push('/dashboard');
-        }
-        if (localStorage.getItem('providerProfile')) {
-            localStorage.setItem('providerProfile', false);
-            // history.push('/provider/dashboard');
-            history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)
-        }
-
+  const handleProfile = () => {
+    if (localStorage.getItem("userProfile")) {
+      localStorage.setItem("userProfile", false);
+      history.push("/dashboard");
     }
+    if (localStorage.getItem("providerProfile")) {
+      localStorage.setItem("providerProfile", false);
+      // history.push('/provider/dashboard');
+      history.replace(
+        `/provider/profile?id=${localStorage.getItem("providerId")}`
+      );
+      window.location.reload();
+    }
+  };
 
   const navigateToRegister = () => {
-    history.push('/register');
-}
+    history.push("/register");
+  };
 
-const navigatetoLogin = () => {
-  history.push('/login')
-}
-
+  const navigatetoLogin = () => {
+    history.push("/login");
+  };
 
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-      {
-        localStorage.getItem('userProfile') || localStorage.getItem('providerProfile') ? null:
-        <CustomDropdown
-          noLiPadding
-          buttonText="Provider"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/provider/register" className={classes.dropdownLink}>
-              Provider Register
-            </Link>,
-            <Link to="/provider/login" className={classes.dropdownLink}>
-            Provider Login
-          </Link>,
-          ]}
-        />
-        }
+        {localStorage.getItem("userProfile") ||
+        localStorage.getItem("providerProfile") ? null : (
+          <CustomDropdown
+            noLiPadding
+            buttonText="Provider"
+            buttonProps={{
+              className: classes.navLink,
+              color: "transparent",
+            }}
+            buttonIcon={Apps}
+            dropdownList={[
+              <Link to="/provider/register" className={classes.dropdownLink}>
+                Provider Register
+              </Link>,
+              <Link to="/provider/login" className={classes.dropdownLink}>
+                Provider Login
+              </Link>,
+            ]}
+          />
+        )}
       </ListItem>
       <ListItem className={classes.listItem}>
-
-      {
-        localStorage.getItem('userProfile') || localStorage.getItem('providerProfile') ? <Button
-        color="transparent"
-        target="_blank"
-        className={classes.navLink}
-        onClick={handleProfile}
-      >
-       <b>Welcome {name}</b>
-      </Button> :
-        <Button
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-          onClick={navigatetoLogin}
-        >
-         <b>Login</b>
-        </Button>
-        }
+        {localStorage.getItem("userProfile") ||
+        localStorage.getItem("providerProfile") ? (
+          <Button
+            color="transparent"
+            target="_blank"
+            className={classes.navLink}
+            onClick={handleProfile}
+          >
+            <b>Welcome {name}</b>
+          </Button>
+        ) : (
+          <Button
+            color="transparent"
+            target="_blank"
+            className={classes.navLink}
+            onClick={navigatetoLogin}
+          >
+            <b>Login</b>
+          </Button>
+        )}
         {
-
-        <Button
-        color="transparent"
-        target="_blank"
-        className={classes.navLink}
-        >
-            <Link to={'/contact'} style={{textDecoration: 'none', color: '#4d4d4d', fontWeight: 'bold'}}>
-                Contact Us
+          <Button
+            color="transparent"
+            target="_blank"
+            className={classes.navLink}
+          >
+            <Link
+              to={"/contact"}
+              style={{
+                textDecoration: "none",
+                color: "#4d4d4d",
+                fontWeight: "bold",
+              }}
+            >
+              Contact Us
             </Link>
-            
-        </Button>
-
+          </Button>
         }
-        
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        
-      {
-        localStorage.getItem('userProfile') || localStorage.getItem('providerProfile')? <Button
-        color="info"
-        target="_blank"
-        className={classes.navLink}
-        onClick={logout}
-      >
-        Logout
-      </Button> :
-        <Button
+        {localStorage.getItem("userProfile") ||
+        localStorage.getItem("providerProfile") ? (
+          <Button
+            color="info"
+            target="_blank"
+            className={classes.navLink}
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
             color="info"
             target="_blank"
             className={classes.navLink}
@@ -417,11 +423,8 @@ const navigatetoLogin = () => {
           >
             Register
           </Button>
-      }
-        
-        
+        )}
       </ListItem>
-  
     </List>
   );
 }

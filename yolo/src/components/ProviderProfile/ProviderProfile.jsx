@@ -159,11 +159,16 @@ export default class ProviderProfile extends React.Component {
       anchor: null,
     };
   }
+
   openUpdateExpertise = () => {
     this.setState({ updateExpertise: true });
   };
   handleClickOpen = () => {
-    this.setState({ open: true });
+    if (
+      this.state.providerData.partnerId === localStorage.getItem("providerId")
+    ) {
+      this.setState({ open: true });
+    }
   };
   handleClick = (event) => {
     this.setState({ anchor: event.currentTarget });
@@ -176,6 +181,9 @@ export default class ProviderProfile extends React.Component {
     });
   };
   componentDidMount() {
+    let demo = window.location.search;
+    let myParam = demo.split("=");
+    let partnerId = myParam[1];
     //    var pcity = '';
     if (localStorage.getItem("userName")) {
       this.viewers();
@@ -233,11 +241,8 @@ export default class ProviderProfile extends React.Component {
     let demo = window.location.search;
     let myParam = demo.split("=");
     let Id;
-    if (localStorage.getItem("providerId")) {
-      Id = localStorage.getItem("providerId");
-    } else {
-      Id = myParam[1];
-    }
+
+    Id = myParam[1];
 
     fetch("/api/provider/" + Id, {
       method: "GET",
