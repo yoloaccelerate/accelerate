@@ -78,6 +78,7 @@ const HtmlTooltip = withStyles((theme) => ({
 class Home extends React.Component {
     constructor(props) {
         super();
+        this.myList = [];
         this.state = {
             open: false,
             allProfile:true,
@@ -243,6 +244,8 @@ arr=this.state.allProvidersDetails.filter((provider)=>{
             )
 console.log(arr,9899)
 this.setState({searchedResult:arr})
+this.myList = [...arr];
+
 }
 
     logic_for_profiles_based_on_city() {
@@ -252,7 +255,7 @@ this.setState({searchedResult:arr})
         return (
             <div>
                 {
-                    (this.state.searchedResult != [] && this.state.searchedResult.length) ? this.state.searchedResult.map((itemz, index) => {
+                    (this.myList != [] && this.myList.length) ? this.myList.map((itemz, index) => {
                         console.log(itemz, "inside");
                         return (
                             <div>
@@ -270,7 +273,7 @@ this.setState({searchedResult:arr})
 
                                     </span>
 
-                                    {index < 2 ?
+                                    {index < this.myList.length ?
                                         (
                                             <div>
                                                 <ProviderCard itemz={itemz} />
