@@ -50,7 +50,9 @@ export default class ProviderProfile extends React.Component {
     render() {
     
             return(
+            
                 <div className="profile_container">
+                    
                 <div className="profile_card">
                 
                 <div className="profile_img">        
@@ -115,6 +117,7 @@ export default class ProviderProfile extends React.Component {
 
                 </div>
                 </div>
+            
             )
     }
 }

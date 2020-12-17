@@ -47,7 +47,6 @@ export default class ProviderLogin extends React.Component {
     componentDidMount() {
         document.title = 'Yolo - Provider Login';
         log('User is on Provider Login')
-
     }
     
     handleClose = (event, reason) => {
@@ -105,12 +104,14 @@ export default class ProviderLogin extends React.Component {
                 //console.log("provider id  is-----",this.props.data.providerLogin.success.providerId);
                 // window.localStorage.setItem('providerData',JSON.stringify(this.props.data.providerLogin.success.partnerData));
             //    setTimeout(()=>{history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)},1000) 
+            
                 history.push(`/provider/profile?id=${localStorage.getItem('providerId')}`)
                }
             },1000);
     }
 
     render() {
+console.log(history)
         return(
             <div>
                 <HeaderContainer />
