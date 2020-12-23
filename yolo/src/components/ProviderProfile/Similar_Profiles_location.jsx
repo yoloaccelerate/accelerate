@@ -135,6 +135,7 @@ export default class Similar_Profiles_location extends React.Component {
                     }
                 }).then(res=> {
                     console.log("response is=======", res)
+                    // console.log(this.state.city,"City")
                     if(res.status === 200) {
                         return res.json().then(res=> {
                             this.setState({
@@ -158,14 +159,14 @@ export default class Similar_Profiles_location extends React.Component {
             logic_for_restricting_data(){
 
                 var fullname_array=[]
-
+                console.log(this.state.cityData);
 
 
                 return(
                     <div>
         
         
-                        <div style={{width: '90%', marginLeft: '12px'}}>{this.props.rcn}&nbsp;<ChevronRightIcon/></div>
+                        <div style={{width: '90%', marginLeft: '12px'}}>{this.props.rcn.replace('Others-','')}&nbsp;<ChevronRightIcon/></div>
                         <br/>
         
         
@@ -254,7 +255,7 @@ export default class Similar_Profiles_location extends React.Component {
                                                     )
                                                 }
                                                 <br/>
-                                                <LocationOnOutlinedIcon style={{fontSize: '12px'}}/> {itemz.City}
+                                                <LocationOnOutlinedIcon style={{fontSize: '12px'}}/> {itemz.City.replace('Others-','')}
                                                 
                                             </Typography>
         

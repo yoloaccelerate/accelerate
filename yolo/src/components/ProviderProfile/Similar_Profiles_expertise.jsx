@@ -254,7 +254,7 @@ export default class Similar_Profiles_location extends React.Component {
                                                     )
                                                 }
                                                 <br/>
-                                                <LocationOnOutlinedIcon style={{fontSize: '12px'}}/> {itemz.City}
+                                                <LocationOnOutlinedIcon style={{fontSize: '12px'}}/> {itemz.City.replace('Others-','')}
                                                 
                                             </Typography>
         
@@ -389,7 +389,7 @@ export default class Similar_Profiles_location extends React.Component {
                         <div class="cardd" style={{textAlign: 'center'}}>
                             <br/><br/>
                             <CheckCircleOutlinedIcon style={{color: '#006699'}}/><br/>
-                            <Link variant="caption">See all profiles from<br/>{this.props.rcn}</Link> 
+                            <Link variant="caption">See all profiles from<br/>{this.props.ren}</Link> 
                             <br/>
                             
                         </div> 

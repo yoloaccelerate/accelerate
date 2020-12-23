@@ -633,7 +633,7 @@ export default class ProviderProfile extends React.Component {
                     <Typography variant="caption" style={{ fontSize: "12px" }}>
                       {this.state.providerData.ALineOne},&nbsp;
                       {this.state.providerData.ALineTwo},<br />
-                      &nbsp;&nbsp;&nbsp; City - {this.state.providerData.City}
+                      &nbsp;&nbsp;&nbsp; City - {this.state.providerData.City.replace('Others-','')}
                       ,&nbsp; Country - {this.state.providerData.country},&nbsp;
                       Pin Code - {this.state.providerData.PinCode}
                     </Typography>
@@ -1225,7 +1225,7 @@ export default class ProviderProfile extends React.Component {
                   onClick={similar_profile_location}
                   style={{ color: "#006699", fontSize: "13px" }}
                 >
-                  More Profiles from {this.state.providerData.City}
+                  More Profiles from {this.state.providerData.City.replace('Others-','')}
                 </button>
               </Typography>
               &nbsp; &nbsp;
@@ -1291,7 +1291,7 @@ export default class ProviderProfile extends React.Component {
               </span>
               <div class="similar_container" id="similar_profile_location">
                 <div class="sim_con">
-                  {/* <Similar_Profiles_location rcn={relevant_city_name}/> */}
+                  {<Similar_Profiles_location rcn={relevant_city_name}/>}
                 </div>
               </div>
               {this.state.providerData.partnerType != undefined &&
@@ -1307,7 +1307,7 @@ export default class ProviderProfile extends React.Component {
               )}
               <div class="similar_container" id="similar_profile_expertise">
                 <div class="sim_con">
-                  {/* <Similar_Profiles_expertise ren={relevant_expertise_name}/> */}
+                  {<Similar_Profiles_expertise ren={relevant_expertise_name}/>}
                 </div>
               </div>
               {this.state.providerData.servicesOffered != undefined &&
@@ -1323,7 +1323,7 @@ export default class ProviderProfile extends React.Component {
               )}
               <div class="similar_container" id="similar_profile_service">
                 <div class="sim_con">
-                  {/* <Similar_Profiles_service rsn={relevant_service_name}/> */}
+                  {<Similar_Profiles_service rsn={relevant_service_name}/>}
                 </div>
               </div>
             </div>
