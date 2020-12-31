@@ -77,44 +77,27 @@ var chip_style = {
   border: "1px solid #f2f2f2",
 };
 
-const similar_profile_location = () => {
-  document.getElementById("similar_profile_location").style.display = "block";
-  document.getElementById("similar_profile_expertise").style.display = "none";
-  document.getElementById("similar_profile_service").style.display = "none";
-  document.getElementById("buttons_visibility").style.display = "block";
 
-  window.scrollBy(0, 250);
-};
 
-const similar_profile_expertise = () => {
-  document.getElementById("similar_profile_expertise").style.display = "block";
-  document.getElementById("similar_profile_location").style.display = "none";
-  document.getElementById("similar_profile_service").style.display = "none";
-  document.getElementById("buttons_visibility").style.display = "block";
-
-  window.scrollBy(0, 250);
-};
-
-const similar_profile_service = () => {
-  document.getElementById("similar_profile_service").style.display = "block";
-  document.getElementById("similar_profile_expertise").style.display = "none";
-  document.getElementById("similar_profile_location").style.display = "none";
-  document.getElementById("buttons_visibility").style.display = "block";
-
-  window.scrollBy(0, 250);
-};
-
-const moveright = () => {
+const moveLocationright = () => {
   document.getElementById("similar_profile_location").scrollLeft += 100;
+};
+const moveLocationleft = () => {
+  document.getElementById("similar_profile_location").scrollLeft -= 100;
+};
+const moveServiceright = () => {
   document.getElementById("similar_profile_service").scrollLeft += 100;
-  document.getElementById("similar_profile_service").scrollLeft += 100;
+};
+const moveExpertiseright = () => {
+  document.getElementById("similar_profile_expertise").scrollLeft += 100;
+};
+const moveExpertiseleft = () => {
+  document.getElementById("similar_profile_expertise").scrollLeft -= 100;
+};
+const moveServiceleft = () => {
+  document.getElementById("similar_profile_service").scrollLeft -= 100;
 };
 
-const moveleft = () => {
-  document.getElementById("similar_profile_location").scrollLeft -= 100;
-  document.getElementById("similar_profile_service").scrollLeft -= 100;
-  document.getElementById("similar_profile_service").scrollLeft -= 100;
-};
 
 // const HtmlTooltip = withStyles((theme) => ({
 //     tooltip: {
@@ -889,7 +872,7 @@ export default class ProviderProfile extends React.Component {
                                 style={{ cursor: "move" }}
                                 id="draggable-dialog-title"
                               >
-                                Subscribe
+                                Services
                               </DialogTitle>
                               <DialogContent>
                                 <DialogContentText>
@@ -1219,57 +1202,15 @@ export default class ProviderProfile extends React.Component {
               </Typography>
               <br />
               <br />
-              <Typography variant="caption">
-                <button
-                  class="see_more_link_buttons"
-                  onClick={similar_profile_location}
-                  style={{ color: "#006699", fontSize: "13px" }}
-                >
-                  More Profiles from {this.state.providerData.City.replace('Others-','')}
-                </button>
-              </Typography>
-              &nbsp; &nbsp;
-              {this.state.providerData.partnerType != undefined &&
-              this.state.providerData.partnerType[0].name != undefined ? (
-                <Typography variant="caption">
-                  <button
-                    class="see_more_link_buttons"
-                    onClick={similar_profile_expertise}
-                    style={{ color: "#006699", fontSize: "13px" }}
-                  >
-                    {" "}
-                    More Profiles expertised in{" "}
-                    {this.state.providerData.partnerType[0].name}
-                  </button>
-                </Typography>
-              ) : (
-                ""
-              )}
-              &nbsp; &nbsp;
-              {this.state.providerData.servicesOffered != undefined &&
-              this.state.providerData.servicesOffered[0].name != undefined ? (
-                <Typography variant="caption">
-                  <button
-                    class="see_more_link_buttons"
-                    onClick={similar_profile_service}
-                    style={{ color: "#006699", fontSize: "13px" }}
-                  >
-                    {" "}
-                    More Profiles serving in{" "}
-                    {this.state.providerData.servicesOffered[0].name}
-                  </button>
-                </Typography>
-              ) : (
-                ""
-              )}
-              <div class="navigation_button_div" id="buttons_visibility">
+              
+              <div class="navigation_button_div" id="buttons_visibility" style={{ display: "block"}}>
                 <div
                   class="sub_navigation_button__div"
                   style={{ float: "right", textAlign: "right" }}
                 >
                   <button
                     class="navigation_button box_shadow"
-                    onClick={moveright}
+                    onClick={moveLocationright}
                   >
                     <ChevronRightIcon />
                   </button>
@@ -1280,7 +1221,7 @@ export default class ProviderProfile extends React.Component {
                 >
                   <button
                     class="navigation_button box_shadow"
-                    onClick={moveleft}
+                    onClick={moveLocationleft}
                   >
                     <ChevronLeftIcon />
                   </button>
@@ -1289,7 +1230,7 @@ export default class ProviderProfile extends React.Component {
               <span style={{ display: "none" }}>
                 {(relevant_city_name = this.state.providerData.City)}
               </span>
-              <div class="similar_container" id="similar_profile_location">
+              <div class="similar_container" id="similar_profile_location" style={{ display: "block"}}>
                 <div class="sim_con">
                   {<Similar_Profiles_location rcn={relevant_city_name}/>}
                 </div>
@@ -1305,7 +1246,31 @@ export default class ProviderProfile extends React.Component {
               ) : (
                 ""
               )}
-              <div class="similar_container" id="similar_profile_expertise">
+              <div class="navigation_button_div" id="buttons_visibility" style={{ display: "block"}}>
+                <div
+                  class="sub_navigation_button__div"
+                  style={{ float: "right", textAlign: "right" }}
+                >
+                  <button
+                    class="navigation_button box_shadow"
+                    onClick={moveExpertiseright}
+                  >
+                    <ChevronRightIcon />
+                  </button>
+                </div>
+                <div
+                  class="sub_navigation_button_div"
+                  style={{ float: "left", textAlign: "left" }}
+                >
+                  <button
+                    class="navigation_button box_shadow"
+                    onClick={moveExpertiseleft}
+                  >
+                    <ChevronLeftIcon />
+                  </button>
+                </div>
+              </div>
+              <div class="similar_container" id="similar_profile_expertise" style={{ display: "block"}}>
                 <div class="sim_con">
                   {<Similar_Profiles_expertise ren={relevant_expertise_name}/>}
                 </div>
@@ -1321,7 +1286,31 @@ export default class ProviderProfile extends React.Component {
               ) : (
                 ""
               )}
-              <div class="similar_container" id="similar_profile_service">
+              <div class="navigation_button_div" id="buttons_visibility" style={{ display: "block"}}>
+                <div
+                  class="sub_navigation_button__div"
+                  style={{ float: "right", textAlign: "right" }}
+                >
+                  <button
+                    class="navigation_button box_shadow"
+                    onClick={moveServiceright}
+                  >
+                    <ChevronRightIcon />
+                  </button>
+                </div>
+                <div
+                  class="sub_navigation_button_div"
+                  style={{ float: "left", textAlign: "left" }}
+                >
+                  <button
+                    class="navigation_button box_shadow"
+                    onClick={moveServiceleft}
+                  >
+                    <ChevronLeftIcon />
+                  </button>
+                </div>
+              </div>
+              <div class="similar_container" id="similar_profile_service" style={{ display: "block"}}>
                 <div class="sim_con">
                   {<Similar_Profiles_service rsn={relevant_service_name}/>}
                 </div>

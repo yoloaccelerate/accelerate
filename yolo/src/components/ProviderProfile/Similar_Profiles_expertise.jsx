@@ -165,7 +165,7 @@ export default class Similar_Profiles_location extends React.Component {
                     <div>
         
         
-                        <div style={{width: '90%', marginLeft: '12px'}}>Expertise&nbsp;<ChevronRightIcon/></div>
+                        <div style={{width: '90%', marginLeft: '12px'}}>More profiles expertised in {this.props.ren}&nbsp;<ChevronRightIcon/></div>
                         <br/>
         
         

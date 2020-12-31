@@ -164,7 +164,8 @@ export default class Similar_Profiles_location extends React.Component {
                     <div>
         
         
-                        <div style={{width: '90%', marginLeft: '12px'}}>Services&nbsp;<ChevronRightIcon/></div>
+                        <div style={{width: '90%', marginLeft: '12px'}}>More Profiles serving in{" "}
+                    {this.props.rsn}&nbsp;<ChevronRightIcon/></div>
                         <br/>
         
                         {

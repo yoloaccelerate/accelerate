@@ -166,7 +166,7 @@ export default class Similar_Profiles_location extends React.Component {
                     <div>
         
         
-                        <div style={{width: '90%', marginLeft: '12px'}}>{this.props.rcn.replace('Others-','')}&nbsp;<ChevronRightIcon/></div>
+                        <div style={{width: '90%', marginLeft: '12px'}}>More Profiles from {this.props.rcn.replace('Others-','')}&nbsp;<ChevronRightIcon/></div>
                         <br/>
         
         
